@@ -1,0 +1,21 @@
+package client.model.tables;
+
+import shared.utils.Request;
+import shared.utils.Subject;
+import shared.utils.reservation.Reservation;
+import shared.utils.table.Table;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+public interface TableModel extends Subject {
+    List<Table> getTables();
+    void updateTable(Table table, String tableName, int tableCapacity);
+    LocalDateTime getDateTime();
+    Request reserveTable(String tableName, List<Table> tables);
+    Reservation getSelectedReservation();
+    String getUserName();
+    Request createTable(Table table);
+    Request removeReservation(int id);
+
+}
