@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+
+<TableView prefHeight="530.0" prefWidth="884.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <columns>
+      <TableColumn prefWidth="344.00002443790436" text="Item Name" />
+      <TableColumn minWidth="0.0" prefWidth="290.3999938964844" text="Preparation Status" />
+      <TableColumn prefWidth="251.2000732421875" text="Table Number" />
+   </columns>
+</TableView>

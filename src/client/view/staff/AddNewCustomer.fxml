@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="591.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.customer.CustomerViewModel">
+    <children>
+        <Label layoutX="192.0" layoutY="20.0" prefHeight="42.0" prefWidth="308.0" text="Add New Customer">
+            <font>
+                <Font size="26.0" />
+            </font>
+        </Label>
+        <HBox layoutX="22.0" layoutY="87.0" prefHeight="285.0" prefWidth="554.0">
+            <children>
+                <VBox prefHeight="278.0" prefWidth="164.0">
+                    <children>
+                        <Label prefHeight="69.0" prefWidth="163.0" text="Customer Name:">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                        <Label prefHeight="64.0" prefWidth="164.0" text="Number Of Seats:">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                        <Label prefHeight="80.0" prefWidth="164.0" text="Contact Number:">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                        <Label prefHeight="66.0" prefWidth="164.0" text="Notes:">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </VBox>
+                <VBox prefHeight="278.0" prefWidth="218.0">
+                    <children>
+                        <TextField prefHeight="38.0" prefWidth="242.0">
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                        </TextField>
+                        <ComboBox prefHeight="34.0" prefWidth="218.0">
+                            <VBox.margin>
+                                <Insets top="35.0" />
+                            </VBox.margin>
+                        </ComboBox>
+                        <TextField prefHeight="43.0" prefWidth="218.0">
+                            <VBox.margin>
+                                <Insets top="30.0" />
+                            </VBox.margin>
+                        </TextField>
+                        <TextField prefHeight="44.0" prefWidth="218.0">
+                            <VBox.margin>
+                                <Insets top="27.0" />
+                            </VBox.margin>
+                        </TextField>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+        <Button layoutX="22.0" layoutY="399.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="181.0" text="Create New Customer" />
+        <Button layoutX="440.0" layoutY="399.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="119.0" text="Cancel" />
+    </children>
+</AnchorPane>
