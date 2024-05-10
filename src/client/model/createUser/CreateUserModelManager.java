@@ -2,7 +2,7 @@ package client.model.createUser;
 
 import client.networking.createUser.CreateUserClient;
 
-public class CreateUserModelManager implements CreateUserClient {
+public class CreateUserModelManager implements CreateUserModel {
     public CreateUserClient createUserClient;
 
     public CreateUserModelManager(CreateUserClient createUserClient) {
