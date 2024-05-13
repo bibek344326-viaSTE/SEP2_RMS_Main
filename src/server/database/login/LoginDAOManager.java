@@ -7,7 +7,6 @@ import shared.utils.user.KitchenChef;
 import shared.utils.user.StaffMember;
 import shared.utils.user.Usertype;
 
-import java.lang.ref.Cleaner;
 import java.sql.*;
 
 public class LoginDAOManager implements LoginDAO {
@@ -19,7 +18,7 @@ public class LoginDAOManager implements LoginDAO {
     @Override
     public Request login(String username, String password) {
         try (Connection connection = DatabaseConnection.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM \"User\" WHERE \"username\"=? and \"password\"=?;");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM \"user\" WHERE \"username\"=? and \"password\"=?;");
             statement.setString(1, username);
             statement.setString(2, password);
             ResultSet resultSet = statement.executeQuery();

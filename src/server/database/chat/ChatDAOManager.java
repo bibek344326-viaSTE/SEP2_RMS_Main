@@ -38,7 +38,7 @@ public class ChatDAOManager implements ChatDAO{
     @Override
     public Request addMessage(Message message) throws Exception {
         try (Connection connection = DatabaseConnection.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO \"Message\"(\"Username_Sender\", \"Username_Receiver\",\"Message_Body\") VALUES (?,?,?);");
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO \"message\"(\"username_sender\", \"username_receiver\",\"Message_Body\") VALUES (?,?,?);");
             statement.setString(1, message.getUserNameSender());
             statement.setString(2, message.getUserNameReceiver());
             statement.setString(3, message.getMessageBody());

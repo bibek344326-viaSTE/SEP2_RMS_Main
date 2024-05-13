@@ -16,7 +16,7 @@ public class TableDAOManager implements TableDAO {
         ResultSet resultSet = preparedStatement.executeQuery();
         ArrayList<Table> tables = new ArrayList<>();
         while (resultSet.next()) {
-            String tableName = resultSet.getString("table_number");
+            String tableName = resultSet.getString("table_name");
             int capacity = resultSet.getInt("table_capacity");
             //boolean isOccupied = resultSet.getBoolean("is_occupied");
             Table table = new Table(tableName, capacity);
@@ -29,7 +29,7 @@ public class TableDAOManager implements TableDAO {
     public void create(Table table) throws SQLException {
         try (Connection connection = DatabaseConnection.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "INSERT INTO tables (table_number, table_capacity, is_occupied) VALUES (?,?,?)");
+                    "INSERT INTO tables (table_name, table_capacity, is_occupied) VALUES (?,?,?)");
 
             preparedStatement.setString(1, table.getTableName());
             preparedStatement.setInt(2, table.getTableCapacity());
