@@ -13,27 +13,28 @@
                 <Font size="18.0" />
             </font>
         </Label>
-        <TabPane layoutX="4.0" layoutY="34.0" prefHeight="654.0" prefWidth="874.0" tabClosingPolicy="UNAVAILABLE">
+        <TabPane layoutX="4.0" layoutY="35.0" prefHeight="651.0" prefWidth="875.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab fx:id="customer" text="Customer">
-                <fx:include fx:id="StaffCustomerViewController" source="StaffCustomerView.fxml" />
+                    <fx:include fx:id="StaffCustomerViewController" source="StaffCustomerView.fxml" />
                 </Tab>
 
 
                 <Tab fx:id="tables" text="Tables">
-                <fx:include fx:id="TableViewController" source="StaffTablesView.fxml" />
+                    <fx:include fx:id="TableViewController" source="StaffTablesView.fxml" />
                 </Tab>
 
 
                 <Tab fx:id="orders" text="Orders">
-                <fx:include fx:id="StaffOrderViewController" source="StaffOrderView.fxml" />
+                    <fx:include fx:id="StaffOrderViewController" source="StaffOrderView.fxml" />
                 </Tab>
 
 
                 <Tab fx:id="menuTable" text="Menu Items">
-                <fx:include fx:id="StaffMenuViewController" source="StaffMenuItems.fxml" />
+                    <fx:include fx:id="StaffMenuViewController" source="StaffMenuItems.fxml" />
                 </Tab>
             </tabs>
         </TabPane>
+        <AnchorPane prefHeight="200.0" prefWidth="0.0" />
     </children>
 </AnchorPane>

@@ -71,7 +71,7 @@ public class ViewHandler {
     public void openCustomerTableNumberView() {
         if (customerTableNumberScene == null) {
             try {
-                Parent root = loadFXML("./customer/CustomerTableNumber.fxml");
+                Parent root = loadFXML("./customer/CustomerTableNumberView.fxml");
                 customerTableNumberScene = new Scene(root);
             } catch (IOException e) {
                 throw new RuntimeException(e);
