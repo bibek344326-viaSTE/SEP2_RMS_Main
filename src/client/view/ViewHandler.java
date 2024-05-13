@@ -71,7 +71,7 @@ public class ViewHandler {
     public void openCustomerTableNumberView() {
         if (customerTableNumberScene == null) {
             try {
-                Parent root = loadFXML("./customer/CustomerTableNumber.fxml");
+                Parent root = loadFXML("./customer/CustomerTableNumberView.fxml");
                 customerTableNumberScene = new Scene(root);
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -81,7 +81,6 @@ public class ViewHandler {
         stage.setScene(customerTableNumberScene);
         stage.show();
     }
-
 
 
     public void openStaffLogInView() {
@@ -98,6 +97,7 @@ public class ViewHandler {
         stage.setScene(staffLoginScene);
         stage.show();
     }
+
 
 
     public void openKitchenLoginView() {
@@ -168,17 +168,6 @@ public class ViewHandler {
         ViewController controller = loader.getController();
         controller.init(viewModelFactory, this);
         return root;
-    }
-
-    public void openTableView() {
-        if (tableScene == null) {
-            try {
-                Parent root = loadFXML("./staff/StaffTabView.fxml");
-                tableScene = new Scene(root);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
     }
 
 

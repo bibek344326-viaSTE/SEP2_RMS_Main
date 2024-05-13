@@ -7,10 +7,10 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="631.0" prefWidth="890.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.table.TableViewController">
     <children>
-        <Button layoutX="22.0" layoutY="550.0" mnemonicParsing="false" onAction="#clearSelectedTableButton" prefHeight="38.0" prefWidth="135.0" text="Clear Selected Table" />
-        <Button layoutX="415.0" layoutY="550.0" mnemonicParsing="false" onAction="#addNewTableButton" prefHeight="38.0" prefWidth="110.0" text="Add New Table" />
-        <Button layoutX="573.0" layoutY="550.0" mnemonicParsing="false" onAction="#updateTableDetailsButton" prefHeight="38.0" prefWidth="127.0" text="Update Table Details" />
-        <Button layoutX="744.0" layoutY="550.0" mnemonicParsing="false" onAction="#deleteTableButton" prefHeight="38.0" prefWidth="107.0" text="Delete Table" />
+        <Button layoutX="22.0" layoutY="550.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="135.0" text="Clear Selected Table" />
+        <Button layoutX="415.0" layoutY="550.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="110.0" text="Add New Table" />
+        <Button layoutX="573.0" layoutY="550.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="127.0" text="Update Table Details" />
+        <Button layoutX="744.0" layoutY="550.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="107.0" text="Delete Table" />
       <TableView layoutX="-3.0" layoutY="1.0" prefHeight="530.0" prefWidth="890.0">
          <columns>
             <TableColumn prefWidth="210.3999969959259" text="Table Number" />

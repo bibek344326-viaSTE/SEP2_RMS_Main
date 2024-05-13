@@ -12,7 +12,7 @@ public class App extends Application {
     public void start(Stage stage) throws Exception {
         ClientFactory client = new ClientFactory();
         ModelFactory modelFactory = new ModelFactory(client);
-        ViewModelFactory viewModelFactory = new ViewModelFactory(modelFactory);
+      ViewModelFactory viewModelFactory = new ViewModelFactory();
         ViewHandler viewHandler = new ViewHandler(viewModelFactory);
         viewHandler.start();
     }

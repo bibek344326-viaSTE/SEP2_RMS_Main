@@ -35,5 +35,4 @@ public class StaffCustomerViewController implements ViewController {
         viewHandler.openStaffMemberView();
     }
 
-
 }

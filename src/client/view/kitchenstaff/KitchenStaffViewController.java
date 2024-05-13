@@ -16,6 +16,6 @@ public class KitchenStaffViewController implements ViewController {
     }
 
     public void LogInAsKitchenStaff() {
-        viewHandler.openTableView();
+        viewHandler.openKitchenView();
     }
 }
