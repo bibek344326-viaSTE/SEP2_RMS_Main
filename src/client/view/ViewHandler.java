@@ -83,7 +83,6 @@ public class ViewHandler {
     }
 
 
-
     public void openStaffLogInView() {
         if (staffLoginScene == null) {
             try {
@@ -98,6 +97,7 @@ public class ViewHandler {
         stage.setScene(staffLoginScene);
         stage.show();
     }
+
 
 
     public void openKitchenLoginView() {
@@ -168,17 +168,6 @@ public class ViewHandler {
         ViewController controller = loader.getController();
         controller.init(viewModelFactory, this);
         return root;
-    }
-
-    public void openTableView() {
-        if (tableScene == null) {
-            try {
-                Parent root = loadFXML("./staff/StaffTabView.fxml");
-                tableScene = new Scene(root);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
     }
 
 
