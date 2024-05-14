@@ -2,7 +2,7 @@ package client.view;
 
 import client.core.ViewModelFactory;
 import client.view.staff.StaffTabViewController;
-import client.view.table.TableViewController;
+import client.view.staff.TableViewController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

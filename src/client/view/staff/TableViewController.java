@@ -1,27 +1,23 @@
-package client.view.table;
+package client.view.staff;
 
 import client.core.ViewModelFactory;
 import client.view.ViewController;
 import client.view.ViewHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TableView.TableViewSelectionModel;
+import javafx.scene.control.*;
 
 public class TableViewController implements ViewController {
-   /* @FXML
+    @FXML
     private TableView<SimpleTableViewModel> tableView;
     @FXML
-    private TableColumn<SimpleTableViewModel, Number> tableNumberColumn;
+    private TableColumn<SimpleTableViewModel, String> tableNameColumn;
     @FXML
     private TableColumn<SimpleTableViewModel, Number> capacityColumn;
     @FXML
     private TableColumn<SimpleTableViewModel, Boolean> statusColumn;
     @FXML
-    private TableColumn<SimpleTableViewModel, String> reservedByColumn;*/
+    private TableColumn<SimpleTableViewModel, String> reservedByColumn;
     @FXML
     private Button clearSelectedTableButton;
     @FXML
@@ -33,48 +29,56 @@ public class TableViewController implements ViewController {
     @FXML
     private Button deleteTableButton;
     private ViewHandler viewHandler;
-    private  ViewModelFactory viewModelFactory;
-
+    private TableViewModel tableViewModel;
 
     public void init(ViewModelFactory viewModelFactory, ViewHandler viewHandler) {
         this.viewHandler = viewHandler;
-    }
-        /*this.tableViewModel = viewModelFactory.getTableViewModel();
-
+        this.tableViewModel = viewModelFactory.getTableViewModel();
 
         tableView.setItems(tableViewModel.getTableList());
-        tableNumberColumn.setCellValueFactory(cellData -> cellData.getValue().getTableNumberProperty());
+        tableNameColumn.setCellValueFactory(cellData -> cellData.getValue().getTableNameProperty());
         capacityColumn.setCellValueFactory(cellData -> cellData.getValue().getCapacityProperty());
         statusColumn.setCellValueFactory(cellData -> cellData.getValue().getStatusProperty());
+
+        // Set up cell factory for status column
+        statusColumn.setCellFactory(column -> new TableCell<SimpleTableViewModel, Boolean>() {
+            @Override
+            protected void updateItem(Boolean item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item ? "Occupied" : "Vacant");
+                }
+            }
+        });
+
         //errorLabel.textProperty().bind(tableViewModel.getErrorProperty());
 
         tableViewModel.setSelected(null);
         tableViewModel.deselect();
 
         // Selecting item
-        TableViewSelectionModel<SimpleTableViewModel> selectionModel = tableView.getSelectionModel();
+        TableView.TableViewSelectionModel<SimpleTableViewModel> selectionModel = tableView.getSelectionModel();
         selectionModel.selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 tableViewModel.setSelected(selectionModel.getSelectedItem());
             }
         });
-    }*/
+    }
 
+    @FXML
+    private void deleteTableButton(ActionEvent event) {
+        tableViewModel.remove();
+    }
 
-
-   /* @FXML
-    private void clearSelectedTableButton(ActionEvent event) { // Corrected method signature
+    @FXML
+    private void clearSelectedTableButton(ActionEvent event) {
         tableView.getSelectionModel().clearSelection();
     }
 
     @FXML
-    private void addNewTableButton(ActionEvent event) { // Corrected method signature
+    private void addNewTableButton(ActionEvent event) {
         tableViewModel.addNewTable();
     }
-
-    public void updateTableDetailsButton(ActionEvent actionEvent) {
-    }
-
-    public void deleteTableButton(ActionEvent actionEvent) {
-    }*/
 }

@@ -10,6 +10,7 @@ import client.model.login.LoginModel;
 import client.model.login.LoginModelManager;
 import client.model.tables.TableModel;
 import client.model.tables.TableModelManager;
+import client.networking.tables.TablesClient;
 
 import java.rmi.RemoteException;
 
@@ -44,7 +45,7 @@ public class ModelFactory {
         }
         return chatModel;
     }
-    public TableModel getTableModel() {
+    public TablesClient getTableModel() {
         if (tableManagementModel == null) {
             try {
                 tableManagementModel = new TableModelManager(client.getTableClient());
@@ -52,7 +53,7 @@ public class ModelFactory {
                 throw new RuntimeException(e);
             }
         }
-        return tableManagementModel;
+        return (TablesClient) tableManagementModel;
     }
     public CreateUserModel getCreateUserModel() {
         if (createUserModel == null) {
