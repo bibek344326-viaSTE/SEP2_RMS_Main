@@ -118,7 +118,7 @@ public class ViewHandler {
     public void openMenuItemsView() {
         if (menuScene == null) {
             try {
-                Parent root = loadFXML("./view/customer/CustomerViewMenuItems.fxml");
+                Parent root = loadFXML("./customer/CustomerViewMenuItems.fxml");
                 menuScene = new Scene(root);
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -133,7 +133,7 @@ public class ViewHandler {
     public void openStaffMemberView() {
         if (staffMemberScene == null) {
             try {
-                Parent root = loadFXML("./view/staff/StaffTabView.fxml");
+                Parent root = loadFXML("./staff/StaffTabView.fxml");
                 staffMemberScene = new Scene(root);
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -148,7 +148,7 @@ public class ViewHandler {
     public void openKitchenView() {
         if (kitchenScene == null) {
             try {
-                Parent root = loadFXML("./view/kitchenstaff/KitchenStaffView.fxml");
+                Parent root = loadFXML("./kitchenstaff/KitchenStaffView.fxml");
                 kitchenScene = new Scene(root);
             } catch (IOException e) {
                 throw new RuntimeException(e);
