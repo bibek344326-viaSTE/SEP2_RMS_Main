@@ -3,7 +3,6 @@ package client.view.staff;
 import client.core.ViewModelFactory;
 import client.view.ViewController;
 import client.view.ViewHandler;
-import client.view.table.TableViewController;
 import javafx.fxml.FXML;
 import javafx.scene.control.TabPane;
 
