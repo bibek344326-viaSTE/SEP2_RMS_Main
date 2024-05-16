@@ -19,7 +19,7 @@
             </font>
         </Label>
         <TextField layoutX="159.0" layoutY="139.0" prefHeight="35.0" prefWidth="176.0" />
-        <Button layoutX="198.0" layoutY="218.0" mnemonicParsing="false" onAction="#logInAsStaff" prefHeight="35.0" prefWidth="88.0" text="Log In">
+        <Button layoutX="198.0" layoutY="211.0" mnemonicParsing="false" onAction="#logInAsStaff" prefHeight="35.0" prefWidth="88.0" text="Log In">
             <font>
                 <Font size="14.0" />
             </font>
@@ -34,5 +34,10 @@
                 <Font size="14.0" />
             </font>
         </Label>
+      <Button layoutX="198.0" layoutY="258.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="88.0" text="Back">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>
