@@ -20,6 +20,7 @@ public class StaffTabViewController implements ViewController {
     public void init(ViewModelFactory viewModelFactory, ViewHandler viewHandler) {
         this.viewModelFactory = viewModelFactory;
         this.viewHandler = viewHandler;
+
     }
 
 
