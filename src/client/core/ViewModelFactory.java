@@ -3,6 +3,8 @@ package client.core;
 import client.networking.tables.TablesClient;
 import client.view.staff.TableViewModel;
 
+import java.rmi.RemoteException;
+
 public class ViewModelFactory {
 
     private final ModelFactory modelFactory;
@@ -15,7 +17,7 @@ public class ViewModelFactory {
         this.modelFactory = modelFactory;
         this.viewState = new ViewState();
     }
-    public TableViewModel getTableViewModel() {
+    public TableViewModel getTableViewModel() throws RemoteException {
         if (tableViewModel  == null){
             tableViewModel = new TableViewModel(modelFactory, viewState);
         }

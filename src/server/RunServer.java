@@ -17,10 +17,12 @@ import server.networking.login.CreateUserServerManager;
 import server.networking.login.LoginServerManager;
 import server.networking.tables.TablesServerManager;
 import shared.networking.serverInterfaces.*;
+import shared.utils.table.Table;
 
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class RunServer {
     public static void main(String[] args) throws RemoteException, AlreadyBoundException, SQLException {
@@ -42,5 +44,12 @@ public class RunServer {
 
         Server server = new ServerManager(loginServer, createAccountServer, tablesServerManager, customerListServer, chatServer);
         server.startServer();
+
+        ArrayList<Table> tables = new ArrayList<>();
+        for(Table t: tablesServerManager.getTables()){
+            System.out.println("Table: " + t.getTableName() + "table capacity" + t.getTableCapacity());
+        }
+
+
     }
 }

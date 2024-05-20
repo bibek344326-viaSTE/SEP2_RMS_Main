@@ -15,7 +15,7 @@ import client.networking.tables.TablesClient;
 import java.rmi.RemoteException;
 
 public class ModelFactory {
-    private final ClientFactory client;
+    private ClientFactory client;
     private LoginModel loginModel;
     private TableModel tableManagementModel;
     private ChatModel chatModel;
@@ -25,6 +25,7 @@ public class ModelFactory {
     public ModelFactory(ClientFactory client) {
         this.client = client;
     }
+
     public LoginModel getLoginModel() {
         if (loginModel == null) {
             try {
@@ -35,6 +36,7 @@ public class ModelFactory {
         }
         return loginModel;
     }
+
     public ChatModel getChatModel() {
         if (chatModel == null) {
             try {
@@ -45,16 +47,14 @@ public class ModelFactory {
         }
         return chatModel;
     }
-    public TablesClient getTableModel() {
+
+    public TableModel getTableModel() throws RemoteException {
         if (tableManagementModel == null) {
-            try {
-                tableManagementModel = new TableModelManager(client.getTableClient());
-            } catch (RemoteException e) {
-                throw new RuntimeException(e);
-            }
+            tableManagementModel = new TableModelManager(client.getTableClient());
         }
-        return (TablesClient) tableManagementModel;
+        return tableManagementModel;
     }
+
     public CreateUserModel getCreateUserModel() {
         if (createUserModel == null) {
             try {
@@ -65,6 +65,7 @@ public class ModelFactory {
         }
         return createUserModel;
     }
+
     public CustomerModel getCustomerModel() {
         if (customerModel == null) {
             try {

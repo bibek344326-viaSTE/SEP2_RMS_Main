@@ -53,7 +53,7 @@ public class TablesHandlerManager implements TablesHandler {
         LocalDateTime localDateTime = reservation.getDateTime();
         Request temp = new Request("Error", null);
         for (String occupiedTable : occupiedTables) {
-            temp = reservationDAO.addReservation(username, localDateTime, reservation.getTempTable());
+            temp = reservationDAO.addReservation(username, localDateTime, reservation.getTempTable().getTableName());
         }
         return temp;
     }

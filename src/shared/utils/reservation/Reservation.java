@@ -1,5 +1,7 @@
 package shared.utils.reservation;
 
+import shared.utils.table.Table;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -8,7 +10,7 @@ public class Reservation {
     private LocalDateTime dateTime;
     private int id;
     private List<String> occupiedTables;
-    private String tempTable;
+    private Table tempTable;
 
     public Reservation(String userName, LocalDateTime dateTime, List<String> occupiedTables) {
         this.userName = userName;
@@ -16,7 +18,7 @@ public class Reservation {
         this.occupiedTables = occupiedTables;
     }
 
-    public Reservation(String tempTable, LocalDateTime dateTime) {
+    public Reservation(Table tempTable, LocalDateTime dateTime) {
         this.tempTable = tempTable;
         this.dateTime = dateTime;
     }
@@ -38,6 +40,9 @@ public class Reservation {
         }
     }
 
+    public Table getTable(){
+        return tempTable;
+    }
     public String getUserName() {
         return userName;
     }
@@ -54,7 +59,7 @@ public class Reservation {
         return occupiedTables;
     }
 
-    public String getTempTable() {
+    public Table getTempTable() {
         return tempTable;
     }
 
@@ -74,7 +79,7 @@ public class Reservation {
         this.occupiedTables = occupiedTables;
     }
 
-    public void setTempTable(String tempTable) {
+    public void setTempTable(Table tempTable) {
         this.tempTable = tempTable;
     }
 
