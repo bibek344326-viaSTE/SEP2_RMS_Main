@@ -25,7 +25,7 @@ public class ViewHandler {
     private Scene menuViewStaff;
 
 
-    private TableViewController tableViewController;
+
 
 
     public ViewHandler(ViewModelFactory viewModelFactory) {
@@ -39,7 +39,7 @@ public class ViewHandler {
     }
 
 
-    private void openLogin() {
+    public void openLogin() {
         if (loginScene == null) {
             try {
                 Parent root = loadFXML("./login/RestaurantLoginView.fxml");

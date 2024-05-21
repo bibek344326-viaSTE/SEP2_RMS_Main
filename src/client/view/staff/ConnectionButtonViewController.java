@@ -9,7 +9,7 @@ import javafx.scene.control.TabPane;
 public class ConnectionButtonViewController implements ViewController {
     @FXML
     private TabPane tabPane;
-    @FXML private StaffCustomerViewController staffCustomerViewController;
+    @FXML private StaffLoginController staffCustomerViewController;
     @FXML private TableViewController tableViewController;
     @FXML private StaffOrderViewController staffOrderViewController;
     @FXML private StaffMenuViewController staffMenuViewController;
