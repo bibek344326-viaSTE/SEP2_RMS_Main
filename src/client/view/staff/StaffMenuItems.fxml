@@ -5,12 +5,12 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="631.0" prefWidth="890.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.staff.StaffMenuViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="631.0" prefWidth="890.0" style="-fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.staff.StaffMenuViewController">
     <children>
         <Button layoutX="52.0" layoutY="559.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="120.0" text="Add New Item" />
         <Button layoutX="413.0" layoutY="559.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="120.0" text="Edit Item Details" />
         <Button layoutX="730.0" layoutY="559.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="120.0" text="Delete Item" />
-      <TableView layoutX="-3.0" prefHeight="534.0" prefWidth="890.0">
+      <TableView layoutX="-3.0" layoutY="16.0" prefHeight="518.0" prefWidth="890.0">
          <columns>
             <TableColumn prefWidth="460.80003666877747" text="Item Name" />
             <TableColumn prefWidth="429.5999755859375" text="Type(Food/Drinks)" />
