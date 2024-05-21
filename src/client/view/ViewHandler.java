@@ -82,7 +82,6 @@ public class ViewHandler {
         stage.show();
     }
 
-
     public void openStaffLogInView() {
         if (staffLoginScene == null) {
             try {
