@@ -10,10 +10,10 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="631.0" prefWidth="890.0" style="-fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.staff.StaffLoginController">
     <children>
         <TabPane layoutX="11.0" layoutY="59.0" prefHeight="406.0" prefWidth="706.0" tabClosingPolicy="UNAVAILABLE" />
-        <Button layoutX="397.0" layoutY="553.0" mnemonicParsing="false" onAction="#addNewCustomer" prefHeight="38.0" prefWidth="120.0" text="Add New Customer" />
-        <Button layoutX="551.0" layoutY="553.0" mnemonicParsing="false" onAction="#editNewCustomer" prefHeight="38.0" prefWidth="130.0" text="Edit Customer Details" />
-        <Button layoutX="717.0" layoutY="553.0" mnemonicParsing="false" onAction="#viewCustomerDetails" prefHeight="38.0" prefWidth="135.0" text="View Customer Details" />
-        <ComboBox layoutX="11.0" layoutY="553.0" onAction="#onComboBoxSelection" prefHeight="38.0" prefWidth="227.0" promptText="Assign Table To selected Customer" />
+        <Button layoutX="397.0" layoutY="553.0" mnemonicParsing="false"  prefHeight="38.0" prefWidth="120.0" text="Add New Customer" />
+        <Button layoutX="551.0" layoutY="553.0" mnemonicParsing="false"  prefHeight="38.0" prefWidth="130.0" text="Edit Customer Details" />
+        <Button layoutX="717.0" layoutY="553.0" mnemonicParsing="false"  prefHeight="38.0" prefWidth="135.0" text="View Customer Details" />
+        <ComboBox layoutX="11.0" layoutY="553.0" prefHeight="38.0" prefWidth="227.0" promptText="Assign Table To selected Customer" />
       <TableView layoutX="-1.0" layoutY="13.0" prefHeight="518.0" prefWidth="890.0">
          <columns>
             <TableColumn prefWidth="255.19999980926514" text="Customer Name" />
