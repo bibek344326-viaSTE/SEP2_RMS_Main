@@ -15,5 +15,11 @@ public interface Server extends Remote {
 
     TableServer getTableServer() throws RemoteException;
 
+    MenuServer getMenuServer() throws RemoteException;
+
+    OrderServer getOrderServer() throws RemoteException;
+
+    ReservationServer getReservationServer() throws RemoteException;
+
     void startServer() throws RemoteException, AlreadyBoundException;
 }

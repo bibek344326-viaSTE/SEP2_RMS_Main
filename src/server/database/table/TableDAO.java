@@ -18,4 +18,6 @@ public interface TableDAO {
     List<Table> getAvailableTables() throws SQLException;
 
     List<Table> getAllOccupiedTables() throws SQLException;
+
+    Table getTable(String tableName) throws SQLException;
 }

@@ -96,4 +96,28 @@ public class TableDAOManager implements TableDAO {
             return getTable(preparedStatement);
         }
     }
+
+    @Override
+    public Table getTable(String  tableName) throws SQLException {
+        String sql = "SELECT * FROM tables WHERE id = ?";
+        Table table = null;
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, tableName);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                String tableName1 = rs.getString("tableName");
+                int tableCapacity = rs.getInt("table_capacity");
+                // Assuming there are more fields in the Table class, retrieve them here
+                table = new Table(tableName1, tableCapacity);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        }
+
+        return table;
+    }
 }

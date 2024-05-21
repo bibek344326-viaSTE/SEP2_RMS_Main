@@ -1,5 +1,6 @@
 package server.networking;
 
+import server.networking.menuItems.MenuItemServerManager;
 import shared.networking.serverInterfaces.*;
 
 import java.rmi.AlreadyBoundException;
@@ -16,13 +17,19 @@ public class ServerManager implements Server {
     private TableServer tableServer;
     private CustomerListServer customerListServer;
     private ChatServer chatServer;
+    private OrderServer orderServer;
+    private MenuServer menuServer;
+    private ReservationServer reservationServer;
 
-    public ServerManager(LoginServer loginServer, CreateAccountServer createAccountServer, TableServer tableServer, CustomerListServer customerListServer, ChatServer chatServer) throws RemoteException {
+    public ServerManager(LoginServer loginServer, CreateAccountServer createAccountServer, TableServer tableServer, CustomerListServer customerListServer, ChatServer chatServer, OrderServer orderServer, MenuServer menuServer, ReservationServer reservationServer) throws RemoteException {
         this.loginServer = loginServer;
         this.createAccountServer = createAccountServer;
         this.tableServer = tableServer;
         this.customerListServer = customerListServer;
         this.chatServer = chatServer;
+        this.orderServer = orderServer;
+        this.menuServer = menuServer;
+        this.reservationServer = reservationServer;
         UnicastRemoteObject.exportObject(this, 0);
     }
 
@@ -49,6 +56,21 @@ public class ServerManager implements Server {
     @Override
     public TableServer getTableServer() throws RemoteException {
         return tableServer;
+    }
+
+    @Override
+    public MenuServer getMenuServer() throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public OrderServer getOrderServer() throws RemoteException {
+        return null;
+    }
+
+    @Override
+    public ReservationServer getReservationServer() throws RemoteException {
+        return null;
     }
 
     @Override

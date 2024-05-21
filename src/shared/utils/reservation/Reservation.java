@@ -9,18 +9,19 @@ public class Reservation {
     private String userName;
     private LocalDateTime dateTime;
     private int id;
-    private List<String> occupiedTables;
+    private List<Table> occupiedTables;
     private Table tempTable;
 
-    public Reservation(String userName, LocalDateTime dateTime, List<String> occupiedTables) {
+    public Reservation(String userName, LocalDateTime dateTime, List<Table> occupiedTables) {
         this.userName = userName;
         this.dateTime = dateTime;
         this.occupiedTables = occupiedTables;
     }
 
-    public Reservation(Table tempTable, LocalDateTime dateTime) {
+    public Reservation(Table tempTable, LocalDateTime dateTime, String userName) {
         this.tempTable = tempTable;
         this.dateTime = dateTime;
+        this.userName = userName;
     }
 
     public Reservation(int id, String userName, LocalDateTime dateTime) {
@@ -55,7 +56,7 @@ public class Reservation {
         return id;
     }
 
-    public List<String> getOccupiedTables() {
+    public List<Table> getOccupiedTables() {
         return occupiedTables;
     }
 
@@ -75,7 +76,7 @@ public class Reservation {
         this.id = id;
     }
 
-    public void setOccupiedTables(List<String> occupiedTables) {
+    public void setOccupiedTables(List<Table> occupiedTables) {
         this.occupiedTables = occupiedTables;
     }
 

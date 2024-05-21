@@ -8,6 +8,12 @@ import server.model.customer.CustomerListHandler;
 import server.model.customer.CustomerListHandlerManager;
 import server.model.login.LoginHandler;
 import server.model.login.LoginHandlerManager;
+import server.model.menuItem.MenuItemHandler;
+import server.model.menuItem.MenuItemHandlerManager;
+import server.model.order.OrderHandler;
+import server.model.order.OrderHandlerManager;
+import server.model.reservation.ReservationHandler;
+import server.model.reservation.ReservationHandlerManager;
 import server.model.tables.TablesHandler;
 import server.model.tables.TablesHandlerManager;
 import server.networking.ServerManager;
@@ -15,8 +21,13 @@ import server.networking.chat.ChatServerManager;
 import server.networking.customer.CustomerListServerManager;
 import server.networking.login.CreateUserServerManager;
 import server.networking.login.LoginServerManager;
+import server.networking.menuItems.MenuItemServerManager;
+import server.networking.orders.OrdersServerManager;
+import server.networking.reservation.ReservationListServerManager;
 import server.networking.tables.TablesServerManager;
 import shared.networking.serverInterfaces.*;
+import shared.utils.menuItem.MenuItem;
+import shared.utils.order.OrdersList;
 import shared.utils.table.Table;
 
 import java.rmi.AlreadyBoundException;
@@ -42,11 +53,21 @@ public class RunServer {
         ChatHandler chatHandler = new ChatHandlerManager();
         ChatServer chatServer = new ChatServerManager(chatHandler);
 
-        Server server = new ServerManager(loginServer, createAccountServer, tablesServerManager, customerListServer, chatServer);
+        ReservationHandler reservationHandler = new ReservationHandlerManager();
+        ReservationServer reservationServer = new ReservationListServerManager(reservationHandler);
+
+        MenuItemHandler menuItemHandler = new MenuItemHandlerManager();
+        MenuServer menuServer = new MenuItemServerManager(menuItemHandler);
+
+        OrderHandler orderHandler = new OrderHandlerManager();
+        OrderServer orderServer = new OrdersServerManager(orderHandler);
+
+
+        Server server = new ServerManager(loginServer, createAccountServer, tablesServerManager, customerListServer, chatServer, orderServer, menuServer, reservationServer);
         server.startServer();
 
         ArrayList<Table> tables = new ArrayList<>();
-        for(Table t: tablesServerManager.getTables()){
+        for (Table t : tablesServerManager.getTables()) {
             System.out.println("Table: " + t.getTableName() + "table capacity" + t.getTableCapacity());
         }
 

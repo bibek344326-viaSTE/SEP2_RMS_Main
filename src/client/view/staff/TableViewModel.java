@@ -2,13 +2,13 @@ package client.view.staff;
 
 import client.core.ModelFactory;
 import client.core.ViewState;
-//import client.model.Reservation.ReservationModel;
+import client.model.Reservation.ReservationModel;
 import client.model.tables.TableModel;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import shared.utils.Request;
-//import shared.utils.reservation.Reservation;
+import shared.utils.reservation.Reservation;
 import shared.utils.table.Table;
 
 import java.beans.PropertyChangeListener;
@@ -23,12 +23,12 @@ public class TableViewModel {
     private ObjectProperty<SimpleTableViewModel> selectedTableProperty;
     private StringProperty errorLabel;
     private ViewState viewState;
-   // private ReservationModel reservationModel;
+   private ReservationModel reservationModel;
 
 
     public TableViewModel(ModelFactory modelFactory, ViewState viewState) throws RemoteException {
         this.tablemodel = modelFactory.getTableModel();
-        //this.reservationModel = modelFactory.
+        //this.reservationModel = ,modelFactory.
         this.tableList = FXCollections.observableArrayList();
         this.selectedTableProperty = new SimpleObjectProperty<>();
         this.errorLabel = new SimpleStringProperty();

@@ -1,5 +1,6 @@
 package server.model.tables;
 
+import javafx.scene.control.Tab;
 import server.database.reservation.ReservationDAO;
 import server.database.reservation.ReservationDAOManager;
 import server.database.table.TableDAO;
@@ -49,10 +50,10 @@ public class TablesHandlerManager implements TablesHandler {
     @Override
     public Request reserveTable(Reservation reservation) throws SQLException {
         String username = reservation.getUserName();
-        List<String> occupiedTables = reservation.getOccupiedTables();
+        List<Table> occupiedTables = reservation.getOccupiedTables();
         LocalDateTime localDateTime = reservation.getDateTime();
         Request temp = new Request("Error", null);
-        for (String occupiedTable : occupiedTables) {
+        for (Table occupiedTable : occupiedTables) {
             temp = reservationDAO.addReservation(username, localDateTime, reservation.getTempTable().getTableName());
         }
         return temp;

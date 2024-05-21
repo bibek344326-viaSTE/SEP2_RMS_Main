@@ -50,13 +50,13 @@ public class TableModelManager implements TableModel {
     @Override
     public Request reserveTable(String tableName, List<Table> tables) {
         System.out.println("Table model Manager");
-        List<String> temp = new ArrayList<>();
+        List<Table> temp = new ArrayList<>();
         for (Table table : tables) {
-            temp.add(table.getTableName());
+            temp.add(table);
         }
 
         try {
-            Reservation reservation1 = new Reservation(tempUserName, localDateTime, temp);
+            Reservation reservation1 = new Reservation(tempUserName,localDateTime,temp);
             return tablesClient.reserveTable(reservation1);
         } catch (Exception e) {
             return new Request(e.getMessage(), null);
