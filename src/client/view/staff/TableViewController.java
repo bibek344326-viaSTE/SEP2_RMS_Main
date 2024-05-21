@@ -35,18 +35,15 @@ public class TableViewController implements ViewController {
     private Button deleteTableButton;
     private ViewHandler viewHandler;
     private TableViewModel tableViewModel;
-    private ListView<SimpleTableViewModel> tableList;
+
 
     public void init(ViewModelFactory viewModelFactory, ViewHandler viewHandler) throws RemoteException {
         this.viewHandler = viewHandler;
         this.tableViewModel = viewModelFactory.getTableViewModel();
-
-        tableView.setItems(tableList.getItems());
-
-        initializeTablesList();
         tableNameColumn.setCellValueFactory(cellData -> cellData.getValue().getTableNameProperty());
         capacityColumn.setCellValueFactory(cellData -> cellData.getValue().getCapacityProperty());
         statusColumn.setCellValueFactory(cellData -> cellData.getValue().getStatusProperty());
+        tableView.setItems(tableViewModel.getTableList());
 
         // Set up cell factory for status column
         statusColumn.setCellFactory(column -> new TableCell<>() {
@@ -58,6 +55,7 @@ public class TableViewController implements ViewController {
                 } else {
                     setText(item ? "Occupied" : "Vacant");
                 }
+
             }
         });
 
@@ -76,9 +74,7 @@ public class TableViewController implements ViewController {
 
     }
 
-    private void initializeTablesList() {
-        tableList.getSelectionModel().getSelectionMode();
-    }
+
 
     @FXML
     private void deleteTableButton(ActionEvent event) {

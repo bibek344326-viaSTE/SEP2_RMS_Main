@@ -22,4 +22,16 @@ public class ConnectionButtonViewController implements ViewController {
         this.viewHandler = viewHandler;
 
     }
+    public void openCustomer() {
+        viewHandler.openCustomerViewStaff();
+    }
+    public void openTable() {
+        viewHandler.openStaffTableView();
+    }
+    public void openOrder() {
+        viewHandler.openOrderView();
+    }
+    public void openMenu() {
+        viewHandler.openMenuView();
+    }
 }

@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="631.0" prefWidth="890.0" style="-fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.staff.StaffMenuViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="631.0" prefWidth="890.0" style="-fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.staff.StaffMenuViewController" >
     <children>
         <Button layoutX="52.0" layoutY="559.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="120.0" text="Add New Item" />
         <Button layoutX="413.0" layoutY="559.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="120.0" text="Edit Item Details" />

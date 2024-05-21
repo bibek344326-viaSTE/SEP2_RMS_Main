@@ -10,7 +10,7 @@
         <Button layoutX="22.0" layoutY="550.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="135.0" text="Clear Selected Table" />
         <Button layoutX="415.0" layoutY="550.0" mnemonicParsing="false" onAction="#addNewTableButton" prefHeight="38.0" prefWidth="110.0" text="Add New Table" />
         <Button layoutX="573.0" layoutY="550.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="127.0" text="Update Table Details" />
-        <Button layoutX="744.0" layoutY="550.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="107.0" text="Delete Table" />
+        <Button layoutX="744.0" layoutY="550.0" mnemonicParsing="false" onAction="#deleteTableButton" prefHeight="38.0" prefWidth="107.0" text="Delete Table" />
       <TableView fx:id="tableView" layoutX="-3.0" layoutY="17.0" prefHeight="514.0" prefWidth="890.0">
          <columns>
             <TableColumn fx:id="tableNameColumn" prefWidth="210.3999969959259" text="Table Number" />

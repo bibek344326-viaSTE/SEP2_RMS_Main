@@ -32,7 +32,7 @@ public class StaffCustomerViewController implements ViewController {
     }
 
     public void logInAsStaff() {
-        viewHandler.openStaffMemberView();
+        viewHandler.openConnectionButtons();
     }
 
 }
