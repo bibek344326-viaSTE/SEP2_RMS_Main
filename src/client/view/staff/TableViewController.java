@@ -90,4 +90,10 @@ public class TableViewController implements ViewController {
     private void addNewTableButton(ActionEvent event) {
         tableViewModel.addNewTable();
     }
+    public void back(){
+        viewHandler.openConnectionButtons();
+    }
+    public void edit(){
+        tableViewModel.setSelected(tableView.getItems().get(0));
+    }
 }

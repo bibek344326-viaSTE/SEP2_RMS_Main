@@ -9,7 +9,7 @@
     <children>
         <Button layoutX="21.0" layoutY="550.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="135.0" text="Clear Selected Table" />
         <Button layoutX="193.0" layoutY="550.0" mnemonicParsing="false" onAction="#addNewTableButton" prefHeight="38.0" prefWidth="110.0" text="Add New Table" />
-        <Button layoutX="344.0" layoutY="550.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="127.0" text="Update Table Details" />
+        <Button layoutX="344.0" onAction="#edit" layoutY="550.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="127.0" text="Update Table Details" />
         <Button layoutX="512.0" layoutY="550.0" mnemonicParsing="false" onAction="#deleteTableButton" prefHeight="38.0" prefWidth="107.0" text="Delete Table" />
       <TableView fx:id="tableView" layoutX="-3.0" layoutY="17.0" prefHeight="514.0" prefWidth="890.0">
          <columns>
