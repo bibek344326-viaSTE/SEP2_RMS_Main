@@ -11,5 +11,8 @@ public class StaffOrderViewController implements ViewController {
     public void init(ViewModelFactory viewModelFactory, ViewHandler viewHandler) {
         this.viewHandler = viewHandler;
     }
+    public void back(){
+        viewHandler.openConnectionButtons();
+    }
 
 }
