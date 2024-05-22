@@ -54,11 +54,11 @@ public class TableDAOManager implements TableDAO {
     }
 
     @Override
-    public void delete(Table table) throws SQLException {
+    public void delete(String tableName) throws SQLException {
         try (Connection connection = DatabaseConnection.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "DELETE FROM tables WHERE table_number = ?");
-            preparedStatement.setString(1, table.getTableName());
+                    "DELETE FROM tables WHERE table_name = ?");
+            preparedStatement.setString(1, tableName);
             preparedStatement.executeUpdate();
 
             System.out.println("Table deleted successfully.");

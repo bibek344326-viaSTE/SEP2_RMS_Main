@@ -34,7 +34,7 @@ public class TablesProxy implements TablesHandler {
     }
 
     @Override
-    public Request removeTable(Table table) {
+    public Request removeTable(String table) {
         return tablesHandler.removeTable(table);
     }
 

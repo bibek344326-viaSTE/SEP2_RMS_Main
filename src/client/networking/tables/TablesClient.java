@@ -14,6 +14,6 @@ public interface TablesClient extends Subject {
     Request removeReservation(int reservationId);
     Request addTable(Table table);
     void updateTable(Table table, String tableName, int tableCapacity);
-    void deleteTable(Table table) throws RemoteException;
+    void deleteTable(String tableName) throws RemoteException;
 
 }

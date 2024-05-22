@@ -77,7 +77,7 @@ public class TableViewController implements ViewController {
 
 
     @FXML
-    private void deleteTableButton(ActionEvent event) {
+    private void deleteTableButton(ActionEvent event) throws RemoteException {
         tableViewModel.remove();
     }
 

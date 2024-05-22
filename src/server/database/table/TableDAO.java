@@ -11,7 +11,7 @@ public interface TableDAO {
 
     void update(Table table, String tableName, int tableCapacity) throws SQLException;
 
-    void delete(Table table) throws SQLException;
+    void delete(String  tableName) throws SQLException;
 
     List<Table> getAllTables() throws SQLException;
 

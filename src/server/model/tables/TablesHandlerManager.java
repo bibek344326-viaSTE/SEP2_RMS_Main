@@ -1,6 +1,5 @@
 package server.model.tables;
 
-import javafx.scene.control.Tab;
 import server.database.reservation.ReservationDAO;
 import server.database.reservation.ReservationDAOManager;
 import server.database.table.TableDAO;
@@ -60,7 +59,7 @@ public class TablesHandlerManager implements TablesHandler {
     }
 
     @Override
-    public Request removeTable(Table table) {
+    public Request removeTable(String table) {
         return null;
     }
 

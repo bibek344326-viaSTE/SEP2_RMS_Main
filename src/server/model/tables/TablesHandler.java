@@ -15,7 +15,7 @@ public interface TablesHandler extends Subject {
 
     Request reserveTable(Reservation reservation) throws SQLException;
 
-    Request removeTable(Table table);
+    Request removeTable(String table);
 
     Request removeReservation(int id);
 
