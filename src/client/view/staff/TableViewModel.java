@@ -8,12 +8,10 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import shared.utils.Request;
-import shared.utils.reservation.Reservation;
 import shared.utils.table.Table;
 
 import java.beans.PropertyChangeListener;
 import java.rmi.RemoteException;
-import java.util.List;
 
 public class TableViewModel {
 

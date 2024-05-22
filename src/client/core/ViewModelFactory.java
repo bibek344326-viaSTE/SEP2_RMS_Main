@@ -1,5 +1,6 @@
 package client.core;
 
+import client.view.staff.MenuViewModel;
 import client.view.staff.TableViewModel;
 import client.view.staff.UpdateTableViewModel;
 
@@ -10,6 +11,7 @@ public class ViewModelFactory {
     private TableViewModel tableViewModel;
     private UpdateTableViewModel updateTableViewModel;
     private ViewState viewState;
+    private MenuViewModel menuViewModel;
 
     public ViewModelFactory(ModelFactory modelFactory) {
         this.modelFactory = modelFactory;
@@ -28,6 +30,12 @@ public class ViewModelFactory {
             updateTableViewModel = new UpdateTableViewModel(modelFactory, viewState);
         }
         return updateTableViewModel;
+    }
+    public MenuViewModel getMenuViewModel() throws RemoteException {
+        if (menuViewModel== null) {
+            menuViewModel = new MenuViewModel(modelFactory, viewState);
+        }
+        return menuViewModel;
     }
 }
 

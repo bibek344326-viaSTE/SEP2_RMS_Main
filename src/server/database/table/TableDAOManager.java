@@ -44,7 +44,7 @@ public class TableDAOManager implements TableDAO {
     public void update(Table table, String tableName, int tableCapacity) throws SQLException {
         try (Connection connection = DatabaseConnection.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "UPDATE tables SET table_capacity = ? WHERE table_number = ?");
+                    "UPDATE tables SET table_capacity = ? WHERE table_name = ?");
             preparedStatement.setInt(1, tableCapacity);
             preparedStatement.setString(2, tableName);
             preparedStatement.executeUpdate();

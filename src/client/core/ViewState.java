@@ -29,9 +29,30 @@ public class ViewState {
     private int capacity;
     private boolean status;
 
+    public String getMenuItemName() {
+        return menuItemName;
+    }
+
+    public void setMenuItemName(String menuItemName) {
+        this.menuItemName = menuItemName;
+    }
+
+    public String getMenuItemType() {
+        return menuItemType;
+    }
+
+    public void setMenuItemType(String menuItemType) {
+        this.menuItemType = menuItemType;
+    }
+
+    private String menuItemName;
+    private String menuItemType;
+
     public ViewState() {
         this.tablename = null;
         this.capacity = 0;
         this.status = false;
+        this.menuItemName = null;
+        this.menuItemType = null;
     }
 }

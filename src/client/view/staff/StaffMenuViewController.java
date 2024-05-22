@@ -3,28 +3,73 @@ package client.view.staff;
 import client.core.ViewModelFactory;
 import client.view.ViewController;
 import client.view.ViewHandler;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+import shared.utils.menuItem.MenuItem;
+
+import java.rmi.RemoteException;
 
 public class StaffMenuViewController implements ViewController {
+    @FXML
+    private TableView<SimpleMenuViewModel> menuTableView;
+    @FXML
+    private TableColumn<SimpleMenuViewModel, String> itemNameColumn;
+    @FXML
+    private TableColumn<SimpleMenuViewModel, String> typeColumn;
+    @FXML
+    private Button clearSelectedMenuItemButton;
+    @FXML
+    private Button addNewMenuItemButton;
+    @FXML
+    private Button editMenuItemDetailsButton;
+    @FXML
+    private Button deleteMenuItemButton;
+    @FXML
+    private Label errorLabel;
 
-    @FXML
-    private Button addNewItemButton;
-    @FXML
-    private Button editItemDetailsButton;
-    @FXML
-    private Button deleteItemButton;
     private ViewHandler viewHandler;
-    private ViewModelFactory viewModelFactory;
+    private MenuViewModel menuViewModel;
 
-    @Override
-    public void init(ViewModelFactory viewModelFactory, ViewHandler viewHandler) {
+    public void init(ViewModelFactory viewModelFactory, ViewHandler viewHandler) throws RemoteException {
         this.viewHandler = viewHandler;
+        this.menuViewModel = viewModelFactory.getMenuViewModel();
+
+        itemNameColumn.setCellValueFactory(cellData -> cellData.getValue().getItemNameProperty());
+        typeColumn.setCellValueFactory(cellData -> cellData.getValue().getTypeProperty());
+
+        errorLabel.textProperty().bind(menuViewModel.getErrorProperty());
+
+        menuTableView.setItems(menuViewModel.getMenuItemList());
+
+        menuViewModel.setSelected(null);
+        menuViewModel.deselect();
+
+        menuTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                menuViewModel.setSelected(newSelection);
+            }
+        });
     }
-    public void back(){
+
+    @FXML
+    private void deleteMenuItemButton() {
+        menuViewModel.remove();
+    }
+
+    @FXML
+    private void clearSelectedMenuItemButton(ActionEvent event) {
+        menuTableView.getSelectionModel().clearSelection();
+    }
+
+    @FXML
+    private void addEditButton(ActionEvent event) {
+        menuViewModel.addEdit();
+
+    }
+
+    public void back() {
         viewHandler.openConnectionButtons();
     }
 }
