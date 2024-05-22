@@ -8,6 +8,12 @@ import client.networking.customer.CustomerInfoClient;
 import client.networking.customer.CustomerInfoClientManager;
 import client.networking.login.LoginClient;
 import client.networking.login.LoginClientManager;
+import client.networking.menuItem.MenuItemClient;
+import client.networking.menuItem.MenuItemClientManager;
+import client.networking.order.OrderClient;
+import client.networking.order.OrderClientManager;
+import client.networking.reservation.ReservationClient;
+import client.networking.reservation.ReservationClientManager;
 import client.networking.tables.TablesClient;
 import client.networking.tables.TablesClientManager;
 
@@ -19,39 +25,64 @@ public class ClientFactory {
     private ChatClient chatClient;
     private CreateUserClient createUserClient;
     private CustomerInfoClient customerInfoClient;
+    private ReservationClient reservationClient;
+    private MenuItemClient menuItemClient;
+    private OrderClient orderClient;
 
     public LoginClient getLoginClient() throws RemoteException {
-        if(loginClient == null){
+        if (loginClient == null) {
             loginClient = new LoginClientManager();
         }
         return loginClient;
     }
 
-    public ChatClient getChatClient() throws RemoteException{
-        if(chatClient == null){
+    public ChatClient getChatClient() throws RemoteException {
+        if (chatClient == null) {
             chatClient = new ChatClientManager();
         }
         return chatClient;
     }
 
     public TablesClient getTableClient() throws RemoteException {
-        if(tableClient == null){
+        if (tableClient == null) {
             tableClient = new TablesClientManager();
         }
         return tableClient;
     }
+
     public CreateUserClient getCreateUserClient() throws RemoteException {
-        if(createUserClient == null){
+        if (createUserClient == null) {
             createUserClient = new CreateUserClientManager();
         }
         return createUserClient;
     }
+
     public CustomerInfoClient getCustomerInfoClient() throws RemoteException {
-        if(customerInfoClient == null){
+        if (customerInfoClient == null) {
             customerInfoClient = new CustomerInfoClientManager();
         }
         return customerInfoClient;
     }
 
+    public ReservationClient getReservationClient() throws RemoteException {
+        if (reservationClient == null) {
+            reservationClient = new ReservationClientManager();
+        }
+        return reservationClient;
+    }
+
+    public OrderClient getOrderClient() throws RemoteException{
+        if (orderClient == null) {
+            orderClient = new OrderClientManager();
+        }
+        return orderClient;
+    }
+
+    public MenuItemClient getMenuItemClient() throws RemoteException {
+        if (menuItemClient == null) {
+            menuItemClient = new MenuItemClientManager();
+        }
+        return menuItemClient;
+    }
 }
 

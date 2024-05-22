@@ -10,6 +10,7 @@ import shared.utils.reservation.Reservation;
 import shared.utils.table.Table;
 import shared.utils.user.Customer;
 
+import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -17,9 +18,11 @@ import java.rmi.server.UnicastRemoteObject;
 
 public class ReservationClientManager implements ReservationClient{
     private ReservationDAO reservationDAO;
+    private PropertyChangeSupport support;
 
     public ReservationClientManager() {
         reservationDAO = new ReservationDAOManager();
+        support = new PropertyChangeSupport(this);
     }
 
 
@@ -31,6 +34,16 @@ public class ReservationClientManager implements ReservationClient{
     @Override
     public void reserveTable(Reservation reservation, Table table, Customer customer) {
 
+    }
+
+    @Override
+    public void addListener(String eventName, PropertyChangeListener listener) {
+        support.addPropertyChangeListener(eventName, listener);
+    }
+
+    @Override
+    public void removeListener(String eventName, PropertyChangeListener listener) {
+        support.removePropertyChangeListener(eventName, listener);
     }
 }
 
