@@ -3,9 +3,8 @@ package client.view.customer;
 import client.core.ViewModelFactory;
 import client.view.ViewController;
 import client.view.ViewHandler;
-import javafx.fxml.FXML;
 
-public class CustomerViewController implements ViewController {
+public class CustomerLoginController implements ViewController {
     private ViewModelFactory viewModelFactory;
     private ViewHandler viewHandler;
 
@@ -28,7 +27,7 @@ public class CustomerViewController implements ViewController {
         viewHandler.openCustomerTableNumberView();
     }
 
-    public void proceedToMenuItems() {
-        viewHandler.openMenuItemsView();
+    public void back() {
+        viewHandler.openLogin();
     }
 }

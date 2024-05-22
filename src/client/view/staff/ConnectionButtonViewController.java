@@ -9,7 +9,7 @@ import javafx.scene.control.TabPane;
 public class ConnectionButtonViewController implements ViewController {
     @FXML
     private TabPane tabPane;
-    @FXML private StaffCustomerViewController staffCustomerViewController;
+    @FXML private StaffLoginController staffCustomerViewController;
     @FXML private TableViewController tableViewController;
     @FXML private StaffOrderViewController staffOrderViewController;
     @FXML private StaffMenuViewController staffMenuViewController;
@@ -21,5 +21,17 @@ public class ConnectionButtonViewController implements ViewController {
         this.viewModelFactory = viewModelFactory;
         this.viewHandler = viewHandler;
 
+    }
+    public void openCustomer() {
+        viewHandler.openCustomerViewStaff();
+    }
+    public void openTable() {
+        viewHandler.openStaffTableView();
+    }
+    public void openOrder() {
+        viewHandler.openOrderView();
+    }
+    public void openMenu() {
+        viewHandler.openMenuView();
     }
 }
