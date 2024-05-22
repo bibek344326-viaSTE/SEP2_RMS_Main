@@ -36,11 +36,11 @@ public class CustomerModelManager implements CustomerModel {
 
     @Override
     public void addListener(String eventName, PropertyChangeListener listener) {
-
+        addListener(eventName, listener);
     }
 
     @Override
     public void removeListener(String eventName, PropertyChangeListener listener) {
-
+        removeListener(eventName, listener);
     }
 }

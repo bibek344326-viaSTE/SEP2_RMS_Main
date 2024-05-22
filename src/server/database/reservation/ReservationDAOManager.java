@@ -13,7 +13,7 @@ public class ReservationDAOManager implements ReservationDAO {
     private static ReservationDAOManager instance;
     private static Lock lock = new ReentrantLock();
 
-    private ReservationDAOManager() {
+    public ReservationDAOManager() {
 
     }
 
