@@ -82,6 +82,11 @@ public class TablesClientManager implements TablesClient, TablesCallBack {
     }
 
     @Override
+    public void deleteTable(Table table) throws RemoteException {
+        server.getTableServer().deleteTable(table);
+    }
+
+    @Override
     public void addListener(String eventName, PropertyChangeListener listener) {
         support.addPropertyChangeListener(eventName, listener);
 

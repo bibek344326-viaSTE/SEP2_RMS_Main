@@ -9,6 +9,7 @@ import shared.utils.table.Table;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -81,6 +82,11 @@ public class TableModelManager implements TableModel {
     @Override
     public Request removeReservation(int id) {
         return tablesClient.removeReservation(id);
+    }
+
+    @Override
+    public void deleteTable(Table table) throws RemoteException {
+        tablesClient.deleteTable(table);
     }
 
     @Override

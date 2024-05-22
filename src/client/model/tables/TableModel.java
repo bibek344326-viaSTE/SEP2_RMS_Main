@@ -5,6 +5,7 @@ import shared.utils.Subject;
 import shared.utils.reservation.Reservation;
 import shared.utils.table.Table;
 
+import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -17,5 +18,6 @@ public interface TableModel extends Subject {
     String getUserName();
     Request createTable(Table table);
     Request removeReservation(int id);
+    void deleteTable(Table table) throws RemoteException;
 
 }
