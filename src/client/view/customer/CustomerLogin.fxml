@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="576.0" style="-fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.customer.CustomerViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="576.0" style="-fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.customer.CustomerLoginController">
     <children>
         <Label layoutX="8.0" layoutY="7.0" prefHeight="27.0" prefWidth="366.0" text="Restaurant Management System">
             <font>
@@ -35,7 +35,7 @@
                 <Font name="System Bold" size="18.0" />
             </font>
         </Label>
-      <Button layoutX="237.0" layoutY="317.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="88.0" text="Back">
+      <Button onAction="#back" layoutX="237.0" layoutY="317.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="88.0" text="Back">
          <font>
             <Font size="14.0" />
          </font>
