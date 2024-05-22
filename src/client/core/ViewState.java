@@ -1,11 +1,11 @@
 package client.core;
 
 public class ViewState {
-    public String getTablenumber() {
+    public String getTablename() {
         return tablename;
     }
 
-    public void setTablenumber(String tablename) {
+    public void setTablename(String tablename) {
         this.tablename = tablename;
     }
 

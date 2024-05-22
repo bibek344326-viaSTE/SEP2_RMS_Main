@@ -52,12 +52,12 @@ public class TableViewModel {
 
     public void setSelected(SimpleTableViewModel table) {
         if (table == null) {
-            viewState.setTablenumber(null);
+            viewState.setTablename(null);
             viewState.setCapacity(0);
             viewState.setStatus(false);
         } else {
             this.selectedTableProperty.set(table);
-            viewState.setTablenumber(selectedTableProperty.get().getTableNameProperty().get());
+            viewState.setTablename(selectedTableProperty.get().getTableNameProperty().get());
             viewState.setCapacity(selectedTableProperty.get().getCapacityProperty().get());
             viewState.setStatus(selectedTableProperty.get().getStatusProperty().get());
         }
@@ -70,11 +70,11 @@ public class TableViewModel {
     public void addEdit() {
         SimpleTableViewModel selectedTable = selectedTableProperty.get();
         if (selectedTable != null) {
-            viewState.setTablenumber(selectedTable.getTableNameProperty().get());
+            viewState.setTablename(selectedTable.getTableNameProperty().get());
             viewState.setCapacity(selectedTable.getCapacityProperty().get());
             viewState.setStatus(selectedTable.getStatusProperty().get());
         } else {
-            viewState.setTablenumber(null);
+            viewState.setTablename(null);
             viewState.setCapacity(0);
             viewState.setStatus(false);
         }
