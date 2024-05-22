@@ -27,7 +27,7 @@ public class RunClientApp {
         ViewState viewState = new ViewState();
 
         TableViewModel tableViewModel = new TableViewModel((new ModelFactory(new ClientFactory())), viewState);
-        System.out.println(tableViewModel.getTables().toString());
+
 
         App.launch(App.class);
 

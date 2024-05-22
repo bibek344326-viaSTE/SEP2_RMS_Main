@@ -34,7 +34,6 @@ public class TableViewController implements ViewController {
     private ViewHandler viewHandler;
     private TableViewModel tableViewModel;
 
-
     public void init(ViewModelFactory viewModelFactory, ViewHandler viewHandler) throws RemoteException {
         this.viewHandler = viewHandler;
         this.tableViewModel = viewModelFactory.getTableViewModel();
@@ -53,11 +52,8 @@ public class TableViewController implements ViewController {
                 } else {
                     setText(item ? "Occupied" : "Vacant");
                 }
-
             }
         });
-
-        //errorLabel.textProperty().bind(tableViewModel.getErrorProperty());
 
         tableViewModel.setSelected(null);
         tableViewModel.deselect();
@@ -69,10 +65,7 @@ public class TableViewController implements ViewController {
                 tableViewModel.setSelected(selectionModel.getSelectedItem());
             }
         });
-
     }
-
-
 
     @FXML
     private void deleteTableButton() throws RemoteException {
@@ -85,13 +78,12 @@ public class TableViewController implements ViewController {
     }
 
     @FXML
-    private void addNewTableButton(ActionEvent event) {
-        tableViewModel.addNewTable();
+    private void addEditButton(ActionEvent event) {
+        tableViewModel.addEdit();
+        viewHandler.openAddEditTable();
     }
-    public void back(){
+
+    public void back() {
         viewHandler.openConnectionButtons();
-    }
-    public void edit(){
-        tableViewModel.setSelected(tableView.getItems().get(0));
     }
 }
