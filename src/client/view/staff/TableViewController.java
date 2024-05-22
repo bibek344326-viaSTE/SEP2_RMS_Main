@@ -31,8 +31,6 @@ public class TableViewController implements ViewController {
     private Label errorLabel; // Added missing import
     @FXML
     private Button editTableDetailsButton;
-    @FXML
-    private Button deleteTableButton;
     private ViewHandler viewHandler;
     private TableViewModel tableViewModel;
 
@@ -77,7 +75,7 @@ public class TableViewController implements ViewController {
 
 
     @FXML
-    private void deleteTableButton(ActionEvent event) throws RemoteException {
+    private void deleteTableButton() throws RemoteException {
         tableViewModel.remove();
     }
 

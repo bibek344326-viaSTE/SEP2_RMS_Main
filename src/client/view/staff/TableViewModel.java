@@ -124,7 +124,7 @@ public class TableViewModel {
     }
 
     public void remove() throws RemoteException {
-        tablemodel.deleteTable(selectedTableProperty.get().getTableNameProperty().getName());
+        tablemodel.deleteTable(selectedTableProperty.get().getTableNameProperty().get());
         updateTableList();
     }
 }
