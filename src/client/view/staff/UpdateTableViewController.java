@@ -33,11 +33,11 @@ public class UpdateTableViewController implements ViewController {
         this.viewHandler = viewHandler;
         this.viewModel = viewModelFactory.getUpdateTableViewModel();
 
-
         tableNameField.textProperty().bindBidirectional(viewModel.tableNameProperty());
         Bindings.bindBidirectional(capacityField.textProperty(), viewModel.capacityProperty(), new IntStringConverter());
         statusRadioButton.selectedProperty().bindBidirectional(viewModel.statusProperty());
         errorLabel.textProperty().bind(viewModel.errorProperty());
+        //headerLabel.textProperty().bind(viewModel.headerProperty());
 
         reset();
     }

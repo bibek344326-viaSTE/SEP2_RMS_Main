@@ -36,7 +36,6 @@ public class UpdateTableViewModel {
             if (table != null) {
                 tableNameProperty.set(table.getTableName());
                 capacityProperty.set(table.getTableCapacity());
-
             }
         } else {
             tableNameProperty.set("");
@@ -76,6 +75,7 @@ public class UpdateTableViewModel {
             return false;
         }
     }
+
     public boolean createTable() {
         try {
             Table table = new Table(tableNameProperty.get(), capacityProperty.get());

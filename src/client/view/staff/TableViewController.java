@@ -55,21 +55,25 @@ public class TableViewController implements ViewController {
             }
         });
 
-        tableViewModel.setSelected(null);
-        tableViewModel.deselect();
-
-        // Selecting item
-        TableView.TableViewSelectionModel<SimpleTableViewModel> selectionModel = tableView.getSelectionModel();
-        selectionModel.selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+        tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-                tableViewModel.setSelected(selectionModel.getSelectedItem());
+                tableViewModel.setSelected(newSelection);
             }
         });
+
+        errorLabel.textProperty().bind(tableViewModel.getErrorProperty());
+    }
+
+    public void reset() {
+        tableViewModel.clear();
+        tableView.getSelectionModel().clearSelection();
     }
 
     @FXML
-    private void deleteTableButton() throws RemoteException {
-        tableViewModel.remove();
+    private void deleteTableButton(ActionEvent event) throws RemoteException {
+        boolean ok =tableViewModel.remove();
+        if(ok)
+            viewHandler.openAddEditTable();
     }
 
     @FXML
@@ -83,7 +87,8 @@ public class TableViewController implements ViewController {
         viewHandler.openAddEditTable();
     }
 
-    public void back() {
+    @FXML
+    private void back() {
         viewHandler.openConnectionButtons();
     }
 }

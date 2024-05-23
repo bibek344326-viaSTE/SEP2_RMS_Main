@@ -25,9 +25,12 @@ public class ViewState {
         this.status = status;
     }
 
+
+
     private String tablename;
     private int capacity;
     private boolean status;
+    private boolean remove;
 
     public String getMenuItemName() {
         return menuItemName;
@@ -44,6 +47,8 @@ public class ViewState {
     public void setMenuItemType(String menuItemType) {
         this.menuItemType = menuItemType;
     }
+    public void setRemove(boolean remove) {this.remove = remove;}
+    public boolean isRemove() {return remove;}
 
     private String menuItemName;
     private String menuItemType;
@@ -54,5 +59,6 @@ public class ViewState {
         this.status = false;
         this.menuItemName = null;
         this.menuItemType = null;
+        this.remove =  false;
     }
 }

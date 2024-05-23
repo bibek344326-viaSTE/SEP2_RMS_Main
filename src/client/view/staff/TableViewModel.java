@@ -4,37 +4,40 @@ import client.core.ModelFactory;
 import client.core.ViewState;
 import client.model.Reservation.ReservationModel;
 import client.model.tables.TableModel;
+import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import shared.utils.Request;
 import shared.utils.table.Table;
 
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.rmi.RemoteException;
 
-public class TableViewModel {
+public class TableViewModel implements PropertyChangeListener {
 
     private ObservableList<SimpleTableViewModel> tableList;
-    private TableModel tablemodel;
-    private BooleanProperty tableStatus;
+    private TableModel tableModel;
     private ObjectProperty<SimpleTableViewModel> selectedTableProperty;
     private StringProperty errorLabel;
     private ViewState viewState;
-    private ReservationModel reservationModel;
+
 
     public TableViewModel(ModelFactory modelFactory, ViewState viewState) throws RemoteException {
-        this.tablemodel = modelFactory.getTableModel();
+        this.tableModel = modelFactory.getTableModel();
         this.tableList = FXCollections.observableArrayList();
         this.selectedTableProperty = new SimpleObjectProperty<>();
         this.errorLabel = new SimpleStringProperty();
         this.viewState = viewState;
-
         updateTableList();
     }
 
     public ObservableList<SimpleTableViewModel> getTableList() {
         return tableList;
+    }
+    public void clear(){
+        errorLabel.set(null);
     }
 
     public StringProperty getErrorProperty() {
@@ -43,8 +46,8 @@ public class TableViewModel {
 
     public void updateTableList() {
         tableList.clear();
-        for (int i = 0; i < tablemodel.getTables().size(); i++) {
-            tableList.add(new SimpleTableViewModel(tablemodel.getTables().get(i)));
+        for (Table table : tableModel.getTables()) {
+            tableList.add(new SimpleTableViewModel(table));
         }
     }
 
@@ -55,9 +58,9 @@ public class TableViewModel {
             viewState.setStatus(false);
         } else {
             this.selectedTableProperty.set(table);
-            viewState.setTablename(selectedTableProperty.get().getTableNameProperty().get());
-            viewState.setCapacity(selectedTableProperty.get().getCapacityProperty().get());
-            viewState.setStatus(selectedTableProperty.get().getStatusProperty().get());
+            viewState.setTablename(table.getTableNameProperty().get());
+            viewState.setCapacity(table.getCapacityProperty().get());
+            viewState.setStatus(table.getStatusProperty().get());
         }
     }
 
@@ -66,6 +69,7 @@ public class TableViewModel {
     }
 
     public void addEdit() {
+        viewState.setRemove(false);
         SimpleTableViewModel selectedTable = selectedTableProperty.get();
         if (selectedTable != null) {
             viewState.setTablename(selectedTable.getTableNameProperty().get());
@@ -78,24 +82,50 @@ public class TableViewModel {
         }
     }
 
-    public Request removeReservation(int reservationId) {
-        return tablemodel.removeReservation(reservationId);
+    public boolean remove() throws RemoteException {
+        if (selectedTableProperty.get() != null) {
+            viewState.setTablename(selectedTableProperty.get().getTableNameProperty().get());
+            viewState.setRemove(true);
+            tableModel.deleteTable(viewState.getTablename());
+            updateTableList();
+            return true;
+        } else {
+            viewState.setRemove(false);
+            errorLabel.set("No selection");
+            return false;
+        }
     }
 
-    public void updateTable(Table table, String tableName, int tableCapacity) {
-        tablemodel.updateTable(table, tableName, tableCapacity);
+    private void removeSimpleTable(String tableName) {
+        tableList.removeIf(simpleTableViewModel -> simpleTableViewModel.getTableNameProperty().get().equals(tableName));
     }
 
-    public void addListener(String eventName, PropertyChangeListener listener) {
-        tablemodel.addListener(eventName, listener);
+    private void addSimpleTable(Table table) {
+        for (int i = 0; i < tableList.size(); i++) {
+            Table t = tableModel.getTables().get(i);
+            if (table.getTableCapacity() < t.getTableCapacity()) {
+                tableList.add(i, new SimpleTableViewModel(table));
+                return;
+            }
+        }
+        tableList.add(new SimpleTableViewModel(table));
     }
 
-    public void removeListener(String eventName, PropertyChangeListener listener) {
-        tablemodel.removeListener(eventName, listener);
-    }
-
-    public void remove() throws RemoteException {
-        tablemodel.deleteTable(selectedTableProperty.get().getTableNameProperty().get());
-        updateTableList();
+    @Override
+    public void propertyChange(PropertyChangeEvent event) {
+        Platform.runLater(() -> {
+            switch (event.getPropertyName()) {
+                case "AddTable":
+                    addSimpleTable((Table) event.getNewValue());
+                    break;
+                case "RemoveTable":
+                    removeSimpleTable((String) event.getOldValue());
+                    break;
+                case "UpdateTable":
+                    removeSimpleTable((String) event.getOldValue());
+                    addSimpleTable((Table) event.getNewValue());
+                    break;
+            }
+        });
     }
 }
