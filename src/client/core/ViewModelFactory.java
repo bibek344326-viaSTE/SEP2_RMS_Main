@@ -5,6 +5,7 @@ import client.view.staff.TableViewModel;
 import client.view.staff.UpdateTableViewModel;
 
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 
 public class ViewModelFactory {
     private final ModelFactory modelFactory;
@@ -31,7 +32,7 @@ public class ViewModelFactory {
         }
         return updateTableViewModel;
     }
-    public MenuViewModel getMenuViewModel() throws RemoteException {
+    public MenuViewModel getMenuViewModel() throws RemoteException, SQLException {
         if (menuViewModel== null) {
             menuViewModel = new MenuViewModel(modelFactory, viewState);
         }

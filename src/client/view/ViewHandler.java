@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class ViewHandler {
     private final ViewModelFactory viewModelFactory;
@@ -47,6 +48,8 @@ public class ViewHandler {
                 loginScene = new Scene(root);
             } catch (IOException e) {
                 throw new RuntimeException(e);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
 
         }
@@ -63,6 +66,8 @@ public class ViewHandler {
                 customerScene = new Scene(root);
             } catch (IOException e) {
                 throw new RuntimeException(e);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
         }
         stage.setTitle("Login To Customer View");
@@ -75,7 +80,7 @@ public class ViewHandler {
             try {
                 Parent root = loadFXML("./customer/CustomerTableNumberView.fxml");
                 customerTableNumberScene = new Scene(root);
-            } catch (IOException e) {
+            } catch (IOException | SQLException e) {
                 throw new RuntimeException(e);
             }
         }
@@ -89,7 +94,7 @@ public class ViewHandler {
             try {
                 Parent root = loadFXML("./staff/StaffMemberLogin.fxml");
                 staffLoginScene = new Scene(root);
-            } catch (IOException e) {
+            } catch (IOException | SQLException e) {
                 throw new RuntimeException(e);
             }
 
@@ -106,7 +111,7 @@ public class ViewHandler {
             try {
                 Parent root = loadFXML("./kitchenstaff/KitchenStaffLogin.fxml");
                 kitchenLoginScene = new Scene(root);
-            } catch (IOException e) {
+            } catch (IOException | SQLException e) {
                 throw new RuntimeException(e);
             }
 
@@ -121,7 +126,7 @@ public class ViewHandler {
             try {
                 Parent root = loadFXML("./customer/CustomerViewMenuItems.fxml");
                 menuScene = new Scene(root);
-            } catch (IOException e) {
+            } catch (IOException | SQLException e) {
                 throw new RuntimeException(e);
             }
 
@@ -140,6 +145,8 @@ public class ViewHandler {
                 kitchenScene = new Scene(root);
             } catch (IOException e) {
                 throw new RuntimeException(e);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
         }
         stage.setTitle("Login To kitchen View");
@@ -151,7 +158,7 @@ public class ViewHandler {
             try {
                 Parent root = loadFXML("./staff/ConnectionButtonsForStaff.fxml");
                 connectionButtons = new Scene(root);
-            } catch (IOException e) {
+            } catch (IOException | SQLException e) {
                 throw new RuntimeException(e);
             }
         }
@@ -164,7 +171,7 @@ public class ViewHandler {
             try {
                 Parent root = loadFXML("./staff/StaffTablesView.fxml");
                 tableViewStaff = new Scene(root);
-            } catch (IOException e) {
+            } catch (IOException | SQLException e) {
                 throw new RuntimeException(e);
             }
         }
@@ -177,7 +184,7 @@ public class ViewHandler {
             try {
                 Parent root = loadFXML("./staff/StaffCustomerView.fxml");
                 customerViewStaff = new Scene(root);
-            } catch (IOException e) {
+            } catch (IOException | SQLException e) {
                 throw new RuntimeException(e);
             }
         }
@@ -190,7 +197,7 @@ public class ViewHandler {
             try {
                 Parent root = loadFXML("./staff/StaffOrderView.fxml");
                 orderViewStaff = new Scene(root);
-            } catch (IOException e) {
+            } catch (IOException | SQLException e) {
                 throw new RuntimeException(e);
             }
         }
@@ -203,7 +210,7 @@ public class ViewHandler {
             try {
                 Parent root = loadFXML("./staff/StaffMenuItems.fxml");
                 menuViewStaff = new Scene(root);
-            } catch (IOException e) {
+            } catch (IOException | SQLException e) {
                 throw new RuntimeException(e);
             }
         }
@@ -216,7 +223,7 @@ public class ViewHandler {
             try {
                 Parent root = loadFXML("./staff/UpdateTableDetails.fxml");
                 AddEditTable = new Scene(root);
-            } catch (IOException e) {
+            } catch (IOException | SQLException e) {
                 throw new RuntimeException(e);
             }
         }
@@ -226,7 +233,7 @@ public class ViewHandler {
     }
 
 
-    private Parent loadFXML(String path) throws IOException {
+    private Parent loadFXML(String path) throws IOException, SQLException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource(path));
         Parent root = loader.load();

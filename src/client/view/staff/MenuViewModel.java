@@ -11,6 +11,7 @@ import shared.utils.menuItem.MenuItem;
 
 import java.beans.PropertyChangeListener;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class MenuViewModel {
@@ -21,7 +22,7 @@ public class MenuViewModel {
     private final StringProperty errorLabel;
     private final ViewState viewState;
 
-    public MenuViewModel(ModelFactory modelFactory, ViewState viewState) throws RemoteException {
+    public MenuViewModel(ModelFactory modelFactory, ViewState viewState) throws RemoteException, SQLException {
         this.menuItemModel = modelFactory.getMenuItemModel();
         this.menuItemList = FXCollections.observableArrayList();
         this.selectedMenuItemProperty = new SimpleObjectProperty<>();
@@ -39,7 +40,7 @@ public class MenuViewModel {
         return errorLabel;
     }
 
-    public void updateMenuItemList() throws RemoteException {
+    public void updateMenuItemList() throws RemoteException, SQLException {
         menuItemList.clear();
     for (int i = 0; i < menuItemModel.getMenuItems().size(); i++){
         menuItemList.add(new SimpleMenuViewModel(menuItemModel.getMenuItems().get(i)));
@@ -79,12 +80,12 @@ public class MenuViewModel {
             );
             menuItemModel.removeMenuItem(menuItem);
             updateMenuItemList();
-        } catch (RemoteException e) {
+        } catch (RemoteException | SQLException e) {
             errorLabel.set("Failed to remove menu item: " + e.getMessage());
         }
     }
 
-    public void updateMenuItem(MenuItem menuItem, String newName, String newType) throws RemoteException {
+    public void updateMenuItem(MenuItem menuItem, String newName, String newType) throws RemoteException, SQLException {
         menuItemModel.updateMenuItem(menuItem, newName, newType);
         updateMenuItemList();
     }

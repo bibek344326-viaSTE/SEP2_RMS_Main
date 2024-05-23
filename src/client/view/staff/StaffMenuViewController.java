@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import shared.utils.menuItem.MenuItem;
 
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 
 public class StaffMenuViewController implements ViewController {
     @FXML
@@ -32,14 +33,14 @@ public class StaffMenuViewController implements ViewController {
     private ViewHandler viewHandler;
     private MenuViewModel menuViewModel;
 
-    public void init(ViewModelFactory viewModelFactory, ViewHandler viewHandler) throws RemoteException {
+    public void init(ViewModelFactory viewModelFactory, ViewHandler viewHandler) throws RemoteException, SQLException {
         this.viewHandler = viewHandler;
         this.menuViewModel = viewModelFactory.getMenuViewModel();
 
         itemNameColumn.setCellValueFactory(cellData -> cellData.getValue().getItemNameProperty());
         typeColumn.setCellValueFactory(cellData -> cellData.getValue().getTypeProperty());
 
-        errorLabel.textProperty().bind(menuViewModel.getErrorProperty());
+        //errorLabel.textProperty().bind(menuViewModel.getErrorProperty());
 
         menuTableView.setItems(menuViewModel.getMenuItemList());
 
