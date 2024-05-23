@@ -9,10 +9,12 @@ public class Customer extends User implements Serializable {
         super(username, password);
         this.userType = Usertype.CUSTOMER.name();
     }
+
     public Customer(String username) {
         super(username);
         this.userType = Usertype.CUSTOMER.name();
     }
+
     public String getUserType() {
         return userType;
     }
@@ -25,5 +27,12 @@ public class Customer extends User implements Serializable {
     @Override
     public String getEmployeeType() {
         return userType;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "userType='" + userType + '\'' + super.toString() + '}';
+
     }
 }

@@ -8,6 +8,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class MenuItemModelManager implements MenuItemModel {
@@ -24,18 +25,18 @@ public class MenuItemModelManager implements MenuItemModel {
     }
 
     @Override
-    public ArrayList<MenuItem> getMenuItems() throws RemoteException {
-        return (ArrayList<MenuItem>) menuItemClient.getMenuItems();
+    public ArrayList<MenuItem> getMenuItems() throws RemoteException, SQLException {
+        return menuItemClient.getMenuItems();
     }
 
     @Override
-    public MenuItem getMenuItem(int id) throws RemoteException {
+    public MenuItem getMenuItem(int id) throws RemoteException, SQLException {
         return menuItemClient.getMenuItem(id);
     }
 
     @Override
-    public Request createMenuItem(MenuItem menuItem) throws RemoteException {
-        return menuItemClient.createMenuItem(menuItem);
+    public void createMenuItem(MenuItem menuItem) throws RemoteException {
+        menuItemClient.createMenuItem(menuItem);
     }
 
     @Override

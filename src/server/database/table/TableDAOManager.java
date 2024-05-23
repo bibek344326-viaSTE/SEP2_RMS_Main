@@ -57,7 +57,7 @@ public class TableDAOManager implements TableDAO {
     public void delete(String tableName) throws SQLException {
         try (Connection connection = DatabaseConnection.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "DELETE FROM tables WHERE table_name = ?");
+                    "DELETE * FROM tables WHERE table_name = ?");
             preparedStatement.setString(1, tableName);
             preparedStatement.executeUpdate();
 

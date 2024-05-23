@@ -7,6 +7,7 @@ import shared.utils.menuItem.MenuItem;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class MenuItemServerManager implements MenuServer {
@@ -19,13 +20,13 @@ public class MenuItemServerManager implements MenuServer {
     }
 
     @Override
-    public ArrayList<MenuItem> getMenus() throws RemoteException {
+    public ArrayList<MenuItem> getMenus() throws RemoteException, SQLException {
         return menuItemHandler.getMenuItems();
     }
 
     @Override
-    public void updateMenu(MenuItem menu, String menuName, String menuType) throws RemoteException {
-        menuItemHandler.updateMenuItem(menu, menuName, menuType);
+    public void updateMenu(MenuItem menu, String menuName, String menuType) throws RemoteException, SQLException {
+        menuItemHandler.updateMenuItem(menu, menuName, menuType, menu.getMenuItemID());
     }
 
     @Override

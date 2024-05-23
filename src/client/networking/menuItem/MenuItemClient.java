@@ -6,12 +6,14 @@ import shared.utils.menuItem.MenuItem;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
-public interface MenuItemClient extends Subject, Remote {
-    Request createMenuItem(MenuItem menuItem) throws RemoteException;
+public interface MenuItemClient {
+    void createMenuItem(MenuItem menuItem) throws RemoteException;
     void updateMenuItem(MenuItem menuItem, String newName, String newType);
     void removeMenuItem(MenuItem menuItem);
-    MenuItem getMenuItem(int id) throws RemoteException;
-    List<MenuItem> getMenuItems() throws RemoteException;
+    MenuItem getMenuItem(int id) throws RemoteException, SQLException;
+    ArrayList<MenuItem> getMenuItems() throws RemoteException, SQLException;
 }

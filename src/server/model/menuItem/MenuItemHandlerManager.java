@@ -1,42 +1,45 @@
 package server.model.menuItem;
 
+import server.database.menuItem.MenuItemDAO;
+import server.database.menuItem.MenuItemDAOManager;
 import shared.utils.Request;
 import shared.utils.menuItem.MenuItem;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class MenuItemHandlerManager implements MenuItemHandler {
 
-    private List<MenuItem> menuItems;
+    private MenuItemDAO menuItemDAO;
+
     private PropertyChangeSupport support;
 
     public MenuItemHandlerManager() {
-        menuItems = new ArrayList<>();
+        menuItemDAO = new MenuItemDAOManager();
         support = new PropertyChangeSupport(this);
     }
 
     @Override
     public Request addMenuItem(MenuItem menuItem) {
-        menuItems.add(menuItem);
+        menuItemDAO.addMenuItem(menuItem);
         support.firePropertyChange("menuItemAdded", null, menuItem);
         return null;
     }
 
     @Override
     public void removeMenuItem(MenuItem menuItem) {
-        if (menuItems.remove(menuItem)) {
-            support.firePropertyChange("menuItemRemoved", menuItem, null);
-        }
+        menuItemDAO.removeMenuItem(menuItem.getMenuItemID());
+        support.firePropertyChange("menuItemRemoved", menuItem, null);
+
     }
 
     @Override
-    public void updateMenuItem(MenuItem menuItem, String newName, String newType) {
-        for (int i = 0; i < menuItems.size(); i++) {
-            if (menuItems.get(i).getMenuItemID() == menuItem.getMenuItemID()) {
-                MenuItem oldMenuItem = menuItems.set(i, menuItem);
+    public void updateMenuItem(MenuItem menuItem, String newName, String newType, int menuItemID) throws SQLException {
+        for (int i = 0; i < menuItemDAO.getMenuItems().size(); i++) {
+            if (menuItemDAO.getMenuItem(menuItem.getMenuItemName()).getMenuItemID() == menuItem.getMenuItemID()) {
+                MenuItem oldMenuItem = menuItemDAO.updateMenuItem(menuItem,newName,newType,menuItem.getMenuItemID());
                 support.firePropertyChange("menuItemUpdated", oldMenuItem, menuItem);
                 return;
             }
@@ -44,8 +47,8 @@ public class MenuItemHandlerManager implements MenuItemHandler {
     }
 
     @Override
-    public MenuItem getMenuItem(int id) {
-        for (MenuItem menuItem : menuItems) {
+    public MenuItem getMenuItem(int id) throws SQLException {
+        for (MenuItem menuItem : menuItemDAO.getMenuItems()) {
             if (menuItem.getMenuItemID() == id) {
                 return menuItem;
             }
@@ -54,8 +57,8 @@ public class MenuItemHandlerManager implements MenuItemHandler {
     }
 
     @Override
-    public ArrayList<MenuItem> getMenuItems() {
-        return (ArrayList<MenuItem>) menuItems;
+    public ArrayList<MenuItem> getMenuItems() throws SQLException {
+        return menuItemDAO.getMenuItems();
     }
 
     @Override

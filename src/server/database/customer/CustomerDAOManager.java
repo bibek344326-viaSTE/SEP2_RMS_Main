@@ -64,7 +64,7 @@ public class CustomerDAOManager implements CustomerDAO {
     public ArrayList<Customer> getCustomers() {
         ArrayList<Customer> list = new ArrayList<>();
         try (Connection connection = DatabaseConnection.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("select * from \"User\" WHERE access_type='CUSTOMER'");
+            PreparedStatement statement = connection.prepareStatement("select * from users WHERE accesstype='CUSTOMER'");
 
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {

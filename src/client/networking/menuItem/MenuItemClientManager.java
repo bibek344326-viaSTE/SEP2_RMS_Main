@@ -2,25 +2,19 @@ package client.networking.menuItem;
 
 import client.networking.GetServer;
 import shared.networking.serverInterfaces.Server;
-import shared.utils.Request;
 import shared.utils.menuItem.MenuItem;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
-import java.util.List;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class MenuItemClientManager implements MenuItemClient {
     private Server server;
-    private PropertyChangeSupport support;
+    //private PropertyChangeSupport support;
 
     public MenuItemClientManager() {
         try {
-            UnicastRemoteObject.exportObject(this, 0);
-            support = new PropertyChangeSupport(this);
-            this.server = GetServer.getServerFromRmi();
+           this.server = GetServer.getServerFromRmi();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -28,8 +22,8 @@ public class MenuItemClientManager implements MenuItemClient {
 
 
     @Override
-    public Request createMenuItem(MenuItem menuItem) throws RemoteException {
-        return this.server.getMenuServer().createMenu(menuItem.getMenuItemName(), menuItem.getMenuItemType());
+    public void createMenuItem(MenuItem menuItem) throws RemoteException {
+        this.server.getMenuServer().createMenu(menuItem.getMenuItemName(), menuItem.getMenuItemType());
     }
 
     @Override
@@ -37,6 +31,8 @@ public class MenuItemClientManager implements MenuItemClient {
         try {
             server.getMenuServer().updateMenu(menuItem, newName, newType);
         } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
@@ -51,22 +47,13 @@ public class MenuItemClientManager implements MenuItemClient {
     }
 
     @Override
-    public MenuItem getMenuItem(int id) throws RemoteException {
+    public MenuItem getMenuItem(int id) throws RemoteException, SQLException {
         return server.getMenuServer().getMenus().get(id);
     }
 
     @Override
-    public List<MenuItem> getMenuItems() throws RemoteException {
+    public ArrayList<MenuItem> getMenuItems() throws RemoteException, SQLException {
         return server.getMenuServer().getMenus();
     }
 
-    @Override
-    public void addListener(String eventName, PropertyChangeListener listener) {
-        support.addPropertyChangeListener(eventName, listener);
-    }
-
-    @Override
-    public void removeListener(String eventName, PropertyChangeListener listener) {
-        support.removePropertyChangeListener(eventName, listener);
-    }
 }
