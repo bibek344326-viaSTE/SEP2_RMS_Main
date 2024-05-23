@@ -38,7 +38,7 @@ public class RunClientApp {
         ViewState viewState = new ViewState();
 
         TableViewModel tableViewModel = new TableViewModel((new ModelFactory(new ClientFactory())), viewState);
-        System.out.println(tableViewModel.getTables().toString());
+
 
         MenuItemClient menuItemClient = new MenuItemClientManager();
         MenuItemModel menuItemModel = new MenuItemModelManager(menuItemClient);

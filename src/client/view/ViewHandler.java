@@ -23,6 +23,7 @@ public class ViewHandler {
     private Scene tableViewStaff;
     private Scene orderViewStaff;
     private Scene menuViewStaff;
+    private Scene AddEditTable;
 
 
 
@@ -210,6 +211,19 @@ public class ViewHandler {
         stage.setScene(menuViewStaff);
         stage.show();
     }
+    public void openAddEditTable() {
+        if (AddEditTable == null) {
+            try {
+                Parent root = loadFXML("./staff/UpdateTableDetails.fxml");
+                AddEditTable = new Scene(root);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        stage.setTitle("opened update table detail");
+        stage.setScene(AddEditTable);
+        stage.show();
+    }
 
 
     private Parent loadFXML(String path) throws IOException {
@@ -221,6 +235,7 @@ public class ViewHandler {
         controller.init(viewModelFactory, this);
         return root;
     }
+
 
 
 }
