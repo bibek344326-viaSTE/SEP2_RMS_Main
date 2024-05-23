@@ -1,5 +1,6 @@
 package client.core;
 
+import client.view.staff.CustomerViewModel;
 import client.view.staff.MenuViewModel;
 import client.view.staff.TableViewModel;
 import client.view.staff.UpdateTableViewModel;
@@ -13,6 +14,7 @@ public class ViewModelFactory {
     private UpdateTableViewModel updateTableViewModel;
     private ViewState viewState;
     private MenuViewModel menuViewModel;
+    private CustomerViewModel customerViewModel;
 
     public ViewModelFactory(ModelFactory modelFactory) {
         this.modelFactory = modelFactory;
@@ -37,6 +39,12 @@ public class ViewModelFactory {
             menuViewModel = new MenuViewModel(modelFactory, viewState);
         }
         return menuViewModel;
+    }
+    public CustomerViewModel getCustomerViewModel() throws RemoteException, SQLException {
+        if (customerViewModel== null) {
+            customerViewModel = new CustomerViewModel(modelFactory, viewState);
+        }
+        return customerViewModel;
     }
 }
 

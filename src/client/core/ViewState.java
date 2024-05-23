@@ -31,10 +31,17 @@ public class ViewState {
     private int capacity;
     private boolean status;
     private boolean remove;
+    private String customerName;
+    private String password;
 
     public String getMenuItemName() {
         return menuItemName;
     }
+
+    public String getCustomerName() {return customerName;}
+    public String getPassword() {return password;}
+    public void setCustomerName(String customerName) {this.customerName = customerName;}
+    public void setPassword(String password) {this.password = password;}
 
     public void setMenuItemName(String menuItemName) {
         this.menuItemName = menuItemName;
@@ -60,5 +67,7 @@ public class ViewState {
         this.menuItemName = null;
         this.menuItemType = null;
         this.remove =  false;
+        this.customerName = null;
+        this.password = null;
     }
 }
