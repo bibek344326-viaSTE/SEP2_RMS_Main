@@ -99,7 +99,7 @@ public class TableDAOManager implements TableDAO {
     }
 
     @Override
-    public Table getTable(String  tableName) throws SQLException {
+    public Table getTable(String tableName) throws SQLException {
         String sql = "SELECT * FROM tables WHERE table_name = ?";
         Table table = null;
 
@@ -109,8 +109,9 @@ public class TableDAOManager implements TableDAO {
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
-                String tableName1 = rs.getString("tableName");
+                String tableName1 = rs.getString("table_name");
                 int tableCapacity = rs.getInt("table_capacity");
+               // boolean isOccupied = rs.getBoolean("is_occupied");
                 // Assuming there are more fields in the Table class, retrieve them here
                 table = new Table(tableName1, tableCapacity);
             }

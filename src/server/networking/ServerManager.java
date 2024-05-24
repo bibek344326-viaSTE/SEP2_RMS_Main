@@ -22,15 +22,14 @@ public class ServerManager implements Server {
     private ReservationServer reservationServer;
 
     public ServerManager(LoginServer loginServer, CreateAccountServer createAccountServer,
-                         TableServer tableServer, CustomerListServer customerListServer, ChatServer chatServer,
-                         OrderServer orderServer, MenuServer menuServer, ReservationServer reservationServer)
+                         TableServer tableServer, CustomerListServer customerListServer, ChatServer chatServer, MenuServer menuServer, ReservationServer reservationServer)
             throws RemoteException {
         this.loginServer = loginServer;
         this.createAccountServer = createAccountServer;
         this.tableServer = tableServer;
         this.customerListServer = customerListServer;
         this.chatServer = chatServer;
-        this.orderServer = orderServer;
+        //this.orderServer = orderServer;
         this.menuServer = menuServer;
         this.reservationServer = reservationServer;
         UnicastRemoteObject.exportObject(this, 0);

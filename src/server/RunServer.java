@@ -62,17 +62,17 @@ public class RunServer {
         MenuItemHandler menuItemHandler = new MenuItemHandlerManager();
         MenuServer menuServer = new MenuItemServerManager(menuItemHandler);
 
-        OrderHandler orderHandler = new OrderHandlerManager();
-        OrderServer orderServer = new OrdersServerManager(orderHandler);
+//        OrderHandler orderHandler = new OrderHandlerManager();
+//        OrderServer orderServer = new OrdersServerManager(orderHandler);
 
 
-        Server server = new ServerManager(loginServer, createAccountServer, tablesServerManager, customerListServer, chatServer, orderServer, menuServer, reservationServer);
+        Server server = new ServerManager(loginServer, createAccountServer, tablesServerManager, customerListServer, chatServer, menuServer, reservationServer);
         server.startServer();
 
-        OrderDAO orderDAO = new OrderDAOManager();
-        for(int i=0; i<orderDAO.getOrders().size(); i++){
-            System.out.println(orderDAO.getOrders().get(i)+"\n");;
-        }
+//        OrderDAO orderDAO = new OrderDAOManager();
+//        for(int i=0; i<orderDAO.getOrders().size(); i++){
+//            System.out.println(orderDAO.getOrders().get(i)+"\n");;
+//        }
 
     }
 }
