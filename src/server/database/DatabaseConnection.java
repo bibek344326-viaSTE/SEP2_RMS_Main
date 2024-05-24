@@ -11,7 +11,7 @@ public class DatabaseConnection {
             
 
                 ("jdbc:postgresql://localhost:5432/postgres?currentSchema=sep2_rms",
-                        "postgres", "P@ssw0rd");
+                        "postgres", "captos123");
 
     }
 }

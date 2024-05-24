@@ -36,7 +36,8 @@ public class TableViewModel implements PropertyChangeListener {
     public ObservableList<SimpleTableViewModel> getTableList() {
         return tableList;
     }
-    public void clear(){
+
+    public void clear() {
         errorLabel.set(null);
     }
 
@@ -82,18 +83,9 @@ public class TableViewModel implements PropertyChangeListener {
         }
     }
 
-    public boolean remove() throws RemoteException {
-        if (selectedTableProperty.get() != null) {
-            viewState.setTablename(selectedTableProperty.get().getTableNameProperty().get());
-            viewState.setRemove(true);
-            tableModel.deleteTable(viewState.getTablename());
-            updateTableList();
-            return true;
-        } else {
-            viewState.setRemove(false);
-            errorLabel.set("No selection");
-            return false;
-        }
+    public void remove() throws RemoteException {
+        tableModel.deleteTable(selectedTableProperty.get().getTableNameProperty().get());
+        updateTableList();
     }
 
     private void removeSimpleTable(String tableName) {

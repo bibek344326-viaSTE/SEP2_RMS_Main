@@ -70,10 +70,8 @@ public class TableViewController implements ViewController {
     }
 
     @FXML
-    private void deleteTableButton(ActionEvent event) throws RemoteException {
-        boolean ok =tableViewModel.remove();
-        if(ok)
-            viewHandler.openAddEditTable();
+    private void deleteTableButton() throws RemoteException {
+       tableViewModel.remove();
     }
 
     @FXML
