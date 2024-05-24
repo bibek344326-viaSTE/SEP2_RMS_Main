@@ -33,6 +33,7 @@ public class ViewState {
     private boolean remove;
     private String customerName;
     private String password;
+    private int Id;
 
     public String getMenuItemName() {
         return menuItemName;
@@ -42,6 +43,8 @@ public class ViewState {
     public String getPassword() {return password;}
     public void setCustomerName(String customerName) {this.customerName = customerName;}
     public void setPassword(String password) {this.password = password;}
+    public int getId() {return Id;}
+    public void setId(int Id) {this.Id = Id;}
 
     public void setMenuItemName(String menuItemName) {
         this.menuItemName = menuItemName;
@@ -69,5 +72,6 @@ public class ViewState {
         this.remove =  false;
         this.customerName = null;
         this.password = null;
+        this.Id = 0;
     }
 }

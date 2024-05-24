@@ -51,10 +51,12 @@ public class MenuViewModel {
         if (menuItem == null) {
             viewState.setMenuItemName(null);
             viewState.setMenuItemType(null);
+            viewState.setId(0);
         } else {
             this.selectedMenuItemProperty.set(menuItem);
             viewState.setMenuItemName(selectedMenuItemProperty.get().getItemNameProperty().get());
             viewState.setMenuItemType(selectedMenuItemProperty.get().getTypeProperty().get());
+            viewState.setId(selectedMenuItemProperty.get().getItemIdProperty().get());
         }
     }
 
@@ -67,22 +69,16 @@ public class MenuViewModel {
         if (selectedMenuItem != null) {
             viewState.setMenuItemName(selectedMenuItem.getItemNameProperty().get());
             viewState.setMenuItemType(selectedMenuItem.getTypeProperty().get());
+            viewState.setId(selectedMenuItem.getItemIdProperty().get());
         } else {
             viewState.setMenuItemName(null);
             viewState.setMenuItemType(null);
+            viewState.setId(0);
         }
     }
 
     public void remove() {
-        try {
-            MenuItem menuItem = menuItemModel.getMenuItem(
-                    Integer.parseInt(selectedMenuItemProperty.get().getItemNameProperty().get())
-            );
-            menuItemModel.removeMenuItem(menuItem);
-            updateMenuItemList();
-        } catch (RemoteException | SQLException e) {
-            errorLabel.set("Failed to remove menu item: " + e.getMessage());
-        }
+        menuItemModel.removeMenuItem(selectedMenuItemProperty.get().getItemIdProperty().get());
     }
 
     public void updateMenuItem(MenuItem menuItem, String newName, String newType) throws RemoteException, SQLException {
