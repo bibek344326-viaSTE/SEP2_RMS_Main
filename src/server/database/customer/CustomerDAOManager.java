@@ -2,6 +2,7 @@ package server.database.customer;
 
 import server.database.DatabaseConnection;
 import shared.utils.user.Customer;
+import shared.utils.user.Usertype;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,6 +13,19 @@ public class CustomerDAOManager implements CustomerDAO {
             DriverManager.registerDriver(new org.postgresql.Driver());
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void createCustomer(Customer customer) {
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO users VALUES (?, ?, ?)");
+            statement.setString(1, customer.getUsername());
+            statement.setString(2, customer.getPassword());
+            statement.setString(3, Usertype.CUSTOMER.toString());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 

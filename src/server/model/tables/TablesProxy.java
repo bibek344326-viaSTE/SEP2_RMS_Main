@@ -13,7 +13,7 @@ public class TablesProxy implements TablesHandler {
     private String tableName;
     private int tableCapacity;
 
-    public TablesProxy() {
+    public TablesProxy() throws SQLException {
         tablesHandler = new TablesHandlerManager();
     }
 

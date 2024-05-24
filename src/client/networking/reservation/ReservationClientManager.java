@@ -15,12 +15,13 @@ import java.beans.PropertyChangeSupport;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.SQLException;
 
 public class ReservationClientManager implements ReservationClient{
     private ReservationDAO reservationDAO;
     private PropertyChangeSupport support;
 
-    public ReservationClientManager() {
+    public ReservationClientManager() throws SQLException {
         reservationDAO = new ReservationDAOManager();
         support = new PropertyChangeSupport(this);
     }

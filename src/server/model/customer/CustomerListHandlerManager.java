@@ -15,6 +15,11 @@ public class CustomerListHandlerManager implements CustomerListHandler {
     }
 
     @Override
+    public void addCustomer(Customer customer) {
+        customerDAO.createCustomer(customer);
+    }
+
+    @Override
     public void updateCustomer(Customer customer, String oldUsername) {
         customerDAO.updateCustomer(customer, oldUsername);
     }

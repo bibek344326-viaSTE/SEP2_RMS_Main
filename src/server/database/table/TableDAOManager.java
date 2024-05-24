@@ -29,11 +29,11 @@ public class TableDAOManager implements TableDAO {
     public void create(Table table) throws SQLException {
         try (Connection connection = DatabaseConnection.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "INSERT INTO tables (table_name, table_capacity, is_occupied) VALUES (?,?,?)");
+                    "INSERT INTO tables (table_name, table_capacity, isoccupied) VALUES (?,?,?)");
 
             preparedStatement.setString(1, table.getTableName());
             preparedStatement.setInt(2, table.getTableCapacity());
-            preparedStatement.setBoolean(3, table.isOccupied());
+            preparedStatement.setBoolean(3, false);
             preparedStatement.executeUpdate();
 
             System.out.println("Table added successfully.");
@@ -44,9 +44,10 @@ public class TableDAOManager implements TableDAO {
     public void update(Table table, String tableName, int tableCapacity) throws SQLException {
         try (Connection connection = DatabaseConnection.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "UPDATE tables SET table_capacity = ? WHERE table_name = ?");
-            preparedStatement.setInt(1, tableCapacity);
-            preparedStatement.setString(2, tableName);
+                    "UPDATE tables SET table_name = ?, table_capacity = ? WHERE table_name = ?");
+            preparedStatement.setString(1, table.getTableName());
+            preparedStatement.setInt(2, table.getTableCapacity());
+            preparedStatement.setString(3, table.getTableName());
             preparedStatement.executeUpdate();
 
             System.out.println("Table updated successfully.");
@@ -57,7 +58,7 @@ public class TableDAOManager implements TableDAO {
     public void delete(String tableName) throws SQLException {
         try (Connection connection = DatabaseConnection.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "DELETE * FROM tables WHERE table_name = ?");
+                    "DELETE FROM tables WHERE table_name = ?");
             preparedStatement.setString(1, tableName);
             preparedStatement.executeUpdate();
 
@@ -99,7 +100,7 @@ public class TableDAOManager implements TableDAO {
 
     @Override
     public Table getTable(String  tableName) throws SQLException {
-        String sql = "SELECT * FROM tables WHERE id = ?";
+        String sql = "SELECT * FROM tables WHERE table_name = ?";
         Table table = null;
 
         try (Connection conn = DatabaseConnection.getConnection();

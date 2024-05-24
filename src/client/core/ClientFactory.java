@@ -18,6 +18,7 @@ import client.networking.tables.TablesClient;
 import client.networking.tables.TablesClientManager;
 
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 
 public class ClientFactory {
     private LoginClient loginClient;
@@ -64,7 +65,7 @@ public class ClientFactory {
         return customerInfoClient;
     }
 
-    public ReservationClient getReservationClient() throws RemoteException {
+    public ReservationClient getReservationClient() throws RemoteException, SQLException {
         if (reservationClient == null) {
             reservationClient = new ReservationClientManager();
         }

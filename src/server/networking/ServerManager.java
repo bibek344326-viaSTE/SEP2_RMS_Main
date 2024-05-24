@@ -21,7 +21,10 @@ public class ServerManager implements Server {
     private MenuServer menuServer;
     private ReservationServer reservationServer;
 
-    public ServerManager(LoginServer loginServer, CreateAccountServer createAccountServer, TableServer tableServer, CustomerListServer customerListServer, ChatServer chatServer, OrderServer orderServer, MenuServer menuServer, ReservationServer reservationServer) throws RemoteException {
+    public ServerManager(LoginServer loginServer, CreateAccountServer createAccountServer,
+                         TableServer tableServer, CustomerListServer customerListServer, ChatServer chatServer,
+                         OrderServer orderServer, MenuServer menuServer, ReservationServer reservationServer)
+            throws RemoteException {
         this.loginServer = loginServer;
         this.createAccountServer = createAccountServer;
         this.tableServer = tableServer;

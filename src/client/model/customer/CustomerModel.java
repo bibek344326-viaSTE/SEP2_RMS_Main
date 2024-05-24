@@ -6,6 +6,8 @@ import shared.utils.user.Customer;
 import java.util.List;
 
 public interface CustomerModel extends Subject {
+    void addCustomer(Customer customer);
+
     void updateCustomer(Customer customer, String oldUsername);
 
     void removeCustomer(Customer customer);

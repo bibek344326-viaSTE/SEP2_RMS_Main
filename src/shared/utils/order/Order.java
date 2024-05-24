@@ -7,7 +7,6 @@ import shared.utils.user.Customer;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Order {
     private int orderID;
@@ -54,8 +53,8 @@ public class Order {
         this.customer = customer;
     }
 
-    public List<MenuItem> getOrderItemsList() {
-        return orderItemsList;
+    public MenuItem getOrderItemsList(int menuItemId) {
+        return orderItemsList.get(menuItemId);
     }
 
     public void addOrderItemsList(MenuItem menuItem) {

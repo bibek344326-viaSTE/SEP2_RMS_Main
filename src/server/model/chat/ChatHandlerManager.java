@@ -10,8 +10,8 @@ import java.util.List;
 public class ChatHandlerManager implements ChatHandler {
 
     private ChatDAO chatDAO;
-    public ChatHandlerManager(){
-
+    public ChatHandlerManager() throws Exception {
+        chatDAO = ChatDAOManager.getInstance();
     }
 
     @Override

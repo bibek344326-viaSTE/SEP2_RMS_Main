@@ -1,5 +1,9 @@
 package server;
 
+import server.database.order.OrderDAO;
+import server.database.order.OrderDAOManager;
+import server.database.table.TableDAO;
+import server.database.table.TableDAOManager;
 import server.model.chat.ChatHandler;
 import server.model.chat.ChatHandlerManager;
 import server.model.createUser.CreateUserHandler;
@@ -35,7 +39,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class RunServer {
-    public static void main(String[] args) throws RemoteException, AlreadyBoundException, SQLException {
+    public static void main(String[] args) throws Exception {
 
         LoginHandler loginHandler = new LoginHandlerManager();
         LoginServer loginServer = new LoginServerManager(loginHandler);
@@ -65,11 +69,10 @@ public class RunServer {
         Server server = new ServerManager(loginServer, createAccountServer, tablesServerManager, customerListServer, chatServer, orderServer, menuServer, reservationServer);
         server.startServer();
 
-        ArrayList<Table> tables = new ArrayList<>();
-        for (Table t : tablesServerManager.getTables()) {
-            System.out.println("Table: " + t.getTableName() + "table capacity" + t.getTableCapacity());
+        OrderDAO orderDAO = new OrderDAOManager();
+        for(int i=0; i<orderDAO.getOrders().size(); i++){
+            System.out.println(orderDAO.getOrders().get(i)+"\n");;
         }
-
 
     }
 }

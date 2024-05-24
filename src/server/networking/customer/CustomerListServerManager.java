@@ -18,6 +18,11 @@ public class CustomerListServerManager implements CustomerListServer {
     }
 
     @Override
+    public void addCustomer(Customer customer) throws RemoteException {
+        customerListHandler.addCustomer(customer);
+    }
+
+    @Override
     public void updateCustomer(Customer customer, String oldUsername) throws RemoteException {
         customerListHandler.updateCustomer(customer, oldUsername);
     }

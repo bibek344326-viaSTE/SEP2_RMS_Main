@@ -20,7 +20,7 @@ public class TablesHandlerManager implements TablesHandler {
     private PropertyChangeSupport support;
     private ReservationDAO reservationDAO;
 
-    public TablesHandlerManager() {
+    public TablesHandlerManager() throws SQLException {
         tablesDAO = new TableDAOManager();
         reservationDAO = ReservationDAOManager.getInstance();
         support = new PropertyChangeSupport(this);
