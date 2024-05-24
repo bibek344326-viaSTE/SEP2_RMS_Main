@@ -38,9 +38,9 @@ public class MenuItemClientManager implements MenuItemClient {
     }
 
     @Override
-    public void removeMenuItem(MenuItem menuItem) {
+    public void removeMenuItem(int menuItemID) {
         try {
-            server.getMenuServer().deleteMenu(menuItem);
+            server.getMenuServer().deleteMenu(menuItemID);
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }

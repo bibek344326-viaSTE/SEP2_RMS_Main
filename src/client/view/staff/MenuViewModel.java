@@ -78,7 +78,7 @@ public class MenuViewModel {
             MenuItem menuItem = menuItemModel.getMenuItem(
                     Integer.parseInt(selectedMenuItemProperty.get().getItemNameProperty().get())
             );
-            menuItemModel.removeMenuItem(menuItem);
+            menuItemModel.removeMenuItem(menuItem.getMenuItemID());
             updateMenuItemList();
         } catch (RemoteException | SQLException e) {
             errorLabel.set("Failed to remove menu item: " + e.getMessage());

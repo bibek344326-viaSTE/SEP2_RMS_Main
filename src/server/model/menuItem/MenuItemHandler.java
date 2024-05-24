@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public interface MenuItemHandler extends Subject {
     Request addMenuItem(MenuItem menuItem);
-    void removeMenuItem(MenuItem menuItem);
+    void removeMenuItem(int menuItemID);
     void updateMenuItem(MenuItem menuItem, String menuItemName, String menuItemType, int menuItemID) throws SQLException;
     MenuItem getMenuItem(int id) throws SQLException;
     ArrayList<MenuItem> getMenuItems() throws SQLException;
