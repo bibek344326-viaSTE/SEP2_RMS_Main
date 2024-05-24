@@ -13,7 +13,7 @@ import java.util.List;
 public interface MenuItemClient {
     void createMenuItem(MenuItem menuItem) throws RemoteException;
     void updateMenuItem(MenuItem menuItem, String newName, String newType);
-    void removeMenuItem(MenuItem menuItem);
+    void removeMenuItem(int menuItemID);
     MenuItem getMenuItem(int id) throws RemoteException, SQLException;
     ArrayList<MenuItem> getMenuItems() throws RemoteException, SQLException;
 }

@@ -29,9 +29,9 @@ public class MenuItemHandlerManager implements MenuItemHandler {
     }
 
     @Override
-    public void removeMenuItem(MenuItem menuItem) {
-        menuItemDAO.removeMenuItem(menuItem.getMenuItemID());
-        support.firePropertyChange("menuItemRemoved", menuItem, null);
+    public void removeMenuItem(int menuItemID) {
+        menuItemDAO.removeMenuItem(menuItemID);
+        support.firePropertyChange("menuItemRemoved", menuItemID, null);
 
     }
 

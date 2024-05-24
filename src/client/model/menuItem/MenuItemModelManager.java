@@ -40,8 +40,8 @@ public class MenuItemModelManager implements MenuItemModel {
     }
 
     @Override
-    public void removeMenuItem(MenuItem menuItem) {
-        menuItemClient.removeMenuItem(menuItem);
+    public void removeMenuItem(int menuItemId) throws RemoteException {
+        menuItemClient.removeMenuItem(menuItemId);
     }
 
     @Override

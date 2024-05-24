@@ -12,7 +12,7 @@ public interface MenuItemModel extends Subject {
     ArrayList<MenuItem> getMenuItems() throws RemoteException, SQLException;
     MenuItem getMenuItem(int id) throws RemoteException, SQLException;
     void createMenuItem(MenuItem menuItem) throws RemoteException;
-    void removeMenuItem(MenuItem menuItem);
+    void removeMenuItem(int menuItemId) throws RemoteException;
     void updateMenuItem(MenuItem menuItem, String newName, String newType);
 
 }

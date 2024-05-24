@@ -35,7 +35,7 @@ public class MenuItemServerManager implements MenuServer {
     }
 
     @Override
-    public void deleteMenu(MenuItem menuItem) throws RemoteException {
-        menuItemHandler.removeMenuItem(menuItem);
+    public void deleteMenu(int menuItemID) throws RemoteException {
+        menuItemHandler.removeMenuItem(menuItemID);
     }
 }
