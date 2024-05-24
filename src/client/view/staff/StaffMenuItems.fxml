@@ -12,7 +12,7 @@
         <Button fx:id="deleteMenuItemButton" layoutX="534.0" layoutY="559.0" mnemonicParsing="false" onAction="#deleteMenuItemButton" prefHeight="47.0" prefWidth="120.0" text="Delete Item" />
         <TableView fx:id="menuTableView" layoutX="-3.0" layoutY="16.0" prefHeight="518.0" prefWidth="890.0">
             <columns>
-            <TableColumn prefWidth="118.4000244140625" text="Id" />
+            <TableColumn fx:id="IdColumn" prefWidth="118.4000244140625" text="Id" />
                 <TableColumn fx:id="itemNameColumn" prefWidth="377.5999755859375" text="Item Name" />
                 <TableColumn fx:id="typeColumn" prefWidth="472.800048828125" text="Type(Food/Drinks)" />
             </columns>

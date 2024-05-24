@@ -20,6 +20,8 @@ public class StaffMenuViewController implements ViewController {
     @FXML
     private TableColumn<SimpleMenuViewModel, String> typeColumn;
     @FXML
+    private TableColumn<SimpleMenuViewModel, Number> IdColumn;
+    @FXML
     private Button clearSelectedMenuItemButton;
     @FXML
     private Button addNewMenuItemButton;
@@ -39,6 +41,7 @@ public class StaffMenuViewController implements ViewController {
 
         itemNameColumn.setCellValueFactory(cellData -> cellData.getValue().getItemNameProperty());
         typeColumn.setCellValueFactory(cellData -> cellData.getValue().getTypeProperty());
+        IdColumn.setCellValueFactory(cellData -> cellData.getValue().getItemIdProperty());
 
         //errorLabel.textProperty().bind(menuViewModel.getErrorProperty());
 
@@ -55,7 +58,7 @@ public class StaffMenuViewController implements ViewController {
     }
 
     @FXML
-    private void deleteMenuItemButton() {
+    private void deleteMenuItemButton() throws SQLException, RemoteException {
         menuViewModel.remove();
     }
 

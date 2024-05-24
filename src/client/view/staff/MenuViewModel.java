@@ -77,8 +77,10 @@ public class MenuViewModel {
         }
     }
 
-    public void remove() {
+    public void remove() throws RemoteException, SQLException {
         menuItemModel.removeMenuItem(selectedMenuItemProperty.get().getItemIdProperty().get());
+        updateMenuItemList();
+
     }
 
     public void updateMenuItem(MenuItem menuItem, String newName, String newType) throws RemoteException, SQLException {
