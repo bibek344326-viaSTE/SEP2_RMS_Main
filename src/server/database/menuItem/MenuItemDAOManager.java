@@ -88,9 +88,8 @@ public class MenuItemDAOManager implements MenuItemDAO {
                 String name = rs.getString("menuitemname");
                 String type = rs.getString("menuitemtype");
                 MenuItem menuItem = new MenuItem(name, type);
+                menuItem.setMenuItemID(id);
                 menuItems.add(menuItem);
-
-
             }
             return menuItems;
         }

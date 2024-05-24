@@ -1,5 +1,7 @@
 package server;
 
+import server.database.menuItem.MenuItemDAO;
+import server.database.menuItem.MenuItemDAOManager;
 import server.database.order.OrderDAO;
 import server.database.order.OrderDAOManager;
 import server.database.table.TableDAO;
@@ -73,6 +75,10 @@ public class RunServer {
 //        for(int i=0; i<orderDAO.getOrders().size(); i++){
 //            System.out.println(orderDAO.getOrders().get(i)+"\n");;
 //        }
+        MenuItemDAO menuItemDAO = new MenuItemDAOManager();
+        for(int i=0; i<menuItemDAO.getMenuItems().size(); i++){
+            System.out.println(menuItemDAO.getMenuItems().get(i).getMenuItemID() + " "+ menuItemDAO.getMenuItems().get(i)+"\n");;
+        }
 
     }
 }
