@@ -10,14 +10,15 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class ReservationDAOManager implements ReservationDAO {
 
+    private Connection connection =  new DatabaseConnection().getConnection();
     private static ReservationDAOManager instance;
     private static Lock lock = new ReentrantLock();
 
-    public ReservationDAOManager() {
+    public ReservationDAOManager() throws SQLException {
 
     }
 
-    public static ReservationDAO getInstance() {
+    public static ReservationDAO getInstance() throws SQLException {
         if (instance == null) {
             synchronized (lock) {
                 if (instance == null) {
@@ -30,7 +31,6 @@ public class ReservationDAOManager implements ReservationDAO {
 
     @Override
     public Request addReservation(String username, LocalDateTime localDateTime, String tableName) throws SQLException {
-        Connection connection = null; // Define the connection variable outside try block
         try {
             connection = DatabaseConnection.getConnection();
             // Start transaction
@@ -54,7 +54,7 @@ public class ReservationDAOManager implements ReservationDAO {
 
             // Update table status
             PreparedStatement tableUpdateStatement = connection.prepareStatement(
-                    "UPDATE tables SET isOccupied = true WHERE table_number = ?");
+                    "UPDATE tables SET isOccupied = true WHERE table_name = ?");
             tableUpdateStatement.setString(1, tableName);
             tableUpdateStatement.executeUpdate();
 
@@ -82,7 +82,7 @@ public class ReservationDAOManager implements ReservationDAO {
 
     @Override
     public Request deleteReservation(int id) {
-        Connection connection = null;
+
         try {
             connection = DatabaseConnection.getConnection();
             // Start transaction
@@ -140,7 +140,6 @@ public class ReservationDAOManager implements ReservationDAO {
 
     @Override
     public Request updateReservation(int id, String username, LocalDateTime localDateTime, String tableName) {
-        Connection connection = null;
         try {
             connection = DatabaseConnection.getConnection();
             // Start transaction

@@ -15,6 +15,11 @@ public class CustomerModelManager implements CustomerModel {
     }
 
     @Override
+    public void addCustomer(Customer customer) {
+        client.createCustomer(customer);
+    }
+
+    @Override
     public void updateCustomer(Customer customer, String oldUsername) {
         client.updateCustomer(customer, oldUsername);
     }

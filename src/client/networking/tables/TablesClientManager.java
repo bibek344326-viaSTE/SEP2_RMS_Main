@@ -82,8 +82,8 @@ public class TablesClientManager implements TablesClient, TablesCallBack {
     }
 
     @Override
-    public void deleteTable(Table table) throws RemoteException {
-        server.getTableServer().deleteTable(table);
+    public void deleteTable(String tableName) throws RemoteException {
+        server.getTableServer().deleteTable(tableName);
     }
 
     @Override

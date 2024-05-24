@@ -18,7 +18,7 @@ public class MenuItemDAOManager implements MenuItemDAO {
 
     @Override
     public void addMenuItem(MenuItem menuItem) {
-        String sql = "INSERT INTO menu_items (name, type) VALUES (?, ?)";
+        String sql = "INSERT INTO menuitem (name, type) VALUES (?, ?)";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, menuItem.getMenuItemName());
@@ -31,7 +31,7 @@ public class MenuItemDAOManager implements MenuItemDAO {
 
     @Override
     public void removeMenuItem(int menuItemId) {
-        String sql = "DELETE FROM menu_items WHERE id = ?";
+        String sql = "DELETE FROM menuitem WHERE id = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, menuItemId);
@@ -42,8 +42,8 @@ public class MenuItemDAOManager implements MenuItemDAO {
     }
 
     @Override
-    public void updateMenuItem(MenuItem menuItem, String newName, String newType, int menuItemID) {
-        String sql = "UPDATE menu_items SET name = ?, type = ? WHERE id = ?";
+    public MenuItem updateMenuItem(MenuItem menuItem, String newName, String newType, int menuItemID) {
+        String sql = "UPDATE menuitem SET name = ?, type = ? WHERE id = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, newName);
@@ -53,11 +53,12 @@ public class MenuItemDAOManager implements MenuItemDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return menuItem;
     }
 
     @Override
     public MenuItem getMenuItem(String menuItemName) {
-        String sql = "SELECT * FROM menu_items WHERE name = ?";
+        String sql = "SELECT * FROM menuitem WHERE name = ?";
         MenuItem menuItem = null;
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -76,23 +77,22 @@ public class MenuItemDAOManager implements MenuItemDAO {
     }
 
     @Override
-    public ArrayList<MenuItem> getMenuItems() {
-        String sql = "SELECT * FROM menu_items";
+    public ArrayList<MenuItem> getMenuItems() throws SQLException {
+
         ArrayList<MenuItem> menuItems = new ArrayList<>();
-        try (Connection conn = DatabaseConnection.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            PreparedStatement stmt = connection.prepareStatement("SELECT * FROM menuitem");
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                int id = rs.getInt("id");
-                String name = rs.getString("name");
-                String type = rs.getString("type");
+                int id = rs.getInt("menuitem_id");
+                String name = rs.getString("menuitemname");
+                String type = rs.getString("menuitemtype");
                 MenuItem menuItem = new MenuItem(name, type);
                 menuItems.add(menuItem);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return menuItems;
-    }
 
+
+            }
+            return menuItems;
+        }
+    }
 }

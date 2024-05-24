@@ -18,6 +18,6 @@ public interface TableModel extends Subject {
     String getUserName();
     Request createTable(Table table);
     Request removeReservation(int id);
-    void deleteTable(Table table) throws RemoteException;
+    void deleteTable(String tableName) throws RemoteException;
 
 }

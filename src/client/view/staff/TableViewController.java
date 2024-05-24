@@ -31,11 +31,8 @@ public class TableViewController implements ViewController {
     private Label errorLabel; // Added missing import
     @FXML
     private Button editTableDetailsButton;
-    @FXML
-    private Button deleteTableButton;
     private ViewHandler viewHandler;
     private TableViewModel tableViewModel;
-
 
     public void init(ViewModelFactory viewModelFactory, ViewHandler viewHandler) throws RemoteException {
         this.viewHandler = viewHandler;
@@ -55,30 +52,28 @@ public class TableViewController implements ViewController {
                 } else {
                     setText(item ? "Occupied" : "Vacant");
                 }
-
             }
         });
 
-        //errorLabel.textProperty().bind(tableViewModel.getErrorProperty());
-
-        tableViewModel.setSelected(null);
-        tableViewModel.deselect();
-
-        // Selecting item
-        TableView.TableViewSelectionModel<SimpleTableViewModel> selectionModel = tableView.getSelectionModel();
-        selectionModel.selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+        tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-                tableViewModel.setSelected(selectionModel.getSelectedItem());
+                tableViewModel.setSelected(newSelection);
             }
         });
 
+        errorLabel.textProperty().bind(tableViewModel.getErrorProperty());
     }
 
-
+    public void reset() {
+        tableViewModel.clear();
+        tableView.getSelectionModel().clearSelection();
+    }
 
     @FXML
-    private void deleteTableButton(ActionEvent event) {
-        tableViewModel.remove();
+    private void deleteTableButton(ActionEvent event) throws RemoteException {
+        boolean ok =tableViewModel.remove();
+        if(ok)
+            viewHandler.openAddEditTable();
     }
 
     @FXML
@@ -87,13 +82,13 @@ public class TableViewController implements ViewController {
     }
 
     @FXML
-    private void addNewTableButton(ActionEvent event) {
-        tableViewModel.addNewTable();
+    private void addEditButton(ActionEvent event) {
+        tableViewModel.addEdit();
+        viewHandler.openAddEditTable();
     }
-    public void back(){
+
+    @FXML
+    private void back() {
         viewHandler.openConnectionButtons();
-    }
-    public void edit(){
-        tableViewModel.setSelected(tableView.getItems().get(0));
     }
 }

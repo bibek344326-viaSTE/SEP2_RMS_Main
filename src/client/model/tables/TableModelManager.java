@@ -85,8 +85,8 @@ public class TableModelManager implements TableModel {
     }
 
     @Override
-    public void deleteTable(Table table) throws RemoteException {
-        tablesClient.deleteTable(table);
+    public void deleteTable(String tableName) throws RemoteException {
+        tablesClient.deleteTable(tableName);
     }
 
     @Override

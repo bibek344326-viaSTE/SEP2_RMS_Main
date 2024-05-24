@@ -18,6 +18,14 @@ public class CustomerInfoClientManager implements CustomerInfoClient {
         }
     }
 
+    @Override public void createCustomer(Customer customer){
+        try {
+            server.getCustomerListServer().addCustomer(customer);
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public void updateCustomer(Customer customer, String oldUsername) {
         try {

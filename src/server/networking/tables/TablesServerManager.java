@@ -41,8 +41,8 @@ public class TablesServerManager implements TableServer {
     }
 
     @Override
-    public void deleteTable(Table table) throws RemoteException {
-        tablesHandler.removeTable(table);
+    public void deleteTable(String tableName) throws RemoteException {
+        tablesHandler.removeTable(tableName);
     }
 
     @Override

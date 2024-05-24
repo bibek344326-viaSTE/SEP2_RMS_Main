@@ -19,6 +19,7 @@ import client.model.tables.TableModelManager;
 import client.networking.tables.TablesClient;
 
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 
 public class ModelFactory {
     private ClientFactory client;
@@ -93,7 +94,7 @@ public class ModelFactory {
         return orderModel;
     }
 
-    public ReservationModel getReservationModel() throws RemoteException {
+    public ReservationModel getReservationModel() throws RemoteException, SQLException {
         if (reservationModel == null) {
             reservationModel = new ReservationModelManager(client.getReservationClient());
         }

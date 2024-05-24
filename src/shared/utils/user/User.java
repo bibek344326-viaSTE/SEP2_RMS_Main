@@ -8,14 +8,14 @@ public abstract class User implements Serializable {
     private String password;
 
     public User(String username, String password) {
-        validateUsername(username);
-        validatePassword(password);
+        //validateUsername(username);
+        //validatePassword(password);
         this.username = username;
         this.password = password;
     }
 
     public User(String username) {
-        validateUsername(username);
+        //validateUsername(username);
         this.username = username;
     }
 

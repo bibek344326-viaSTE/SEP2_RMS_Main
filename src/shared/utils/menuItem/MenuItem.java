@@ -1,6 +1,9 @@
 package shared.utils.menuItem;
 
-public class MenuItem {
+import java.io.Serial;
+import java.io.Serializable;
+
+public class MenuItem implements Serializable {
     private String menuItemName;
     private String menuItemType;
     private int menuItemID;

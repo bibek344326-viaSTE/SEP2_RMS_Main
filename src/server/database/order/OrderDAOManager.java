@@ -118,8 +118,8 @@ public class OrderDAOManager implements OrderDAO {
     @Override
     public ArrayList<Order> getOrders() {
         String sqlOrders = "SELECT * FROM orders";
-        String sqlMenuItems = "SELECT mi.id, mi.name, mi.type, omi.order_id FROM menu_items mi " +
-                "JOIN order_menu_items omi ON mi.id = omi.menu_item_id";
+        String sqlMenuItems = "SELECT mi.id, mi.name, mi.type, omi.order_id FROM menu_item mi " +
+                "JOIN order_menu_item omi ON mi.id = omi.menu_item_id";
         ArrayList<Order> orders = new ArrayList<>();
         try (Connection conn = DatabaseConnection.getConnection();
              Statement stmtOrders = conn.createStatement();
@@ -130,9 +130,9 @@ public class OrderDAOManager implements OrderDAO {
             // Retrieve all orders
             while (rsOrders.next()) {
                 int id = rsOrders.getInt("id");
-                String tableID = rsOrders.getString("tableName");
-                String customerID = rsOrders.getString("userName");
-                String orderStatus = rsOrders.getString("orderStatus");
+                String tableID = rsOrders.getString("table_id");
+                String customerID = rsOrders.getString("customer_id");
+                String orderStatus = rsOrders.getString("status");
                 Timestamp orderTimestamp = rsOrders.getTimestamp("orderTimestamp");
                 Table table = getTableByID(tableID); // Method to retrieve Table object by ID
                 Customer customer = getCustomerByID(customerID); // Method to retrieve Customer object by ID
@@ -162,7 +162,6 @@ public class OrderDAOManager implements OrderDAO {
             e.printStackTrace();
         }
         return orders;
-
     }
 
     private Table getTableByID(String tableName) throws SQLException {

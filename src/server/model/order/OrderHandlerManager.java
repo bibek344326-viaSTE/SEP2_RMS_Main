@@ -1,5 +1,7 @@
 package server.model.order;
 
+import server.database.order.OrderDAO;
+import server.database.order.OrderDAOManager;
 import shared.utils.Request;
 import shared.utils.menuItem.MenuItem;
 import shared.utils.order.Order;
@@ -10,42 +12,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderHandlerManager implements OrderHandler {
-    private final List<Order> orders;
+    private OrderDAO orderDAO;
     private final PropertyChangeSupport support;
 
     public OrderHandlerManager() {
-        orders = new ArrayList<>();
+        orderDAO = new OrderDAOManager();
         support = new PropertyChangeSupport(this);
     }
 
     @Override
     public Request addOrder(Order order) {
-        orders.add(order);
+        orderDAO.addMenuToOrder(order.getOrderID(), order.getOrderItemsList(order.getOrderID()));
         support.firePropertyChange("orderAdded", null, order);
         return null;
     }
 
     @Override
     public void removeOrder(Order order) {
-        if (orders.remove(order)) {
-            support.firePropertyChange("orderRemoved", order, null);
-        }
+        //
     }
 
     @Override
     public void updateOrder(Order order) {
-        for (int i = 0; i < orders.size(); i++) {
-            if (orders.get(i).getOrderID() == order.getOrderID()) {
-                Order oldOrder = orders.set(i, order);
-                support.firePropertyChange("orderUpdated", oldOrder, order);
-                return;
-            }
-        }
+       //
     }
 
     @Override
     public Order getOrder(int id) {
-        for (Order order : orders) {
+        for (Order order : orderDAO.getOrders()) {
             if (order.getOrderID() == id) {
                 return order;
             }
@@ -55,7 +49,7 @@ public class OrderHandlerManager implements OrderHandler {
 
     @Override
     public ArrayList<Order> getOrders() {
-        return (ArrayList<Order>) orders;
+        return orderDAO.getOrders();
     }
 
     @Override
