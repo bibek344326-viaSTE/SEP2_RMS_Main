@@ -12,6 +12,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import client.core.IntStringConverter;
+import javafx.scene.layout.Region;
 
 import java.rmi.RemoteException;
 
@@ -27,11 +28,13 @@ public class UpdateTableViewController implements ViewController {
 
     private ViewHandler viewHandler;
     private UpdateTableViewModel viewModel;
+    private Region root;
 
     @Override
-    public void init(ViewModelFactory viewModelFactory, ViewHandler viewHandler) throws RemoteException {
+    public void init(ViewModelFactory viewModelFactory, ViewHandler viewHandler,Region root) throws RemoteException {
         this.viewHandler = viewHandler;
         this.viewModel = viewModelFactory.getUpdateTableViewModel();
+        this.root = root;
 
         tableNameField.textProperty().bindBidirectional(viewModel.tableNameProperty());
         Bindings.bindBidirectional(capacityField.textProperty(), viewModel.capacityProperty(), new IntStringConverter());
@@ -49,18 +52,22 @@ public class UpdateTableViewController implements ViewController {
     @FXML private void confirmButton() {
         boolean ok = viewModel.updateTable();
         if (ok) {
-            viewHandler.openStaffTableView();
+            viewHandler.openView("StaffTable");
         }
     }
 
     @FXML private void createButton() {
         boolean ok = viewModel.createTable();
         if (ok) {
-            viewHandler.openStaffTableView();
+            viewHandler.openView("StaffTable");
         }
     }
 
     @FXML private void backButton() {
-        viewHandler.openStaffTableView();
+        viewHandler.openView("StaffTable");
+    }
+    public Region getRoot()
+    {
+        return root;
     }
 }

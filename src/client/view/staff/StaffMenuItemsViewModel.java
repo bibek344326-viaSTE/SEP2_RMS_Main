@@ -6,15 +6,13 @@ import client.model.menuItem.MenuItemModel;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import shared.utils.Request;
 import shared.utils.menuItem.MenuItem;
 
 import java.beans.PropertyChangeListener;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
-public class MenuViewModel {
+public class StaffMenuItemsViewModel {
 
     private final ObservableList<SimpleMenuViewModel> menuItemList;
     private final MenuItemModel menuItemModel;
@@ -22,7 +20,7 @@ public class MenuViewModel {
     private final StringProperty errorLabel;
     private final ViewState viewState;
 
-    public MenuViewModel(ModelFactory modelFactory, ViewState viewState) throws RemoteException, SQLException {
+    public StaffMenuItemsViewModel(ModelFactory modelFactory, ViewState viewState) throws RemoteException, SQLException {
         this.menuItemModel = modelFactory.getMenuItemModel();
         this.menuItemList = FXCollections.observableArrayList();
         this.selectedMenuItemProperty = new SimpleObjectProperty<>();

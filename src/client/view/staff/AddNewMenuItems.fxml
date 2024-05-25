@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="408.0" prefWidth="520.0" style="-fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="408.0" prefWidth="520.0" style="-fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.staff.AddNewMenuItemsController">
     <children>
         <Label layoutX="125.0" layoutY="26.0" prefHeight="42.0" prefWidth="316.0" text="Add New Menu Items">
             <font>
@@ -25,12 +25,12 @@
             </font>
         </Label>
         <TextField layoutX="219.0" layoutY="134.0" prefHeight="42.0" prefWidth="205.0" />
-        <Button layoutX="32.0" layoutY="330.0" mnemonicParsing="false" onAction="#confirmButton" prefHeight="42.0" prefWidth="126.0" text="Confirm">
+        <Button layoutX="32.0" layoutY="330.0" mnemonicParsing="false"  prefHeight="42.0" prefWidth="126.0" text="Confirm">
             <font>
                 <Font size="18.0" />
             </font>
         </Button>
-        <Button layoutX="339.0" layoutY="330.0" mnemonicParsing="false" onAction="#backButton" prefHeight="42.0" prefWidth="112.0" text="Back">
+        <Button layoutX="339.0" layoutY="330.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="112.0" text="Back">
             <font>
                 <Font size="18.0" />
             </font>

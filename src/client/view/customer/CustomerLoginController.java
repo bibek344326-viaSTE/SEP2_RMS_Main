@@ -3,10 +3,12 @@ package client.view.customer;
 import client.core.ViewModelFactory;
 import client.view.ViewController;
 import client.view.ViewHandler;
+import javafx.scene.layout.Region;
 
 public class CustomerLoginController implements ViewController {
     private ViewModelFactory viewModelFactory;
     private ViewHandler viewHandler;
+    private Region root;
 
    /* public void clearTableForCustomer() {
         Customer selectedCustomer = customerComboBox.getSelectionModel().getSelectedItem();
@@ -19,15 +21,20 @@ public class CustomerLoginController implements ViewController {
 
 
     @Override
-    public void init(ViewModelFactory viewModelFactory, ViewHandler viewHandler) {
+    public void init(ViewModelFactory viewModelFactory, ViewHandler viewHandler,Region root) {
         this.viewModelFactory = viewModelFactory;
         this.viewHandler = viewHandler;
+        this.root = root;
     }
     public void logInAsCustomer() {
-        viewHandler.openCustomerTableNumberView();
+        viewHandler.openView("customerTableNumber");
     }
 
     public void back() {
-        viewHandler.openLogin();
+        viewHandler.openView("login");
+    }
+    public Region getRoot()
+    {
+        return root;
     }
 }

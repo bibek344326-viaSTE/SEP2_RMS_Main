@@ -2,20 +2,18 @@ package client.view.staff;
 
 import client.core.ModelFactory;
 import client.core.ViewState;
-import client.model.Reservation.ReservationModel;
 import client.model.tables.TableModel;
 import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import shared.utils.Request;
 import shared.utils.table.Table;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.rmi.RemoteException;
 
-public class TableViewModel implements PropertyChangeListener {
+public class StaffTableViewModel implements PropertyChangeListener {
 
     private ObservableList<SimpleTableViewModel> tableList;
     private TableModel tableModel;
@@ -24,7 +22,7 @@ public class TableViewModel implements PropertyChangeListener {
     private ViewState viewState;
 
 
-    public TableViewModel(ModelFactory modelFactory, ViewState viewState) throws RemoteException {
+    public StaffTableViewModel(ModelFactory modelFactory, ViewState viewState) throws RemoteException {
         this.tableModel = modelFactory.getTableModel();
         this.tableList = FXCollections.observableArrayList();
         this.selectedTableProperty = new SimpleObjectProperty<>();
