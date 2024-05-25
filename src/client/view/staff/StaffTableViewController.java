@@ -80,7 +80,7 @@ public class StaffTableViewController implements ViewController {
     }
 
     @FXML
-    private void addEditButton(ActionEvent event) {
+    private void addEditButton() {
         tableViewModel.addEdit();
         viewHandler.openView("addEditTable");
     }

@@ -257,6 +257,9 @@ public class ViewHandler {
                 e.printStackTrace();
             }
         }
+        else{
+            updateTableViewController.reset();
+        }
         return updateTableViewController.getRoot();
     }
 
@@ -391,6 +394,9 @@ public class ViewHandler {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+        else{
+            staffTableViewController.reset();
         }
         return staffTableViewController.getRoot();
     }
