@@ -52,19 +52,19 @@ public class UpdateTableViewController implements ViewController {
     @FXML private void confirmButton() {
         boolean ok = viewModel.updateTable();
         if (ok) {
-            viewHandler.openView("StaffTable");
+            viewHandler.openView("staffTable");
         }
     }
 
     @FXML private void createButton() {
         boolean ok = viewModel.createTable();
         if (ok) {
-            viewHandler.openView("StaffTable");
+            viewHandler.openView("staffTable");
         }
     }
 
     @FXML private void backButton() {
-        viewHandler.openView("StaffTable");
+        viewHandler.openView("staffTable");
     }
     public Region getRoot()
     {

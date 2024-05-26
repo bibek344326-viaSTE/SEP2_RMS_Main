@@ -111,7 +111,16 @@ public class ViewHandler {
             case "staffTable":
                 root = loadStaffTableView("staff/StaffTablesView.fxml");
                 break;
+            default:
+                System.out.println("Invalid view id: " + id);
+                return;
         }
+
+        if (root == null) {
+            System.out.println("Failed to load view for id: " + id);
+            return;
+        }
+
         currentScene.setRoot(root);
 
         String title = "";
@@ -132,13 +141,15 @@ public class ViewHandler {
                 loader.setLocation(getClass().getResource(fxmlFile));
                 Region root = loader.load();
                 loginViewController = loader.getController();
-                loginViewController.init(viewModelFactory, this,root);
+                loginViewController.init(viewModelFactory, this, root);
+                return root;
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
         return loginViewController.getRoot();
     }
+
 
     private Region loadCustomerLoginView(String fxmlFile) {
         if (customerLoginController == null) {
