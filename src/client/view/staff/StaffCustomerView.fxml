@@ -11,7 +11,7 @@
         <TableView fx:id="customerTableView" layoutX="-1.0" layoutY="13.0" prefHeight="518.0" prefWidth="890.0">
             <columns>
                 <TableColumn fx:id="customerNameColumn" prefWidth="414.0" text="Customer Name" />
-                <TableColumn fx:id="passwordColumn" minWidth="0.0" prefWidth="475.0" text="Password" />
+                <TableColumn fx:id="passwordColumn" minWidth="0.0" prefWidth="475.0" text="Passcode" />
             </columns>
         </TableView>
         <Button fx:id="addButton" layoutX="272.0" layoutY="553.0" mnemonicParsing="false" onAction="#addEditButton" prefHeight="38.0" prefWidth="120.0" text="Add New Customer" />
