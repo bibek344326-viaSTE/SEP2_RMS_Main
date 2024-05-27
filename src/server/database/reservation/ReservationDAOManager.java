@@ -336,4 +336,58 @@ public class ReservationDAOManager implements ReservationDAO {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public void removeReservation(int id) {
+        try {
+            connection = DatabaseConnection.getInstance().getConnection();
+            // Start transaction
+            connection.setAutoCommit(false);
+
+            // Check if the reservation exists
+            PreparedStatement checkStatement = connection.prepareStatement(
+                    "SELECT * FROM reservation WHERE reservation_id = ?");
+            checkStatement.setInt(1, id);
+            ResultSet resultSet = checkStatement.executeQuery();
+            if (!resultSet.next()) {
+                return;
+            }
+
+            // Delete reservation
+            PreparedStatement deleteStatement = connection.prepareStatement(
+                    "DELETE FROM reservation WHERE reservation_id = ?");
+            deleteStatement.setInt(1, id);
+            deleteStatement.executeUpdate();
+
+            // Update table status
+            PreparedStatement tableUpdateStatement = connection.prepareStatement(
+                    "UPDATE tables SET isOccupied = false WHERE table_number = ?");
+            tableUpdateStatement.setString(1, resultSet.getString("table_number"));
+            tableUpdateStatement.executeUpdate();
+
+            // Commit transaction
+            connection.commit();
+
+        } catch (SQLException e) {
+            // Rollback transaction if an error occurs
+            if (connection != null) {
+                try {
+                    connection.rollback();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            e.printStackTrace();
+
+        } finally {
+            // Close connection in finally block to ensure it's always closed
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 }
