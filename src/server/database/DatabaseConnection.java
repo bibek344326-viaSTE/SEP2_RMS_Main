@@ -15,7 +15,7 @@ public class DatabaseConnection {
         try {
             connection = DriverManager.getConnection(
                     "jdbc:postgresql://localhost:5432/postgres?currentSchema=sep2_rms",
-                    "postgres", "P@ssw0rd");
+                    "postgres", "captos123");
         } catch (SQLException e) {
             throw new SQLException("Failed to create the database connection.", e);
         }
