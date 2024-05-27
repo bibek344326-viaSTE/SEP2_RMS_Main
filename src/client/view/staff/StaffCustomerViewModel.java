@@ -74,7 +74,7 @@ public class StaffCustomerViewModel {
     }
 
     public void remove() throws SQLException, RemoteException {
-        //customerModel.removeCustomer(selectedCustomerProperty.get().getCustomernameProperty().get());
+        customerModel.removeCustomer(selectedCustomerProperty.get().getPasswordProperty().get());
         updateCustomerList();
     }
 }

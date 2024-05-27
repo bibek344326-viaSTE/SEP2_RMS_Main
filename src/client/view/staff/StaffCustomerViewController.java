@@ -60,7 +60,10 @@ public class StaffCustomerViewController implements ViewController {
     private void back() throws SQLException, RemoteException {
         viewHandler.openView("connectionButtons");
     }
-
+@FXML
+private void delete() throws SQLException, RemoteException {
+        customerViewModel.remove();
+}
     public Region getRoot() {
         return root;
     }
