@@ -1,6 +1,7 @@
 package client.view.staff;
 
 import client.core.ModelFactory;
+import client.core.ViewModelFactory;
 import client.core.ViewState;
 import client.model.tables.TableModel;
 import javafx.beans.property.*;

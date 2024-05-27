@@ -12,6 +12,7 @@ import shared.utils.table.Table;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 
 public class StaffTableViewModel implements PropertyChangeListener {
 
@@ -81,9 +82,12 @@ public class StaffTableViewModel implements PropertyChangeListener {
         }
     }
 
-    public void remove() throws RemoteException {
+    public void remove() throws RemoteException, SQLException {
         tableModel.deleteTable(selectedTableProperty.get().getTableNameProperty().get());
         updateTableList();
+    }
+    public void changeStatus(){
+
     }
 
     private void removeSimpleTable(String tableName) {

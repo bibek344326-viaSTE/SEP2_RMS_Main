@@ -10,6 +10,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +86,7 @@ public class TableModelManager implements TableModel {
     }
 
     @Override
-    public void deleteTable(String tableName) throws RemoteException {
+    public void deleteTable(String tableName) throws RemoteException, SQLException {
         tablesClient.deleteTable(tableName);
     }
 

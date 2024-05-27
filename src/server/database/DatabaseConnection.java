@@ -10,9 +10,8 @@ public class DatabaseConnection {
     private Connection connection;
 
     private DatabaseConnection() throws SQLException {
-        connection = DriverManager.getConnection
-                ("jdbc:postgresql://localhost:5432/postgres?currentSchema=sep2_rms", "postgres", "P@ssw0rd");
-
+        connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=sep2_rms", "postgres", "captos123");
+    }
 
     public static DatabaseConnection getInstance() throws SQLException {
         if (instance == null || instance.getConnection().isClosed()) {

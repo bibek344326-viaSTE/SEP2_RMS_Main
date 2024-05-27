@@ -18,7 +18,7 @@ public interface TableServer extends Remote {
 
     void updateTable(Table table, String tableName, int tableCapacity) throws RemoteException;
 
-    void deleteTable(String tableName) throws RemoteException;
+    void deleteTable(String tableName) throws RemoteException, SQLException;
 
     void registerTableClient(TablesCallBack tablesCallBack) throws RemoteException;
 

@@ -82,7 +82,7 @@ public class TablesClientManager implements TablesClient, TablesCallBack {
     }
 
     @Override
-    public void deleteTable(String tableName) throws RemoteException {
+    public void deleteTable(String tableName) throws RemoteException, SQLException {
         server.getTableServer().deleteTable(tableName);
     }
 
