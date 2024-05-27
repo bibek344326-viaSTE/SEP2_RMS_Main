@@ -29,6 +29,9 @@ public class StaffMenuItemsViewModel {
 
         updateMenuItemList();
     }
+    public void clear(){
+        errorLabel.set(null);
+    }
 
     public ObservableList<SimpleMenuViewModel> getMenuItemList() {
         return menuItemList;
@@ -62,7 +65,8 @@ public class StaffMenuItemsViewModel {
         setSelected(null);
     }
 
-    public void addEdit() {
+    public void addEdit() throws SQLException, RemoteException {
+        viewState.setRemove(false);
         SimpleMenuViewModel selectedMenuItem = selectedMenuItemProperty.get();
         if (selectedMenuItem != null) {
             viewState.setMenuItemName(selectedMenuItem.getItemNameProperty().get());
@@ -73,6 +77,7 @@ public class StaffMenuItemsViewModel {
             viewState.setMenuItemType(null);
             viewState.setId(0);
         }
+        updateMenuItemList();
     }
 
     public void remove() throws RemoteException, SQLException {

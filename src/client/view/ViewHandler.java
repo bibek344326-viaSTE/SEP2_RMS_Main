@@ -253,6 +253,9 @@ public class ViewHandler {
                 e.printStackTrace();
             }
         }
+        else{
+            updateTableViewController.reset();
+        }
 
         return staffMenuViewController.getRoot();
     }
