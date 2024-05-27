@@ -7,7 +7,7 @@ public interface CustomerInfoClient {
     void createCustomer(Customer customer);
 
     void updateCustomer(Customer customer, String oldUsername);
-    void removeCustomer(Customer customer);
+    void removeCustomer(String customerid);
     Customer getCustomer(String username);
     List<Customer> getCustomers();
 }

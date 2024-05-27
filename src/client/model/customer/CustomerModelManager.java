@@ -25,8 +25,8 @@ public class CustomerModelManager implements CustomerModel {
     }
 
     @Override
-    public void removeCustomer(Customer customer) {
-        client.removeCustomer(customer);
+    public void removeCustomer(String customerid) {
+        client.removeCustomer(customerid);
     }
 
     @Override
