@@ -11,7 +11,6 @@ public class DatabaseConnection {
 
     // Private constructor to prevent instantiation
     private DatabaseConnection() throws SQLException {
-        connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=sep2_rms", "postgres", "captos123");
         try {
             connection = DriverManager.getConnection(
                     "jdbc:postgresql://localhost:5432/postgres?currentSchema=sep2_rms",
