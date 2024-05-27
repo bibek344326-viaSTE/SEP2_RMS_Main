@@ -3,16 +3,15 @@ package client.view.staff;
 import client.core.ViewModelFactory;
 import client.view.ViewController;
 import client.view.ViewHandler;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import shared.utils.menuItem.MenuItem;
+import javafx.scene.layout.Region;
 
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 
-public class StaffMenuViewController implements ViewController {
+public class StaffMenuItemsViewController implements ViewController {
     @FXML
     private TableView<SimpleMenuViewModel> menuTableView;
     @FXML
@@ -33,11 +32,13 @@ public class StaffMenuViewController implements ViewController {
     private Label errorLabel;
 
     private ViewHandler viewHandler;
-    private MenuViewModel menuViewModel;
+    private StaffMenuItemsViewModel menuViewModel;
+    private Region root;
 
-    public void init(ViewModelFactory viewModelFactory, ViewHandler viewHandler) throws RemoteException, SQLException {
+    public void init(ViewModelFactory viewModelFactory, ViewHandler viewHandler,Region root) throws RemoteException, SQLException {
         this.viewHandler = viewHandler;
         this.menuViewModel = viewModelFactory.getMenuViewModel();
+        this.root = root;
 
         itemNameColumn.setCellValueFactory(cellData -> cellData.getValue().getItemNameProperty());
         typeColumn.setCellValueFactory(cellData -> cellData.getValue().getTypeProperty());
@@ -74,7 +75,11 @@ public class StaffMenuViewController implements ViewController {
     }
 
     public void back() {
-        viewHandler.openConnectionButtons();
+        viewHandler.openView("connectionButtons");
+    }
+    public Region getRoot()
+    {
+        return root;
     }
 }
 

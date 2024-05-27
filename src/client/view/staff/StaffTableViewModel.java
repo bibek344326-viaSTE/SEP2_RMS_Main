@@ -2,20 +2,18 @@ package client.view.staff;
 
 import client.core.ModelFactory;
 import client.core.ViewState;
-import client.model.Reservation.ReservationModel;
 import client.model.tables.TableModel;
 import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import shared.utils.Request;
 import shared.utils.table.Table;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.rmi.RemoteException;
 
-public class TableViewModel implements PropertyChangeListener {
+public class StaffTableViewModel implements PropertyChangeListener {
 
     private ObservableList<SimpleTableViewModel> tableList;
     private TableModel tableModel;
@@ -24,7 +22,7 @@ public class TableViewModel implements PropertyChangeListener {
     private ViewState viewState;
 
 
-    public TableViewModel(ModelFactory modelFactory, ViewState viewState) throws RemoteException {
+    public StaffTableViewModel(ModelFactory modelFactory, ViewState viewState) throws RemoteException {
         this.tableModel = modelFactory.getTableModel();
         this.tableList = FXCollections.observableArrayList();
         this.selectedTableProperty = new SimpleObjectProperty<>();
@@ -36,7 +34,8 @@ public class TableViewModel implements PropertyChangeListener {
     public ObservableList<SimpleTableViewModel> getTableList() {
         return tableList;
     }
-    public void clear(){
+
+    public void clear() {
         errorLabel.set(null);
     }
 
@@ -82,18 +81,9 @@ public class TableViewModel implements PropertyChangeListener {
         }
     }
 
-    public boolean remove() throws RemoteException {
-        if (selectedTableProperty.get() != null) {
-            viewState.setTablename(selectedTableProperty.get().getTableNameProperty().get());
-            viewState.setRemove(true);
-            tableModel.deleteTable(viewState.getTablename());
-            updateTableList();
-            return true;
-        } else {
-            viewState.setRemove(false);
-            errorLabel.set("No selection");
-            return false;
-        }
+    public void remove() throws RemoteException {
+        tableModel.deleteTable(selectedTableProperty.get().getTableNameProperty().get());
+        updateTableList();
     }
 
     private void removeSimpleTable(String tableName) {

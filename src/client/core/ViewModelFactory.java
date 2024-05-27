@@ -1,29 +1,39 @@
 package client.core;
 
-import client.view.staff.CustomerViewModel;
-import client.view.staff.MenuViewModel;
-import client.view.staff.TableViewModel;
-import client.view.staff.UpdateTableViewModel;
+import client.view.customer.*;
+import client.view.kitchenstaff.KitchenStaffViewModel;
+import client.view.staff.*;
 
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 
 public class ViewModelFactory {
     private final ModelFactory modelFactory;
-    private TableViewModel tableViewModel;
+    private StaffTableViewModel tableViewModel;
     private UpdateTableViewModel updateTableViewModel;
     private ViewState viewState;
-    private MenuViewModel menuViewModel;
-    private CustomerViewModel customerViewModel;
+    private StaffMenuItemsViewModel menuViewModel;
+    private StaffCustomerViewModel customerViewModel;
+    private AddNewCustomerViewModel addNewCustomerViewModel;
+    private AddNewMenuItemsViewModel addNewMenuItemsViewModel;
+    private AddNewTableViewModel addNewTableViewModel;
+    private CreateNewCustomerViewModel createNewCustomerViewModel;
+    private EditMenuItemsViewModel editMenuItemsViewModel;
+    private StaffOrderViewModel staffOrderViewModel;
+    private CustomerLoginViewModel customerLoginViewModel;
+    private CustomerTableNumberViewModel customerTableNumberViewModel;
+    private CustomerViewMenuItemsViewModel customerViewMenuItemsViewModel;
+    private CustomerViewOrderStatusViewModel customerViewOrderStatusViewModel;
+    private KitchenStaffViewModel kitchenStaffViewModel;
 
     public ViewModelFactory(ModelFactory modelFactory) {
         this.modelFactory = modelFactory;
         this.viewState = new ViewState();
     }
 
-    public TableViewModel getTableViewModel() throws RemoteException {
+    public StaffTableViewModel getTableViewModel() throws RemoteException {
         if (tableViewModel == null) {
-            tableViewModel = new TableViewModel(modelFactory, viewState);
+            tableViewModel = new StaffTableViewModel(modelFactory, viewState);
         }
         return tableViewModel;
     }
@@ -34,17 +44,96 @@ public class ViewModelFactory {
         }
         return updateTableViewModel;
     }
-    public MenuViewModel getMenuViewModel() throws RemoteException, SQLException {
-        if (menuViewModel== null) {
-            menuViewModel = new MenuViewModel(modelFactory, viewState);
+
+    public StaffMenuItemsViewModel getMenuViewModel() throws RemoteException, SQLException {
+        if (menuViewModel == null) {
+            menuViewModel = new StaffMenuItemsViewModel(modelFactory, viewState);
         }
         return menuViewModel;
     }
-    public CustomerViewModel getCustomerViewModel() throws RemoteException, SQLException {
-        if (customerViewModel== null) {
-            customerViewModel = new CustomerViewModel(modelFactory, viewState);
+
+    public StaffCustomerViewModel getCustomerViewModel() throws RemoteException, SQLException {
+        if (customerViewModel == null) {
+            customerViewModel = new StaffCustomerViewModel(modelFactory, viewState);
         }
         return customerViewModel;
+    }
+
+    public AddNewCustomerViewModel getAddNewCustomerViewModel() throws RemoteException {
+        if (addNewCustomerViewModel == null) {
+            addNewCustomerViewModel = new AddNewCustomerViewModel(modelFactory, viewState);
+        }
+        return addNewCustomerViewModel;
+    }
+
+    public AddNewMenuItemsViewModel getAddNewMenuItemsViewModel() throws RemoteException {
+        if (addNewMenuItemsViewModel == null) {
+            addNewMenuItemsViewModel = new AddNewMenuItemsViewModel(modelFactory, viewState);
+        }
+        return addNewMenuItemsViewModel;
+    }
+
+    public AddNewTableViewModel getAddNewTableViewModel() throws RemoteException {
+        if (addNewTableViewModel == null) {
+            addNewTableViewModel = new AddNewTableViewModel(modelFactory, viewState);
+        }
+        return addNewTableViewModel;
+    }
+
+    public CreateNewCustomerViewModel getCreateNewCustomerViewModel() throws RemoteException {
+        if (createNewCustomerViewModel == null) {
+            createNewCustomerViewModel = new CreateNewCustomerViewModel(modelFactory, viewState);
+        }
+        return createNewCustomerViewModel;
+    }
+
+    public EditMenuItemsViewModel getEditMenuItemsViewModel() throws RemoteException {
+        if (editMenuItemsViewModel == null) {
+            editMenuItemsViewModel = new EditMenuItemsViewModel(modelFactory, viewState);
+        }
+        return editMenuItemsViewModel;
+    }
+
+    public StaffOrderViewModel getStaffOrderViewModel() throws RemoteException {
+        if (staffOrderViewModel == null) {
+            staffOrderViewModel = new StaffOrderViewModel(modelFactory, viewState);
+        }
+        return staffOrderViewModel;
+    }
+
+    public CustomerLoginViewModel getCustomerLoginViewModel() throws RemoteException {
+        if (customerLoginViewModel == null) {
+            customerLoginViewModel = new CustomerLoginViewModel(modelFactory, viewState);
+        }
+        return customerLoginViewModel;
+    }
+
+    public CustomerTableNumberViewModel getCustomerTableNumberViewModel() throws RemoteException {
+        if (customerTableNumberViewModel == null) {
+            customerTableNumberViewModel = new CustomerTableNumberViewModel(modelFactory, viewState);
+        }
+        return customerTableNumberViewModel;
+    }
+
+    public CustomerViewMenuItemsViewModel getCustomerViewMenuItemsViewModel() throws RemoteException {
+        if (customerViewMenuItemsViewModel == null) {
+            customerViewMenuItemsViewModel = new CustomerViewMenuItemsViewModel(modelFactory, viewState);
+        }
+        return customerViewMenuItemsViewModel;
+    }
+
+    public CustomerViewOrderStatusViewModel getCustomerViewOrderStatusViewModel() throws RemoteException {
+        if (customerViewOrderStatusViewModel == null) {
+            customerViewOrderStatusViewModel = new CustomerViewOrderStatusViewModel(modelFactory, viewState);
+        }
+        return customerViewOrderStatusViewModel;
+    }
+
+    public KitchenStaffViewModel getKitchenStaffViewModel() throws RemoteException {
+        if (kitchenStaffViewModel == null) {
+            kitchenStaffViewModel = new KitchenStaffViewModel(modelFactory, viewState);
+        }
+        return kitchenStaffViewModel;
     }
 }
 
