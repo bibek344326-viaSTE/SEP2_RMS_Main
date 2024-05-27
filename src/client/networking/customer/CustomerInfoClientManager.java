@@ -36,9 +36,9 @@ public class CustomerInfoClientManager implements CustomerInfoClient {
     }
 
     @Override
-    public void removeCustomer(Customer customer) {
+    public void removeCustomer(String customerid) {
         try {
-            server.getCustomerListServer().removeCustomer(customer);
+            server.getCustomerListServer().removeCustomer(customerid);
         } catch (RemoteException e) {
             e.printStackTrace();
         }

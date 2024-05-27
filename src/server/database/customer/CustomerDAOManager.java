@@ -43,10 +43,10 @@ public class CustomerDAOManager implements CustomerDAO {
     }
 
     @Override
-    public void removeCustomer(Customer customer) {
+    public void removeCustomer(String customerid) {
         try (Connection connection = DatabaseConnection.getInstance().getConnection()) {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM \"User\" WHERE \"username\"=?;");
-            statement.setString(1, customer.getUsername());
+            statement.setString(1, customerid);
 
             statement.executeUpdate();
         } catch (SQLException e) {

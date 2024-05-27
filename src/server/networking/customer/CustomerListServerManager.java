@@ -28,8 +28,8 @@ public class CustomerListServerManager implements CustomerListServer {
     }
 
     @Override
-    public void removeCustomer(Customer customer) throws RemoteException {
-        customerListHandler.removeCustomer(customer);
+    public void removeCustomer(String customerid) throws RemoteException {
+        customerListHandler.removeCustomer(customerid);
     }
 
     @Override

@@ -25,8 +25,8 @@ public class CustomerListHandlerManager implements CustomerListHandler {
     }
 
     @Override
-    public void removeCustomer(Customer customer) {
-        customerDAO.removeCustomer(customer);
+    public void removeCustomer(String customerid) {
+        customerDAO.removeCustomer(customerid);
     }
 
     @Override
