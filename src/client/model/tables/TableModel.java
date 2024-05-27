@@ -12,27 +12,13 @@ import java.util.List;
 
 public interface TableModel extends Subject {
     List<Table> getTables();
-
     void updateTable(Table table, String tableName, int tableCapacity);
-
     LocalDateTime getDateTime();
-
     Request reserveTable(String tableName, List<Table> tables);
-
     Reservation getSelectedReservation();
-
     String getUserName();
-
     Request createTable(Table table);
-
     Request removeReservation(int id);
-
     void deleteTable(String tableName) throws RemoteException, SQLException;
-
-    void addObserver(TableObserver observer);
-
-    void removeObserver(TableObserver observer);
-
-    void notifyObservers();
 
 }

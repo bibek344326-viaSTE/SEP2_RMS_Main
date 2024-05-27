@@ -32,7 +32,7 @@ public class StaffMemberLoginController implements ViewController {
         if (password.isEmpty()) {
             errorLabel.setText("You need to fill in the password");
         } else if (password.equals(STAFF_PASSWORD)) {
-            viewHandler.openView("staffTable");
+            viewHandler.openView("connectionButtons");
         } else {
             errorLabel.setText("Incorrect password");
         }

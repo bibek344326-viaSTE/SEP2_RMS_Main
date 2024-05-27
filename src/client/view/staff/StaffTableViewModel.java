@@ -87,6 +87,9 @@ public class StaffTableViewModel implements PropertyChangeListener {
         tableModel.deleteTable(selectedTableProperty.get().getTableNameProperty().get());
         updateTableList();
     }
+    public void changeStatus(){
+
+    }
 
     private void removeSimpleTable(String tableName) {
         tableList.removeIf(simpleTableViewModel -> simpleTableViewModel.getTableNameProperty().get().equals(tableName));

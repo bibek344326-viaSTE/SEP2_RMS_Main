@@ -253,6 +253,10 @@ public class ViewHandler {
                 e.printStackTrace();
             }
         }
+        else{
+            staffMenuViewController.reset();
+        }
+
         return staffMenuViewController.getRoot();
     }
 
@@ -345,6 +349,9 @@ public class ViewHandler {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+        else{
+            addNewMenuItemsController.reset();
         }
         return addNewMenuItemsController.getRoot();
     }

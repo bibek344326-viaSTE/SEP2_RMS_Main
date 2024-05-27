@@ -57,6 +57,10 @@ public class StaffMenuItemsViewController implements ViewController {
             }
         });
     }
+    public void reset(){
+        menuViewModel.clear();
+        menuTableView.getSelectionModel().clearSelection();
+    }
 
     @FXML
     private void deleteMenuItemButton() throws SQLException, RemoteException {
@@ -69,8 +73,9 @@ public class StaffMenuItemsViewController implements ViewController {
     }
 
     @FXML
-    private void addEditButton(ActionEvent event) {
+    private void addEditButton() throws SQLException, RemoteException {
         menuViewModel.addEdit();
+        viewHandler.openView("addNewMenuItems");
 
     }
 

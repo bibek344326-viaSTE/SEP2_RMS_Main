@@ -34,7 +34,7 @@ public class StaffTableViewController implements ViewController {
     private StaffTableViewModel tableViewModel;
     private Region root;
 
-    public void init(ViewModelFactory viewModelFactory, ViewHandler viewHandler,Region root) throws RemoteException {
+    public void init(ViewModelFactory viewModelFactory, ViewHandler viewHandler, Region root) throws RemoteException {
         this.viewHandler = viewHandler;
         this.tableViewModel = viewModelFactory.getTableViewModel();
         tableNameColumn.setCellValueFactory(cellData -> cellData.getValue().getTableNameProperty());
@@ -72,7 +72,8 @@ public class StaffTableViewController implements ViewController {
 
     @FXML
     private void deleteTableButton() throws RemoteException, SQLException {
-       tableViewModel.remove();
+        tableViewModel.remove();
+
     }
 
     @FXML
