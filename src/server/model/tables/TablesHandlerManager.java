@@ -59,8 +59,9 @@ public class TablesHandlerManager implements TablesHandler {
     }
 
     @Override
-    public Request removeTable(String table) {
-        return null;
+    public Request removeTable(String table) throws SQLException {
+        tablesDAO.delete(table);
+        return new Request("Table deleted", null);
     }
 
     @Override
