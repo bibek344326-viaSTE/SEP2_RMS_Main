@@ -26,6 +26,9 @@ public class StaffCustomerViewModel {
 
         updateCustomerList();
     }
+    public void clear(){
+        errorLabel.set(null);
+    }
 
     public ObservableList<SimpleCustomerViewModel> getCustomerList() {
         return customerList;
@@ -57,24 +60,21 @@ public class StaffCustomerViewModel {
         setSelected(null);
     }
 
-    public void add() {
-        // Add a new customer
-    }
-
-    public void edit() {
+    public void addEdit() throws SQLException, RemoteException {
+        viewState.setRemove(false);
         SimpleCustomerViewModel selectedCustomer = selectedCustomerProperty.get();
         if (selectedCustomer != null) {
-            // Edit the selected customer
+            viewState.setCustomerName(selectedCustomer.getCustomernameProperty().get());
+            viewState.setPassword(selectedCustomer.getPasswordProperty().get());
         } else {
-            // Show error or handle appropriately
+            viewState.setCustomerName(null);
+            viewState.setPassword(null);
         }
+        updateCustomerList();
     }
 
-
-
-    public void updateCustomer(/* parameters */) throws RemoteException, SQLException {
-        // Update customer details
+    public void remove() throws SQLException, RemoteException {
+        customerModel.removeCustomer(selectedCustomerProperty.get().getCustomernameProperty().get());
+        updateCustomerList();
     }
-
-
 }
