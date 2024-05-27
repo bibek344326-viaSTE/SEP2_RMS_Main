@@ -254,7 +254,7 @@ public class ViewHandler {
             }
         }
         else{
-            updateTableViewController.reset();
+            staffMenuViewController.reset();
         }
 
         return staffMenuViewController.getRoot();
@@ -349,6 +349,9 @@ public class ViewHandler {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+        else{
+            addNewMenuItemsController.reset();
         }
         return addNewMenuItemsController.getRoot();
     }
