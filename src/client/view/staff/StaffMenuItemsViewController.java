@@ -35,7 +35,7 @@ public class StaffMenuItemsViewController implements ViewController {
     private StaffMenuItemsViewModel menuViewModel;
     private Region root;
 
-    public void init(ViewModelFactory viewModelFactory, ViewHandler viewHandler,Region root) throws RemoteException, SQLException {
+    public void init(ViewModelFactory viewModelFactory, ViewHandler viewHandler, Region root) throws RemoteException, SQLException {
         this.viewHandler = viewHandler;
         this.menuViewModel = viewModelFactory.getMenuViewModel();
         this.root = root;
@@ -57,13 +57,14 @@ public class StaffMenuItemsViewController implements ViewController {
             }
         });
     }
-    public void reset(){
+
+    public void reset() {
         menuViewModel.clear();
         menuTableView.getSelectionModel().clearSelection();
     }
 
     @FXML
-    private void deleteMenuItemButton() throws SQLException, RemoteException {
+    private void deleteMenuItemButton(ActionEvent event) throws SQLException, RemoteException {
         menuViewModel.remove();
     }
 
@@ -73,17 +74,17 @@ public class StaffMenuItemsViewController implements ViewController {
     }
 
     @FXML
-    private void addEditButton() throws SQLException, RemoteException {
+    private void addEditButton(ActionEvent event) throws SQLException, RemoteException {
         menuViewModel.addEdit();
         viewHandler.openView("addNewMenuItems");
-
     }
 
-    public void back() {
+    @FXML
+    private void back(ActionEvent event) throws SQLException, RemoteException {
         viewHandler.openView("connectionButtons");
     }
-    public Region getRoot()
-    {
+
+    public Region getRoot() {
         return root;
     }
 }

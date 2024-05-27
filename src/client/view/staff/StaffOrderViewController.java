@@ -5,6 +5,9 @@ import client.view.ViewController;
 import client.view.ViewHandler;
 import javafx.scene.layout.Region;
 
+import java.rmi.RemoteException;
+import java.sql.SQLException;
+
 public class StaffOrderViewController implements ViewController {
     private ViewHandler viewHandler;
     private StaffOrderViewModel staffOrderViewModel;
@@ -14,7 +17,7 @@ public class StaffOrderViewController implements ViewController {
         this.viewHandler = viewHandler;
         this.root = root;
     }
-    public void back(){
+    public void back() throws SQLException, RemoteException {
         viewHandler.openView("connectionButtons");
     }
     public Region getRoot()

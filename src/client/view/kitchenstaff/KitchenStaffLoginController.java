@@ -9,6 +9,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 
+import java.rmi.RemoteException;
+import java.sql.SQLException;
+
 public class KitchenStaffLoginController implements ViewController {
     private ViewHandler viewHandler;
     private ViewModelFactory viewModelFactory;
@@ -35,7 +38,7 @@ public class KitchenStaffLoginController implements ViewController {
     }
 
     @FXML
-    public void logInAsKitchenStaff() {
+    public void logInAsKitchenStaff() throws SQLException, RemoteException {
         String password = passwordField.getText();
         if (password.isEmpty()) {
             errorLabel.setText("You need to fill in the password");
@@ -47,7 +50,7 @@ public class KitchenStaffLoginController implements ViewController {
     }
 
     @FXML
-    public void back() {
+    public void back() throws SQLException, RemoteException {
         viewHandler.openView("login");
     }
     public Region getRoot()

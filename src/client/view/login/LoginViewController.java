@@ -6,6 +6,9 @@ import client.view.ViewHandler;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 
+import java.rmi.RemoteException;
+import java.sql.SQLException;
+
 public class LoginViewController implements ViewController {
     private ViewHandler viewHandler;
     private Region root;
@@ -23,17 +26,17 @@ public class LoginViewController implements ViewController {
      }*/
 
     @FXML
-    private void customerButtonPressed() {
+    private void customerButtonPressed() throws SQLException, RemoteException {
         viewHandler.openView("customerLogin");
     }
 
     @FXML
-    private void staffMemberButtonPressed() {
+    private void staffMemberButtonPressed() throws SQLException, RemoteException {
         viewHandler.openView("staffLogin");
     }
 
     @FXML
-    private void kitchenStaffButtonPressed() {
+    private void kitchenStaffButtonPressed() throws SQLException, RemoteException {
         viewHandler.openView("kitchenLogin");
 
     }

@@ -82,13 +82,13 @@ public class StaffTableViewController implements ViewController {
     }
 
     @FXML
-    private void addEditButton() {
+    private void addEditButton() throws SQLException, RemoteException {
         tableViewModel.addEdit();
         viewHandler.openView("addEditTable");
     }
 
     @FXML
-    private void back() {
+    private void back() throws SQLException, RemoteException {
         viewHandler.openView("connectionButtons");
     }
     public Region getRoot()

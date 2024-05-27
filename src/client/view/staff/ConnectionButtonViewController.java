@@ -7,6 +7,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.Region;
 
+import java.rmi.RemoteException;
+import java.sql.SQLException;
+
 public class ConnectionButtonViewController implements ViewController {
     @FXML
     private TabPane tabPane;
@@ -25,16 +28,16 @@ public class ConnectionButtonViewController implements ViewController {
         this.root = root;
 
     }
-    public void openCustomer() {
+    public void openCustomer() throws SQLException, RemoteException {
         viewHandler.openView("customerViewStaff");
     }
-    public void openTable() {
+    public void openTable() throws SQLException, RemoteException {
         viewHandler.openView("staffTable");
     }
-    public void openOrder() {
+    public void openOrder() throws SQLException, RemoteException {
         viewHandler.openView("orderView");
     }
-    public void openMenu() {
+    public void openMenu() throws SQLException, RemoteException {
         viewHandler.openView("menuView");
     }
     public Region getRoot()

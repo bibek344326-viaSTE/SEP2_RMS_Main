@@ -23,13 +23,7 @@ public class StaffCustomerViewController implements ViewController {
     @FXML
     private Button addButton;
     @FXML
-    private Button editButton;
-    @FXML
-    private Button deleteButton;
-    @FXML
     private Button backButton;
-    @FXML
-    private ComboBox<String> assignTableComboBox;
 
     private ViewHandler viewHandler;
     private StaffCustomerViewModel customerViewModel;
@@ -51,24 +45,23 @@ public class StaffCustomerViewController implements ViewController {
         customerViewModel.setSelected(null);
         customerViewModel.deselect();
     }
-
-    @FXML
-    private void addNewCustomer() {
-        // Add new customer logic
+    public void reset(){
+        customerViewModel.clear();
+        customerTableView.getSelectionModel().clearSelection();
     }
 
     @FXML
-    private void editCustomer() {
-        // Edit customer logic
+    private void addEditButton() throws SQLException, RemoteException {
+        customerViewModel.addEdit();
+        viewHandler.openView("createNewCustomer");
     }
 
-
     @FXML
-    private void back() {
+    private void back() throws SQLException, RemoteException {
         viewHandler.openView("connectionButtons");
     }
-    public Region getRoot()
-    {
+
+    public Region getRoot() {
         return root;
     }
 }

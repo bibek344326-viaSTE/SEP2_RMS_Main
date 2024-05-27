@@ -15,6 +15,7 @@ import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.sql.SQLException;
 
 public class ViewHandler {
@@ -45,13 +46,13 @@ public class ViewHandler {
         this.viewModelFactory = viewModelFactory;
     }
 
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws SQLException, RemoteException {
         this.primaryStage = primaryStage;
         this.currentScene = new Scene(new Region(), 800, 600);
         openView("login");
     }
 
-    public void openView(String id) {
+    public void openView(String id) throws SQLException, RemoteException {
         Region root = null;
         switch (id) {
             case "login":
@@ -223,6 +224,9 @@ public class ViewHandler {
                 e.printStackTrace();
             }
         }
+        else{
+            staffCustomerController.reset();
+        }
         return staffCustomerController.getRoot();
     }
 
@@ -371,7 +375,7 @@ public class ViewHandler {
         return addNewTableController.getRoot();
     }
 
-    private Region loadCreateNewCustomerView(String fxmlFile) {
+    private Region loadCreateNewCustomerView(String fxmlFile) throws SQLException, RemoteException {
         if (createNewCustomerController == null) {
             try {
                 FXMLLoader loader = new FXMLLoader();
@@ -382,6 +386,9 @@ public class ViewHandler {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+        else{
+            createNewCustomerController.reset();
         }
         return createNewCustomerController.getRoot();
     }

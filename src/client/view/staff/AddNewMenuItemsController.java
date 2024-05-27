@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 
 public class AddNewMenuItemsController {
     @FXML private Label headerLabel;
@@ -46,21 +47,21 @@ public class AddNewMenuItemsController {
         }
     }
 
-    @FXML private void confirmButton() {
+    @FXML private void confirmButton() throws SQLException, RemoteException {
         boolean ok = viewModel.updateMenuItem();
         if (ok) {
             viewHandler.openView("menuView");
         }
     }
 
-    @FXML private void createButton() {
+    @FXML private void createButton() throws SQLException, RemoteException {
         boolean ok = viewModel.createMenuItem();
         if (ok) {
             viewHandler.openView("menuView");
         }
     }
 
-    @FXML private void backButton() {
+    @FXML private void backButton() throws SQLException, RemoteException {
         viewHandler.openView("menuView");
     }
 

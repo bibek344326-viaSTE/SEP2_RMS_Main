@@ -5,6 +5,9 @@ import client.view.ViewController;
 import client.view.ViewHandler;
 import javafx.scene.layout.Region;
 
+import java.rmi.RemoteException;
+import java.sql.SQLException;
+
 public class CustomerLoginController implements ViewController {
     private ViewModelFactory viewModelFactory;
     private ViewHandler viewHandler;
@@ -26,11 +29,11 @@ public class CustomerLoginController implements ViewController {
         this.viewHandler = viewHandler;
         this.root = root;
     }
-    public void logInAsCustomer() {
+    public void logInAsCustomer() throws SQLException, RemoteException {
         viewHandler.openView("customerTableNumber");
     }
 
-    public void back() {
+    public void back() throws SQLException, RemoteException {
         viewHandler.openView("login");
     }
     public Region getRoot()
