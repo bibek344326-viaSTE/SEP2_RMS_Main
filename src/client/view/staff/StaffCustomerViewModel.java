@@ -6,21 +6,18 @@ import client.model.customer.CustomerModel;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import shared.utils.user.Customer;
 
-import java.beans.PropertyChangeListener;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
-import java.util.List;
 
-public class CustomerViewModel {
+public class StaffCustomerViewModel {
     private final ObservableList<SimpleCustomerViewModel> customerList;
     private final CustomerModel customerModel;
     private final ObjectProperty<SimpleCustomerViewModel> selectedCustomerProperty;
     private final StringProperty errorLabel;
     private final ViewState viewState;
 
-    public CustomerViewModel(ModelFactory modelFactory, ViewState viewState) throws RemoteException, SQLException {
+    public StaffCustomerViewModel(ModelFactory modelFactory, ViewState viewState) throws RemoteException, SQLException {
         this.customerModel = modelFactory.getCustomerModel();
         this.customerList = FXCollections.observableArrayList();
         this.selectedCustomerProperty = new SimpleObjectProperty<>();

@@ -3,16 +3,14 @@ package client.view.staff;
 import client.core.ViewModelFactory;
 import client.view.ViewController;
 import client.view.ViewHandler;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import shared.utils.table.Table;
+import javafx.scene.layout.Region;
 
 import java.rmi.RemoteException;
-import java.util.List;
 
-public class TableViewController implements ViewController {
+public class StaffTableViewController implements ViewController {
     @FXML
     private TableView<SimpleTableViewModel> tableView;
     @FXML
@@ -32,15 +30,17 @@ public class TableViewController implements ViewController {
     @FXML
     private Button editTableDetailsButton;
     private ViewHandler viewHandler;
-    private TableViewModel tableViewModel;
+    private StaffTableViewModel tableViewModel;
+    private Region root;
 
-    public void init(ViewModelFactory viewModelFactory, ViewHandler viewHandler) throws RemoteException {
+    public void init(ViewModelFactory viewModelFactory, ViewHandler viewHandler,Region root) throws RemoteException {
         this.viewHandler = viewHandler;
         this.tableViewModel = viewModelFactory.getTableViewModel();
         tableNameColumn.setCellValueFactory(cellData -> cellData.getValue().getTableNameProperty());
         capacityColumn.setCellValueFactory(cellData -> cellData.getValue().getCapacityProperty());
         statusColumn.setCellValueFactory(cellData -> cellData.getValue().getStatusProperty());
         tableView.setItems(tableViewModel.getTableList());
+        this.root = root;
 
         // Set up cell factory for status column
         statusColumn.setCellFactory(column -> new TableCell<>() {
@@ -70,10 +70,8 @@ public class TableViewController implements ViewController {
     }
 
     @FXML
-    private void deleteTableButton(ActionEvent event) throws RemoteException {
-        boolean ok =tableViewModel.remove();
-        if(ok)
-            viewHandler.openAddEditTable();
+    private void deleteTableButton() throws RemoteException {
+       tableViewModel.remove();
     }
 
     @FXML
@@ -82,13 +80,17 @@ public class TableViewController implements ViewController {
     }
 
     @FXML
-    private void addEditButton(ActionEvent event) {
+    private void addEditButton() {
         tableViewModel.addEdit();
-        viewHandler.openAddEditTable();
+        viewHandler.openView("addEditTable");
     }
 
     @FXML
     private void back() {
-        viewHandler.openConnectionButtons();
+        viewHandler.openView("connectionButtons");
+    }
+    public Region getRoot()
+    {
+        return root;
     }
 }

@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 
-public class StaffLoginController implements ViewController {
+public class StaffMemberLoginController implements ViewController {
     private static final String STAFF_PASSWORD = "bestfood123";
     private Region root;
     private ViewModelFactory viewModelFactory;
@@ -21,8 +21,9 @@ public class StaffLoginController implements ViewController {
     private Label errorLabel;
 
     @Override
-    public void init(ViewModelFactory viewModelFactory, ViewHandler viewHandler) {
+    public void init(ViewModelFactory viewModelFactory, ViewHandler viewHandler,Region root) {
         this.viewHandler = viewHandler;
+        this.root = root;
     }
 
     @FXML
@@ -31,14 +32,18 @@ public class StaffLoginController implements ViewController {
         if (password.isEmpty()) {
             errorLabel.setText("You need to fill in the password");
         } else if (password.equals(STAFF_PASSWORD)) {
-            viewHandler.openConnectionButtons();
+            viewHandler.openView("staffTable");
         } else {
             errorLabel.setText("Incorrect password");
         }
     }
 
     public void back(){
-        viewHandler.openLogin();
+        viewHandler.openView("login");
+    }
+    public Region getRoot()
+    {
+        return root;
     }
 }
 

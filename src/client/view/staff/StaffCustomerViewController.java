@@ -3,20 +3,17 @@ package client.view.staff;
 import client.core.ViewModelFactory;
 import client.view.ViewController;
 import client.view.ViewHandler;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
+import javafx.scene.layout.Region;
 
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 
-public class StaffCustomerController implements ViewController {
+public class StaffCustomerViewController implements ViewController {
     @FXML
     private TableView<SimpleCustomerViewModel> customerTableView;
     @FXML
@@ -35,12 +32,14 @@ public class StaffCustomerController implements ViewController {
     private ComboBox<String> assignTableComboBox;
 
     private ViewHandler viewHandler;
-    private CustomerViewModel customerViewModel;
+    private StaffCustomerViewModel customerViewModel;
+    private Region root;
 
     @Override
-    public void init(ViewModelFactory viewModelFactory, ViewHandler viewHandler) throws SQLException, RemoteException {
+    public void init(ViewModelFactory viewModelFactory, ViewHandler viewHandler, Region root) throws SQLException, RemoteException {
         this.viewHandler = viewHandler;
         this.customerViewModel = viewModelFactory.getCustomerViewModel();
+        this.root = root;
 
         // Bind table columns to properties in SimpleCustomerViewModel
         customerNameColumn.setCellValueFactory(cellData -> cellData.getValue().getCustomernameProperty());
@@ -66,6 +65,10 @@ public class StaffCustomerController implements ViewController {
 
     @FXML
     private void back() {
-        viewHandler.openConnectionButtons();
+        viewHandler.openView("connectionButtons");
+    }
+    public Region getRoot()
+    {
+        return root;
     }
 }
