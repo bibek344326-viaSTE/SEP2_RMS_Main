@@ -80,6 +80,7 @@ public class StaffTableViewModel implements PropertyChangeListener {
             viewState.setCapacity(0);
             viewState.setStatus(false);
         }
+        updateTableList();
     }
 
     public void remove() throws RemoteException, SQLException {

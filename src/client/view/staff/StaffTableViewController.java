@@ -73,6 +73,7 @@ public class StaffTableViewController implements ViewController {
     @FXML
     private void deleteTableButton() throws RemoteException, SQLException {
         tableViewModel.remove();
+
     }
 
     @FXML
