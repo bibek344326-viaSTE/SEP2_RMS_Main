@@ -42,4 +42,9 @@ public class ReservationListServerManager implements ReservationServer {
     public ArrayList<Reservation> getReservations() throws RemoteException {
         return reservations;
     }
+
+    @Override
+    public ArrayList<Reservation> getReservationsByUsername(String username) throws RemoteException {
+        return reservationHandler.getReservationsByUsername(username);
+    }
 }

@@ -16,7 +16,7 @@ public class CreateDAOManager implements CreateDAO {
 
     @Override
     public String addUser(String username, String password, String userType) {
-        try (Connection connection = DatabaseConnection.getConnection()) {
+        try (Connection connection = DatabaseConnection.getInstance().getConnection()) {
             PreparedStatement statement = connection.prepareStatement("SELECT * from \"User\" where \"username\"=?;");
             statement.setString(1,username);
             ResultSet resultSet = statement.executeQuery();

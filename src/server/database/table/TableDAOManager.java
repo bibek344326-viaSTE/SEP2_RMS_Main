@@ -27,7 +27,7 @@ public class TableDAOManager implements TableDAO {
 
     @Override
     public void create(Table table) throws SQLException {
-        try (Connection connection = DatabaseConnection.getConnection()) {
+        try (Connection connection = DatabaseConnection.getInstance().getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "INSERT INTO tables (table_name, table_capacity, isoccupied) VALUES (?,?,?)");
 
@@ -42,7 +42,7 @@ public class TableDAOManager implements TableDAO {
 
     @Override
     public void update(Table table, String tableName, int tableCapacity) throws SQLException {
-        try (Connection connection = DatabaseConnection.getConnection()) {
+        try (Connection connection = DatabaseConnection.getInstance().getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "UPDATE tables SET table_name = ?, table_capacity = ? WHERE table_name = ?");
             preparedStatement.setString(1, table.getTableName());
@@ -56,7 +56,7 @@ public class TableDAOManager implements TableDAO {
 
     @Override
     public void delete(String tableName) throws SQLException {
-        try (Connection connection = DatabaseConnection.getConnection()) {
+        try (Connection connection = DatabaseConnection.getInstance().getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "DELETE FROM tables WHERE table_name = ?");
             preparedStatement.setString(1, tableName);
@@ -68,7 +68,7 @@ public class TableDAOManager implements TableDAO {
 
     @Override
     public List<Table> getAllTables() throws SQLException {
-        try (Connection connection = DatabaseConnection.getConnection()) {
+        try (Connection connection = DatabaseConnection.getInstance().getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "SELECT * FROM tables");
             return getTable(preparedStatement);
@@ -78,7 +78,7 @@ public class TableDAOManager implements TableDAO {
 
     @Override
     public List<Table> getAvailableTables() throws SQLException {
-        try (Connection connection = DatabaseConnection.getConnection()) {
+        try (Connection connection = DatabaseConnection.getInstance().getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "SELECT * FROM tables WHERE is_occupied = ?");
             preparedStatement.setBoolean(1, false);
@@ -89,7 +89,7 @@ public class TableDAOManager implements TableDAO {
 
     @Override
     public List<Table> getAllOccupiedTables() throws SQLException {
-        try (Connection connection = DatabaseConnection.getConnection()) {
+        try (Connection connection = DatabaseConnection.getInstance().getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(
                     "SELECT * FROM tables WHERE is_occupied = ?");
             preparedStatement.setBoolean(1, true);
@@ -103,7 +103,7 @@ public class TableDAOManager implements TableDAO {
         String sql = "SELECT * FROM tables WHERE table_name = ?";
         Table table = null;
 
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, tableName);
             ResultSet rs = pstmt.executeQuery();

@@ -18,7 +18,7 @@ public class CustomerDAOManager implements CustomerDAO {
 
     @Override
     public void createCustomer(Customer customer) {
-        try (Connection connection = DatabaseConnection.getConnection()) {
+        try (Connection connection = DatabaseConnection.getInstance().getConnection()) {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO users VALUES (?, ?, ?)");
             statement.setString(1, customer.getUsername());
             statement.setString(2, customer.getPassword());
@@ -31,7 +31,7 @@ public class CustomerDAOManager implements CustomerDAO {
 
     @Override
     public void updateCustomer(Customer customer, String oldUsername) {
-        try (Connection connection = DatabaseConnection.getConnection()) {
+        try (Connection connection = DatabaseConnection.getInstance().getConnection()) {
             PreparedStatement statement = connection.prepareStatement("UPDATE \"User\" SET (username,password)=(?,?,?,?) WHERE \"username\"=?;");
             statement.setString(3, customer.getUsername());
             statement.setString(4, customer.getPassword());
@@ -44,7 +44,7 @@ public class CustomerDAOManager implements CustomerDAO {
 
     @Override
     public void removeCustomer(Customer customer) {
-        try (Connection connection = DatabaseConnection.getConnection()) {
+        try (Connection connection = DatabaseConnection.getInstance().getConnection()) {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM \"User\" WHERE \"username\"=?;");
             statement.setString(1, customer.getUsername());
 
@@ -56,7 +56,7 @@ public class CustomerDAOManager implements CustomerDAO {
 
     @Override
     public Customer getCustomer(String username) {
-        try (Connection connection = DatabaseConnection.getConnection()) {
+        try (Connection connection = DatabaseConnection.getInstance().getConnection()) {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM \"User\" WHERE \"username\"=?;");
             statement.setString(1, username);
 
@@ -77,7 +77,7 @@ public class CustomerDAOManager implements CustomerDAO {
     @Override
     public ArrayList<Customer> getCustomers() {
         ArrayList<Customer> list = new ArrayList<>();
-        try (Connection connection = DatabaseConnection.getConnection()) {
+        try (Connection connection = DatabaseConnection.getInstance().getConnection()) {
             PreparedStatement statement = connection.prepareStatement("select * from users WHERE accesstype='CUSTOMER'");
 
             ResultSet resultSet = statement.executeQuery();

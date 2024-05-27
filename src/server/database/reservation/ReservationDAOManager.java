@@ -2,15 +2,17 @@ package server.database.reservation;
 
 import server.database.DatabaseConnection;
 import shared.utils.Request;
+import shared.utils.reservation.Reservation;
 
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class ReservationDAOManager implements ReservationDAO {
 
-    private Connection connection =  new DatabaseConnection().getConnection();
+    private Connection connection = DatabaseConnection.getInstance().getConnection();
     private static ReservationDAOManager instance;
     private static Lock lock = new ReentrantLock();
 
@@ -32,7 +34,7 @@ public class ReservationDAOManager implements ReservationDAO {
     @Override
     public Request addReservation(String username, LocalDateTime localDateTime, String tableName) throws SQLException {
         try {
-            connection = DatabaseConnection.getConnection();
+            connection = DatabaseConnection.getInstance().getConnection();
             // Start transaction
             connection.setAutoCommit(false);
 
@@ -84,7 +86,7 @@ public class ReservationDAOManager implements ReservationDAO {
     public Request deleteReservation(int id) {
 
         try {
-            connection = DatabaseConnection.getConnection();
+            connection = DatabaseConnection.getInstance().getConnection();
             // Start transaction
             connection.setAutoCommit(false);
 
@@ -139,9 +141,47 @@ public class ReservationDAOManager implements ReservationDAO {
     }
 
     @Override
+    public ArrayList<Reservation> getAllReservations() {
+        try {
+            connection = DatabaseConnection.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM reservation");
+            ResultSet resultSet = statement.executeQuery();
+
+            ArrayList<Reservation> reservations = new ArrayList<>();
+            while (resultSet.next()) {
+                Reservation reservation = new Reservation(
+                        resultSet.getInt("reservation_id"),
+                        resultSet.getString("table_number"),
+                        resultSet.getString("customer_id"),
+                        resultSet.getTimestamp("reservation_time").toLocalDateTime()
+                );
+                reservations.add(reservation);
+            }
+
+            return reservations;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+
+        } finally {
+            // Close connection in finally block to ensure it's always closed
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+        }
+    }
+
+    @Override
     public Request updateReservation(int id, String username, LocalDateTime localDateTime, String tableName) {
         try {
-            connection = DatabaseConnection.getConnection();
+            connection = DatabaseConnection.getInstance().getConnection();
             // Start transaction
             connection.setAutoCommit(false);
 
@@ -200,11 +240,100 @@ public class ReservationDAOManager implements ReservationDAO {
 
     @Override
     public Request getReservation(String username) {
-        return null;
+        try {
+            connection = DatabaseConnection.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM reservation WHERE customer_id = ?");
+            statement.setString(1, username);
+            ResultSet resultSet = statement.executeQuery();
+
+            ArrayList<Reservation> reservations = new ArrayList<>();
+            while (resultSet.next()) {
+                Reservation reservation = new Reservation(
+                        resultSet.getInt("reservation_id"),
+                        resultSet.getString("table_number"),
+                        resultSet.getString("customer_id"),
+                        resultSet.getTimestamp("reservation_time").toLocalDateTime()
+                );
+                reservations.add(reservation);
+            }
+
+            return new Request("Reservations found", reservations);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return new Request("Failed to get reservations", null);
+
+        } finally {
+            // Close connection in finally block to ensure it's always closed
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    @Override
+    public ArrayList<Reservation> getReservationsByUsername(String username) {
+        try {
+            connection = DatabaseConnection.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM reservation WHERE customer_id = ?");
+            statement.setString(1, username);
+            ResultSet resultSet = statement.executeQuery();
+
+            ArrayList<Reservation> reservations = new ArrayList<>();
+            while (resultSet.next()) {
+                Reservation reservation = new Reservation(
+                        resultSet.getInt("reservation_id"),
+                        resultSet.getString("table_number"),
+                        resultSet.getString("customer_id"),
+                        resultSet.getTimestamp("reservation_time").toLocalDateTime()
+                );
+                reservations.add(reservation);
+            }
+
+            return reservations;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+
+        } finally {
+            // Close connection in finally block to ensure it's always closed
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     @Override
     public Request getReservation(int id) {
-        return null;
+        try {
+            connection = DatabaseConnection.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM reservation WHERE reservation_id = ?");
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                Reservation reservation = new Reservation(
+                        resultSet.getInt("reservation_id"),
+                        resultSet.getString("table_number"),
+                        resultSet.getString("customer_id"),
+                        resultSet.getTimestamp("reservation_time").toLocalDateTime()
+                );
+                return new Request("Reservation found", reservation);
+            } else {
+                return new Request("Reservation not found", null);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

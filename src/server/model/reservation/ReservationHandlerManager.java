@@ -1,35 +1,40 @@
 package server.model.reservation;
 
+import server.database.reservation.ReservationDAO;
+import server.database.reservation.ReservationDAOManager;
 import shared.utils.reservation.Reservation;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class ReservationHandlerManager implements ReservationHandler {
+    private ReservationDAO reservationDAO;
     private PropertyChangeSupport support;
-    private ArrayList<Reservation> reservations;
 
-    public ReservationHandlerManager() {
+
+    public ReservationHandlerManager() throws SQLException {
+        reservationDAO = new ReservationDAOManager();
         support = new PropertyChangeSupport(this);
-        reservations = new ArrayList<>();
     }
 
     @Override
-    public void reserve(Reservation reservation) {
-        reservations.add(reservation);
+    public void reserve(Reservation reservation) throws SQLException {
+        reservationDAO.addReservation(reservation.getUserName(), LocalDateTime.now(), reservation.getTempTable().getTableName());
         support.firePropertyChange("reservationAdded", null, reservation);
 
     }
 
     @Override
     public ArrayList<Reservation> getReservations() {
-        return reservations;
+        return reservationDAO.getAllReservations();
     }
 
     @Override
     public Reservation getReservation(int id) {
-        for (Reservation reservation : reservations) {
+        for (Reservation reservation : reservationDAO.getAllReservations()) {
             if (reservation.getId() == id) {
                 return reservation;
             }
@@ -39,9 +44,14 @@ public class ReservationHandlerManager implements ReservationHandler {
 
     @Override
     public void clearReservation(Reservation reservation) {
-        if (reservations.remove(reservation)) {
+        if (reservationDAO.deleteReservation(reservation.getId())) {
             support.firePropertyChange("reservationRemoved", reservation, null);
         }
+    }
+
+    @Override
+    public ArrayList<Reservation> getReservationsByUsername(String username) {
+        return reservationDAO.getReservationsByUsername(username);
     }
 
     @Override

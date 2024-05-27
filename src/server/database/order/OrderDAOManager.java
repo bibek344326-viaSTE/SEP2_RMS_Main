@@ -27,7 +27,7 @@ public class OrderDAOManager implements OrderDAO {
     @Override
     public void createOrder(Order order) {
         String sql = "INSERT INTO orders (order_date) VALUES (?)";
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             pstmt.setTimestamp(1, order.getOrderDateTime());
             pstmt.executeUpdate();
@@ -49,7 +49,7 @@ public class OrderDAOManager implements OrderDAO {
                 "JOIN orderitems omi ON mi.id = omi.menuitem_id " +
                 "WHERE omi.orderid = ?";
         Order order = null;
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement pstmtOrder = conn.prepareStatement(sqlOrder);
              PreparedStatement pstmtMenuItems = conn.prepareStatement(sqlMenuItems)) {
 
@@ -92,7 +92,7 @@ public class OrderDAOManager implements OrderDAO {
     @Override
     public void addMenuToOrder(int orderId, MenuItem menuItem) {
         String sql = "INSERT INTO order_menu_items (order_id, menu_item_id) VALUES (?, ?)";
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, orderId);
             pstmt.setInt(2, menuItem.getMenuItemID());
@@ -105,7 +105,7 @@ public class OrderDAOManager implements OrderDAO {
     @Override
     public void removeMenuFromOrder(int orderId, MenuItem menuItem) {
         String sql = "DELETE FROM order_menu_items WHERE order_id = ? AND menu_item_id = ?";
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, orderId);
             pstmt.setInt(2, menuItem.getMenuItemID());
@@ -118,10 +118,15 @@ public class OrderDAOManager implements OrderDAO {
     @Override
     public ArrayList<Order> getOrders() {
         String sqlOrders = "SELECT * FROM orders";
-        String sqlMenuItems = "SELECT mi.menuitem_id, mi.menuitemname, mi.menuitemtype FROM menuitem mi " +
-                "JOIN orderitems omi ON mi.menuitem_id = omi.menuitemid";
+        String sqlMenuItems = "SELECT o.orderID, mi.menuitem_id, mi.menuItemName, mi.menuitemtype, t.table_name AS tableName, u.username AS customerid, oi.orderStatus " +
+                "FROM orders o " +
+                "JOIN OrderItems oi ON o.orderID = oi.orderID " +
+                "JOIN MenuItem mi ON oi.menuitemid = mi.menuitem_id " +
+                "JOIN tables t ON o.tableID = t.table_name " +
+                "JOIN users u ON o.customerID = u.username;";
+
         ArrayList<Order> orders = new ArrayList<>();
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = DatabaseConnection.getInstance().getConnection();
              Statement stmtOrders = conn.createStatement();
              Statement stmtMenuItems = conn.createStatement();
              ResultSet rsOrders = stmtOrders.executeQuery(sqlOrders);
@@ -132,13 +137,10 @@ public class OrderDAOManager implements OrderDAO {
                 int orderId = rsOrders.getInt("orderid");
                 String tableID = rsOrders.getString("tableid");
                 String customerID = rsOrders.getString("customerid");
-                String orderStatus = rsOrders.getString("orderstatus");
                 Timestamp orderTimestamp = rsOrders.getTimestamp("orderTimestamp");
                 Table table = getTableByID(tableID); // Method to retrieve Table object by ID
                 Customer customer = getCustomerByID(customerID); // Method to retrieve Customer object by ID
-
                 Order order = new Order(orderId, table, customer);
-                order.setOrderStaus(OrderStatus.valueOf(orderStatus));
                 order.setOrderDateTime(orderTimestamp);
                 orders.add(order);
             }
@@ -146,13 +148,20 @@ public class OrderDAOManager implements OrderDAO {
             // Retrieve all menu items and map them to the appropriate orders
             while (rsMenuItems.next()) {
                 int orderId = rsMenuItems.getInt("orderid");
-                //int menuItemId = rsMenuItems.getInt("menuitem_id");
-                String name = rsMenuItems.getString("menuitemname");
+                int menuItemId = rsMenuItems.getInt("menuitem_id");
+                String menuitemname = rsMenuItems.getString("menuitemname");
+                String tableName = rsMenuItems.getString("tablename");
+                String customerName = rsMenuItems.getString("customerid");
+                String orderStatus = rsMenuItems.getString("orderstatus");
                 String type = rsMenuItems.getString("menuitemtype");
-                MenuItem menuItem = new MenuItem(name, type);
+                MenuItem menuItem = new MenuItem(menuitemname, type);
+                menuItem.setMenuItemID(menuItemId);
 
                 for (Order order : orders) {
                     if (order.getOrderID() == orderId) {
+                        order.setCustomer(getCustomerByID(customerName));
+                        order.setOrderStaus(OrderStatus.ORDERED);
+                        order.getTable().setTableName(tableName);
                         order.addOrderItemsList(menuItem);
                         break;
                     }

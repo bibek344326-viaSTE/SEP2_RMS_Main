@@ -37,7 +37,7 @@ public class ChatDAOManager implements ChatDAO{
 
     @Override
     public Request addMessage(Message message) throws Exception {
-        try (Connection connection = DatabaseConnection.getConnection()) {
+        try (Connection connection = DatabaseConnection.getInstance().getConnection()) {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO message 'username_sender', 'username_receiver\",\"Message_Body\") VALUES (?,?,?);");
             statement.setString(1, message.getUserNameSender());
             statement.setString(2, message.getUserNameReceiver());
@@ -51,7 +51,7 @@ public class ChatDAOManager implements ChatDAO{
 
     @Override
     public Request getStaffMember() throws Exception {
-        try (Connection connection = DatabaseConnection.getConnection()) {
+        try (Connection connection = DatabaseConnection.getInstance().getConnection()) {
             PreparedStatement statement = connection.prepareStatement("SELECT username FROM user WHERE 'accestype'=?;");
             statement.setString(1, Usertype.STAFFMEMBERS.toString());
             ResultSet resultSet = statement.executeQuery();
@@ -67,7 +67,7 @@ public class ChatDAOManager implements ChatDAO{
 
     @Override
     public Request getAllCustomersWhoWantsToChat(String username) throws Exception {
-        try (Connection connection = DatabaseConnection.getConnection()) {
+        try (Connection connection = DatabaseConnection.getInstance().getConnection()) {
             PreparedStatement statement = connection.prepareStatement("SELECT DISTINCT \"Username_Sender\" from \"Message\" WHERE \"Username_Receiver\" =?;");
             statement.setString(1, username);
             ResultSet resultSet = statement.executeQuery();
@@ -84,7 +84,7 @@ public class ChatDAOManager implements ChatDAO{
 
     @Override
     public List<Message> getAllMessages(String username, String client) throws Exception {
-        try (Connection connection = DatabaseConnection.getConnection()) {
+        try (Connection connection = DatabaseConnection.getInstance().getConnection()) {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM \"Message\" WHERE \"Username_Sender\"=? AND \"Username_Receiver\"=? OR \"Username_Sender\"=? AND \"Username_Receiver\"=?; ");
             statement.setString(1, username);
             statement.setString(2, client);

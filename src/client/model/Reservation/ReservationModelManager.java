@@ -2,14 +2,16 @@ package client.model.Reservation;
 
 import client.networking.reservation.ReservationClient;
 import shared.utils.reservation.Reservation;
+import shared.utils.table.Table;
+import shared.utils.user.Customer;
 
-import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
 
-public class ReservationModelManager implements ReservationModel{
+public class ReservationModelManager implements ReservationModel {
+    private ReservationClient reservationClient;
     private final ReservationList reservationList;
     private final PropertyChangeSupport property;
 
@@ -17,6 +19,7 @@ public class ReservationModelManager implements ReservationModel{
 
     public ReservationModelManager(ReservationClient reservationClient) {
         property = new PropertyChangeSupport(this);
+        this.reservationClient = reservationClient;
         reservationList = new ReservationList();
         createDummyData();
     }
@@ -31,23 +34,36 @@ public class ReservationModelManager implements ReservationModel{
 
     @Override
     public void addReservation(Reservation reservation) {
-       reservationList.addReservation(reservation);
+        reservationList.addReservation(reservation);
         property.firePropertyChange("ReservationAdded", null, reservation);
     }
 
     @Override
+    public void addReservation(Reservation reservation, Customer customer, Table table) throws SQLException {
+        reservationClient.reserveTable(reservation, table, customer);
+        reservationList.addReservation(reservation);
+        property.firePropertyChange("ReservationAdded", null, reservation);
+
+    }
+
+    @Override
     public void removeReservation(Reservation reservation) {
-        reservationList.removeReservation(reservation);
+        reservationClient.clearReservation(reservation);
     }
 
     @Override
     public List<Reservation> getAllReservations() {
-        return reservationList.getAllReservations();
+        return reservationClient.getReservations();
     }
 
     @Override
     public Reservation findReservationByTable(String tableName) {
         return reservationList.findReservationByTable(tableName);
+    }
+
+    @Override
+    public List<Reservation> getReservationsByCustomer(Customer customer) {
+        return List.of();
     }
 
     @Override

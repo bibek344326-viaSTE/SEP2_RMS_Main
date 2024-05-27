@@ -1,6 +1,5 @@
 package server.networking;
 
-import server.networking.menuItems.MenuItemServerManager;
 import shared.networking.serverInterfaces.*;
 
 import java.rmi.AlreadyBoundException;
@@ -8,7 +7,6 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.security.spec.RSAOtherPrimeInfo;
 
 public class ServerManager implements Server {
 
@@ -22,7 +20,7 @@ public class ServerManager implements Server {
     private ReservationServer reservationServer;
 
     public ServerManager(LoginServer loginServer, CreateAccountServer createAccountServer,
-                         TableServer tableServer, CustomerListServer customerListServer, ChatServer chatServer, MenuServer menuServer, ReservationServer reservationServer)
+                         TableServer tableServer, CustomerListServer customerListServer, ChatServer chatServer, MenuServer menuServer, OrderServer orderServer, ReservationServer reservationServer)
             throws RemoteException {
         this.loginServer = loginServer;
         this.createAccountServer = createAccountServer;

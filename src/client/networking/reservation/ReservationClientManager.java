@@ -16,8 +16,10 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.List;
 
-public class ReservationClientManager implements ReservationClient{
+public class ReservationClientManager implements ReservationClient {
     private ReservationDAO reservationDAO;
     private PropertyChangeSupport support;
 
@@ -33,8 +35,24 @@ public class ReservationClientManager implements ReservationClient{
     }
 
     @Override
-    public void reserveTable(Reservation reservation, Table table, Customer customer) {
+    public List<Reservation> getReservations() {
+        return reservationDAO.getAllReservations();
+    }
 
+
+    @Override
+    public void getReservationById(int id) {
+        support.firePropertyChange("Reservation", null, reservationDAO.getReservation(id));
+    }
+
+    @Override
+    public void getReservationsByCustomer(Customer customer) {
+        support.firePropertyChange("Reservations", null, reservationDAO.getReservationsByUsername(customer.getUsername()));
+    }
+
+    @Override
+    public void reserveTable(Reservation reservation, Table table, Customer customer) throws SQLException {
+        reservationDAO.addReservation(customer.getUsername(), LocalDateTime.now(), table.getTableName());
     }
 
     @Override

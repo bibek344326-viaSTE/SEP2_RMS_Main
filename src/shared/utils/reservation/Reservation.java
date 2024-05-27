@@ -30,16 +30,12 @@ public class Reservation {
         this.dateTime = dateTime;
     }
 
-    private void verifyData(String username, LocalDateTime dateTime, List<String> occupiedTables) throws Exception {
-        if (username == null) {
-            throw new Exception("Cannot create a reservation without customer");
-        }
-        if (dateTime == null) {
-            throw new Exception("Reservation Date missing");
-        } else if (occupiedTables == null || occupiedTables.isEmpty()) {
-            throw new Exception("Cannot create a reservation without Tables");
-        }
+    public Reservation(int reservationId, String tablename, String customerId, LocalDateTime reservationTime) {
+        this.id = reservationId;
+        this.userName = customerId;
+        this.dateTime = reservationTime;
     }
+
 
     public Table getTable(){
         return tempTable;

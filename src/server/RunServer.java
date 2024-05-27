@@ -4,6 +4,8 @@ import server.database.menuItem.MenuItemDAO;
 import server.database.menuItem.MenuItemDAOManager;
 import server.database.order.OrderDAO;
 import server.database.order.OrderDAOManager;
+import server.database.reservation.ReservationDAO;
+import server.database.reservation.ReservationDAOManager;
 import server.database.table.TableDAO;
 import server.database.table.TableDAOManager;
 import server.model.chat.ChatHandler;
@@ -64,21 +66,27 @@ public class RunServer {
         MenuItemHandler menuItemHandler = new MenuItemHandlerManager();
         MenuServer menuServer = new MenuItemServerManager(menuItemHandler);
 
-//        OrderHandler orderHandler = new OrderHandlerManager();
-//        OrderServer orderServer = new OrdersServerManager(orderHandler);
+        OrderHandler orderHandler = new OrderHandlerManager();
+        OrderServer orderServer = new OrdersServerManager(orderHandler);
 
 
-        Server server = new ServerManager(loginServer, createAccountServer, tablesServerManager, customerListServer, chatServer, menuServer, reservationServer);
+        Server server = new ServerManager(loginServer, createAccountServer, tablesServerManager, customerListServer, chatServer, menuServer,orderServer, reservationServer);
         server.startServer();
+
+
+//        ReservationDAO reservationDAO = new ReservationDAOManager();
+//        for(int i=0; i<reservationDAO.().size(); i++){
+//            System.out.println(reservationDAO.getReservations().get(i).getCustomer().getUsername()+"\n");;
+//        }
 
 //        OrderDAO orderDAO = new OrderDAOManager();
 //        for(int i=0; i<orderDAO.getOrders().size(); i++){
-//            System.out.println(orderDAO.getOrders().get(i)+"\n");;
+//            System.out.println(orderDAO.getOrders().get(i).getCustomer().getUsername()+"\n");;
 //        }
-        MenuItemDAO menuItemDAO = new MenuItemDAOManager();
-        for(int i=0; i<menuItemDAO.getMenuItems().size(); i++){
-            System.out.println(menuItemDAO.getMenuItems().get(i).getMenuItemID() + " "+ menuItemDAO.getMenuItems().get(i)+"\n");;
-        }
+//        MenuItemDAO menuItemDAO = new MenuItemDAOManager();
+//        for(int i=0; i<menuItemDAO.getMenuItems().size(); i++){
+//            System.out.println(menuItemDAO.getMenuItems().get(i).getMenuItemID() + " "+ menuItemDAO.getMenuItems().get(i)+"\n");;
+//        }
 
     }
 }

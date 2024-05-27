@@ -17,7 +17,7 @@ public class LoginDAOManager implements LoginDAO {
 
     @Override
     public Request login(String username, String password) {
-        try (Connection connection = DatabaseConnection.getConnection()) {
+        try (Connection connection = DatabaseConnection.getInstance().getConnection()) {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM \"user\" WHERE \"username\"=? and \"password\"=?;");
             statement.setString(1, username);
             statement.setString(2, password);
