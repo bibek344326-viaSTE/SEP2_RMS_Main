@@ -111,7 +111,7 @@ public class TableDAOManager implements TableDAO {
             if (rs.next()) {
                 String tableName1 = rs.getString("table_name");
                 int tableCapacity = rs.getInt("table_capacity");
-               // boolean isOccupied = rs.getBoolean("is_occupied");
+                // boolean isOccupied = rs.getBoolean("is_occupied");
                 // Assuming there are more fields in the Table class, retrieve them here
                 table = new Table(tableName1, tableCapacity);
             }

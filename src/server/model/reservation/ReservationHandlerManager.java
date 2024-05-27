@@ -44,9 +44,8 @@ public class ReservationHandlerManager implements ReservationHandler {
 
     @Override
     public void clearReservation(Reservation reservation) {
-        if (reservationDAO.deleteReservation(reservation.getId())) {
+        reservationDAO.removeReservation(reservation.getId());
             support.firePropertyChange("reservationRemoved", reservation, null);
-        }
     }
 
     @Override

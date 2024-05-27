@@ -21,4 +21,6 @@ public interface ReservationDAO {
     ArrayList<Reservation> getReservationsByUsername(String username);
 
     Request getReservation(int id);
+
+    void removeReservation(int id);
 }
