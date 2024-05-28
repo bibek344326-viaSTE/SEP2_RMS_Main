@@ -14,14 +14,12 @@ public class ViewModelFactory {
     private ViewState viewState;
     private StaffMenuItemsViewModel menuViewModel;
     private StaffCustomerViewModel customerViewModel;
-    private AddNewCustomerViewModel addNewCustomerViewModel;
     private AddNewMenuItemsViewModel addNewMenuItemsViewModel;
     private AddNewTableViewModel addNewTableViewModel;
     private CreateNewCustomerViewModel createNewCustomerViewModel;
     private EditMenuItemsViewModel editMenuItemsViewModel;
     private StaffOrderViewModel staffOrderViewModel;
     private CustomerLoginViewModel customerLoginViewModel;
-    private CustomerTableNumberViewModel customerTableNumberViewModel;
     private CustomerViewMenuItemsViewModel customerViewMenuItemsViewModel;
     private CustomerViewOrderStatusViewModel customerViewOrderStatusViewModel;
     private KitchenStaffViewModel kitchenStaffViewModel;
@@ -59,12 +57,7 @@ public class ViewModelFactory {
         return customerViewModel;
     }
 
-    public AddNewCustomerViewModel getAddNewCustomerViewModel() throws RemoteException {
-        if (addNewCustomerViewModel == null) {
-            addNewCustomerViewModel = new AddNewCustomerViewModel(modelFactory, viewState);
-        }
-        return addNewCustomerViewModel;
-    }
+
 
     public AddNewMenuItemsViewModel getAddNewMenuItemsViewModel() throws RemoteException {
         if (addNewMenuItemsViewModel == null) {
@@ -108,12 +101,6 @@ public class ViewModelFactory {
         return customerLoginViewModel;
     }
 
-    public CustomerTableNumberViewModel getCustomerTableNumberViewModel() throws RemoteException {
-        if (customerTableNumberViewModel == null) {
-            customerTableNumberViewModel = new CustomerTableNumberViewModel(modelFactory, viewState);
-        }
-        return customerTableNumberViewModel;
-    }
 
     public CustomerViewMenuItemsViewModel getCustomerViewMenuItemsViewModel() throws RemoteException {
         if (customerViewMenuItemsViewModel == null) {

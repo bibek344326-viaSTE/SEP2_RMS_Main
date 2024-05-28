@@ -2,7 +2,6 @@ package client.view;
 
 import client.core.ViewModelFactory;
 import client.view.customer.CustomerLoginController;
-import client.view.customer.CustomerTableNumberViewController;
 import client.view.customer.CustomerViewMenuItemsController;
 import client.view.customer.CustomerViewOrderStatusController;
 import client.view.kitchenstaff.KitchenStaffLoginController;
@@ -22,7 +21,6 @@ public class ViewHandler {
     private final ViewModelFactory viewModelFactory;
     private Stage primaryStage;
     private Scene currentScene;
-    private CustomerTableNumberViewController customerTableNumberViewController;
     private CustomerViewMenuItemsController customerViewMenuItemsController;
     private CustomerViewOrderStatusController customerViewOrderStatusController;
     private LoginViewController loginViewController;
@@ -35,7 +33,6 @@ public class ViewHandler {
     private StaffOrderViewController staffOrderViewController;
     private StaffMenuItemsViewController staffMenuViewController;
     private UpdateTableViewController updateTableViewController;
-    private AddNewCustomerController addNewCustomerController;
     private AddNewMenuItemsController addNewMenuItemsController;
     private AddNewTableController addNewTableController;
     private CreateNewCustomerController createNewCustomerController;
@@ -85,17 +82,11 @@ public class ViewHandler {
             case "addEditTable":
                 root = loadAddEditTableView("staff/UpdateTableDetails.fxml");
                 break;
-            case "customerTableNumber":
-                root = loadCustomerTableNumberView("customer/CustomerTableNumberView.fxml");
-                break;
             case "customerViewMenuItems":
                 root = loadCustomerViewMenuItems("customer/CustomerViewMenuItems.fxml");
                 break;
             case "customerViewOrderStatus":
                 root = loadCustomerViewOrderStatus("customer/CustomerViewOrderStatus.fxml");
-                break;
-            case "addNewCustomer":
-                root = loadAddNewCustomerView("staff/AddNewCustomer.fxml");
                 break;
             case "addNewMenuItems":
                 root = loadAddNewMenuItemsView("staff/AddNewMenuItems.fxml");
@@ -282,20 +273,7 @@ public class ViewHandler {
         return updateTableViewController.getRoot();
     }
 
-    private Region loadCustomerTableNumberView(String fxmlFile) {
-        if (customerTableNumberViewController == null) {
-            try {
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource(fxmlFile));
-                Region root = loader.load();
-                customerTableNumberViewController = loader.getController();
-                customerTableNumberViewController.init(viewModelFactory, this,root);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return customerTableNumberViewController.getRoot();
-    }
+
 
     private Region loadCustomerViewMenuItems(String fxmlFile) {
         if (customerViewMenuItemsController == null) {
@@ -327,20 +305,7 @@ public class ViewHandler {
         return customerViewOrderStatusController.getRoot();
     }
 
-    private Region loadAddNewCustomerView(String fxmlFile) {
-        if (addNewCustomerController == null) {
-            try {
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource(fxmlFile));
-                Region root = loader.load();
-                addNewCustomerController = loader.getController();
-                addNewCustomerController.init(viewModelFactory, this,root);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return addNewCustomerController.getRoot();
-    }
+
 
     private Region loadAddNewMenuItemsView(String fxmlFile) {
         if (addNewMenuItemsController == null) {
