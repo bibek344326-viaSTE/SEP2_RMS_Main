@@ -12,17 +12,29 @@ public class OrderClientManager implements OrderClient {
     private Server server;
 
     public OrderClientManager() {
-        server = GetServer.getServerFromRmi();
+        try {
+           this.server = GetServer.getServerFromRmi();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void createOrder(Order order) throws RemoteException {
-        server.getOrderServer().createOrder(order);
+       try {
+           server.getOrderServer().addNewOrder(order);
+       } catch (RemoteException e) {
+           throw new RuntimeException(e);
+       }
     }
 
     @Override
-    public void cancelOrder(Order order) throws RemoteException {
-        server.getOrderServer().deleteOrder(order);
+    public void cancelOrder(int orderid) throws RemoteException {
+        try {
+            server.getOrderServer().deleteOrder(orderid);
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -32,17 +44,17 @@ public class OrderClientManager implements OrderClient {
 
     @Override
     public List<Order> getAllOrders() throws RemoteException {
-        return server.getOrderServer().getOrders();
+        return server.getOrderServer().getAllOrders();
     }
 
     @Override
-    public void removeItemFromOrder(MenuItem menuItem, Order order) throws RemoteException {
-        server.getOrderServer().addMenuItemFromOrder(order, menuItem);
+    public void removeItemFromOrder(int menuItemid, int orderId) throws RemoteException {
+        server.getOrderServer().removeMenuFromOrder(orderId, menuItemid);
     }
 
     @Override
-    public void addItemToOrder(MenuItem menuItem, Order order) throws RemoteException {
-        server.getOrderServer().addMenuItemFromOrder(order, menuItem);
+    public void addItemToOrder(int menuItemid, int orderId) throws RemoteException {
+        server.getOrderServer().addMenuToOrder(orderId, menuItemid);
 
     }
 }

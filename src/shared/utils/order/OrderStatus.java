@@ -1,5 +1,7 @@
 package shared.utils.order;
 
-public enum OrderStatus {
+import java.io.Serializable;
+
+public enum OrderStatus implements Serializable {
     ORDERED, PREPARING, READY, SERVED
 }

@@ -2,10 +2,11 @@ package shared.utils.reservation;
 
 import shared.utils.table.Table;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class Reservation {
+public class Reservation implements Serializable {
     private String userName;
     private LocalDateTime dateTime;
     private int id;

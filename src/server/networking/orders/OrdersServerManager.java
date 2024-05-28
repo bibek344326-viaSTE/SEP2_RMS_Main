@@ -5,24 +5,25 @@ import shared.networking.serverInterfaces.OrderServer;
 import shared.utils.Request;
 import shared.utils.menuItem.MenuItem;
 import shared.utils.order.Order;
+import shared.utils.order.OrderStatus;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 public class OrdersServerManager implements OrderServer {
+
     private ArrayList<Order> orders;
     private OrderHandler orderHandler;
 
     public OrdersServerManager(OrderHandler orderHandler) throws RemoteException {
-        this.orders = orderHandler.getOrders();
         this.orderHandler = orderHandler;
         UnicastRemoteObject.exportObject(this, 0);
     }
 
     @Override
-    public ArrayList<Order> getOrders() throws RemoteException {
-        return orders;
+    public Request addNewOrder(Order order) throws RemoteException {
+        return orderHandler.createOrder(order);
     }
 
     @Override
@@ -31,23 +32,34 @@ public class OrdersServerManager implements OrderServer {
     }
 
     @Override
-    public Request createOrder(Order order) throws RemoteException {
-        return orderHandler.addOrder(order);
+    public void addMenuToOrder(int orderId, int menuItemId) throws RemoteException {
+        orderHandler.addMenuToOrder(orderId, menuItemId);
     }
 
     @Override
-    public void deleteOrder(Order order) throws RemoteException {
-        orderHandler.removeOrder(order);
-    }
-
-
-    @Override
-    public void removeMenuItemFromOrder(Order order, MenuItem menuItem) throws RemoteException {
-        orderHandler.removeMenuItemFromOrder(order.getOrderID(), menuItem);
+    public void removeMenuFromOrder(int orderId, int menuItemId) throws RemoteException {
+        orderHandler.removeMenuFromOrder(orderId, menuItemId);
     }
 
     @Override
-    public void addMenuItemFromOrder(Order order, MenuItem menuItem) throws RemoteException {
-        orderHandler.addMenuItemToOrder(order.getOrderID(), menuItem);
+    public ArrayList<Order> getAllOrders() throws RemoteException {
+        return orderHandler.getAllOrders();
     }
+
+    @Override
+    public void deleteOrder(int orderId) throws RemoteException {
+        orderHandler.deleteOrder(orderId);
+    }
+
+    @Override
+    public ArrayList<MenuItem> getOrderItems(int orderId) throws RemoteException {
+        return orderHandler.getOrderItems(orderId);
+    }
+
+    @Override
+    public void updateOrderStatus(int orderId, OrderStatus orderStatus) throws RemoteException {
+        orderHandler.updateOrderStatus(orderId, orderStatus);
+    }
+
+
 }

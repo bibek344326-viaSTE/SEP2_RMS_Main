@@ -3,6 +3,8 @@ package server.database.order;
 import server.database.DatabaseConnection;
 import server.database.customer.CustomerDAO;
 import server.database.customer.CustomerDAOManager;
+import server.database.menuItem.MenuItemDAO;
+import server.database.menuItem.MenuItemDAOManager;
 import server.database.table.TableDAO;
 import server.database.table.TableDAOManager;
 import shared.utils.menuItem.MenuItem;
@@ -19,24 +21,21 @@ public class OrderDAOManager implements OrderDAO {
     public OrderDAOManager() {
         try {
             DriverManager.registerDriver(new org.postgresql.Driver());
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
+
     @Override
     public void createOrder(Order order) {
-        String sql = "INSERT INTO orders (order_date) VALUES (?)";
-        try (Connection conn = DatabaseConnection.getInstance().getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            pstmt.setTimestamp(1, order.getOrderDateTime());
+        String sql = "INSERT INTO orders (orderid, tableid, customerid, ordertimestamp) VALUES (?, ?, ?, ?)";
+        try (Connection conn = DatabaseConnection.getInstance().getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, order.getOrderID());
+            pstmt.setString(2, order.getTable().getTableName());
+            pstmt.setString(3, order.getCustomer().getUsername());
+            pstmt.setTimestamp(4, order.getOrderDateTime());
             pstmt.executeUpdate();
-
-            // Retrieve the generated order ID
-            ResultSet rs = pstmt.getGeneratedKeys();
-            if (rs.next()) {
-                order.setOrderID(rs.getInt(1));
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -44,147 +43,147 @@ public class OrderDAOManager implements OrderDAO {
 
     @Override
     public Order getOrder(int orderId) {
-        String sqlOrder = "SELECT * FROM orders WHERE id = ?";
-        String sqlMenuItems = "SELECT mi.id, mi.name, mi.type FROM menuitem mi " +
-                "JOIN orderitems omi ON mi.id = omi.menuitem_id " +
-                "WHERE omi.orderid = ?";
-        Order order = null;
-        try (Connection conn = DatabaseConnection.getInstance().getConnection();
-             PreparedStatement pstmtOrder = conn.prepareStatement(sqlOrder);
-             PreparedStatement pstmtMenuItems = conn.prepareStatement(sqlMenuItems)) {
-
-            // Retrieve order details
-            pstmtOrder.setInt(1, orderId);
-            ResultSet rsOrder = pstmtOrder.executeQuery();
-            if (rsOrder.next()) {
-                int id = rsOrder.getInt("id");
-                String tableID = rsOrder.getString("tableName");
-                String customerID = rsOrder.getString("customer_id");
-                String orderStatus = rsOrder.getString("orderStatus");
-                Timestamp orderTimestamp = rsOrder.getTimestamp("orderTimestamp");
-                Table table = getTableByID(tableID); // Method to retrieve Table object by ID
-                Customer customer = getCustomerByID(customerID); // Method to retrieve Customer object by ID
-
-                order = new Order(id, table, customer);
-                order.setOrderStaus(OrderStatus.valueOf(orderStatus));
-                order.setOrderDateTime(orderTimestamp);
-            }
-
-            // Retrieve menu items associated with the order
-            if (order != null) {
-                pstmtMenuItems.setInt(1, orderId);
-                ResultSet rsMenuItems = pstmtMenuItems.executeQuery();
-                while (rsMenuItems.next()) {
-                    int menuItemId = rsMenuItems.getInt("id");
-                    String name = rsMenuItems.getString("name");
-                    String type = rsMenuItems.getString("type");
-                    MenuItem menuItem = new MenuItem(name, type);
-                    order.addOrderItemsList(menuItem);
-                }
+        try {
+            Connection connection = DatabaseConnection.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM orders WHERE orderid = ?;");
+            statement.setInt(1, orderId);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                int orderID = resultSet.getInt("orderid");
+                String tableID = resultSet.getString("tableid");
+                String customerID = resultSet.getString("customerid");
+                Timestamp orderDateTime = resultSet.getTimestamp("ordertimestamp");
+                TableDAO tableDAO = new TableDAOManager();
+                Table table = tableDAO.getTable(tableID);
+                CustomerDAO customerDAO = new CustomerDAOManager();
+                Customer customer = customerDAO.getCustomer(customerID);
+                Order order = new Order(orderID, table, customer, orderDateTime);
+                order.setCustomer(customer); // Set the Customer object
+                return order;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return order;
+        return null;
+
     }
 
-
     @Override
-    public void addMenuToOrder(int orderId, MenuItem menuItem) {
-        String sql = "INSERT INTO order_menu_items (order_id, menu_item_id) VALUES (?, ?)";
-        try (Connection conn = DatabaseConnection.getInstance().getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, orderId);
-            pstmt.setInt(2, menuItem.getMenuItemID());
-            pstmt.executeUpdate();
+    public void addMenuToOrder(int orderId, int menuItemid) {
+        try {
+            Connection connection = DatabaseConnection.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO orderitems (orderid, menuitemid,orderstatus) VALUES (?, ?,?);");
+            statement.setInt(1, orderId);
+            statement.setInt(2, menuItemid);
+            statement.setString(3, OrderStatus.ORDERED.name());
+            statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void removeMenuFromOrder(int orderId, MenuItem menuItem) {
-        String sql = "DELETE FROM order_menu_items WHERE order_id = ? AND menu_item_id = ?";
-        try (Connection conn = DatabaseConnection.getInstance().getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, orderId);
-            pstmt.setInt(2, menuItem.getMenuItemID());
-            pstmt.executeUpdate();
+    public void removeMenuFromOrder(int orderId, int menuItemID) {
+        try {
+            Connection connection = DatabaseConnection.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM orderitems WHERE orderid = ? AND menuitemid = ?;");
+            statement.setInt(1, orderId);
+            statement.setInt(2, menuItemID);
+            statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public ArrayList<Order> getOrders() {
-        String sqlOrders = "SELECT * FROM orders";
-        String sqlMenuItems = "SELECT o.orderID, mi.menuitem_id, mi.menuItemName, mi.menuitemtype, t.table_name AS tableName, u.username AS customerid, oi.orderStatus " +
-                "FROM orders o " +
-                "JOIN OrderItems oi ON o.orderID = oi.orderID " +
-                "JOIN MenuItem mi ON oi.menuitemid = mi.menuitem_id " +
-                "JOIN tables t ON o.tableID = t.table_name " +
-                "JOIN users u ON o.customerID = u.username;";
+    public ArrayList<Order> getAllOrders() {
+        try {
+            Connection connection = DatabaseConnection.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM orders;");
+            ResultSet resultSet = statement.executeQuery();
+            ArrayList<Order> orderArrayList = new ArrayList<>();
+            while (resultSet.next()) {
+                int orderID = resultSet.getInt("orderid");
+                String tableID = resultSet.getString("tableid");
+                String customerID = resultSet.getString("customerID");
+                Customer customer = getCustomer(customerID); // Get the Customer object
+                System.out.println("Customer ID: " + customerID); // Add this line
+                System.out.println("Customer: " + customer); // Add this line
 
-        ArrayList<Order> orders = new ArrayList<>();
-        try (Connection conn = DatabaseConnection.getInstance().getConnection();
-             Statement stmtOrders = conn.createStatement();
-             Statement stmtMenuItems = conn.createStatement();
-             ResultSet rsOrders = stmtOrders.executeQuery(sqlOrders);
-             ResultSet rsMenuItems = stmtMenuItems.executeQuery(sqlMenuItems)) {
-
-            // Retrieve all orders
-            while (rsOrders.next()) {
-                int orderId = rsOrders.getInt("orderid");
-                String tableID = rsOrders.getString("tableid");
-                String customerID = rsOrders.getString("customerid");
-                Timestamp orderTimestamp = rsOrders.getTimestamp("orderTimestamp");
-                Table table = getTableByID(tableID); // Method to retrieve Table object by ID
-                Customer customer = getCustomerByID(customerID); // Method to retrieve Customer object by ID
-                Order order = new Order(orderId, table, customer);
-                order.setOrderDateTime(orderTimestamp);
-                orders.add(order);
+                Timestamp orderDateTime = resultSet.getTimestamp("ordertimestamp");
+                TableDAO tableDAO = new TableDAOManager();
+                Table table = tableDAO.getTable(tableID);
+                Order order = new Order(orderID, table, customer, orderDateTime);
+                order.setCustomer(customer); // Set the Customer object
+                orderArrayList.add(order);
             }
+            return orderArrayList;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-            // Retrieve all menu items and map them to the appropriate orders
-            while (rsMenuItems.next()) {
-                int orderId = rsMenuItems.getInt("orderid");
-                int menuItemId = rsMenuItems.getInt("menuitem_id");
-                String menuitemname = rsMenuItems.getString("menuitemname");
-                String tableName = rsMenuItems.getString("tablename");
-                String customerName = rsMenuItems.getString("customerid");
-                String orderStatus = rsMenuItems.getString("orderstatus");
-                String type = rsMenuItems.getString("menuitemtype");
-                MenuItem menuItem = new MenuItem(menuitemname, type);
-                menuItem.setMenuItemID(menuItemId);
+    @Override
+    public void deleteOrder(int orderId) {
+        try {
+            Connection connection = DatabaseConnection.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM orders WHERE orderid = ?;");
+            statement.setInt(1, orderId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
-                for (Order order : orders) {
-                    if (order.getOrderID() == orderId) {
-                        order.setCustomer(getCustomerByID(customerName));
-                        order.setOrderStaus(OrderStatus.ORDERED);
-                        order.getTable().setTableName(tableName);
-                        order.addOrderItemsList(menuItem);
-                        break;
-                    }
-                }
+    @Override
+    public ArrayList<MenuItem> getOrderItems(int orderId) {
+        try {
+            Connection connection = DatabaseConnection.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM orderitems WHERE orderid = ?;");
+            statement.setInt(1, orderId);
+            ResultSet resultSet = statement.executeQuery();
+            ArrayList<MenuItem> menuItems = new ArrayList<>();
+            while (resultSet.next()) {
+                int menuItemID = resultSet.getInt("menuitemid");
+                MenuItemDAO menuItemDAO = new MenuItemDAOManager();
+                MenuItem menuItem = menuItemDAO.getMenuItem(String.valueOf(menuItemID));
+                menuItems.add(menuItem);
+            }
+            return menuItems;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public void updateOrderStatus(int orderId, OrderStatus orderStatus) {
+        try {
+            Connection connection = DatabaseConnection.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement("UPDATE orderitems SET orderstatus = ? WHERE orderid = ?;");
+            statement.setString(1, orderStatus.name());
+            statement.setInt(2, orderId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Customer getCustomer(String customerID) {
+        try {
+            Connection connection = DatabaseConnection.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE username = ?;");
+            statement.setString(1, customerID);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                String username = resultSet.getString("username");
+                String password = resultSet.getString("password");
+                return new Customer(username, password);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return orders;
-    }
-
-    private Table getTableByID(String tableName) throws SQLException {
-        // Implement this method to retrieve a Table object from the database based on the tableID
-        TableDAO tableDAO = new TableDAOManager();
-
-        return tableDAO.getTable(tableName); // Replace with actual implementation
-    }
-
-    private Customer getCustomerByID(String customerID) {
-        // Implement this method to retrieve a Customer object from the database based on the customerID
-        CustomerDAO customerDAO = new CustomerDAOManager();
-
-        return customerDAO.getCustomer(customerID); // Replace with actual implementation
+        return null;
     }
 
 }

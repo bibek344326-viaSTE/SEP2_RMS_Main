@@ -1,5 +1,7 @@
 package shared.utils.user;
 
-public enum Usertype {
+import java.io.Serializable;
+
+public enum Usertype implements Serializable {
     STAFFMEMBERS, CUSTOMER, KITCHENCHEF
 }
