@@ -22,6 +22,8 @@ public class StaffCustomerViewController implements ViewController {
     @FXML
     private Button backButton;
     @FXML
+    private ComboBox<String> assignTableComboBox;
+    @FXML
     private Label errorLabel;
 
     private ViewHandler viewHandler;
@@ -42,9 +44,13 @@ public class StaffCustomerViewController implements ViewController {
         // Populate table with data from ViewModel
         customerTableView.setItems(customerViewModel.getCustomerList());
 
+        // Bind ComboBox to availableTablesList
+        assignTableComboBox.setItems(customerViewModel.getAvailableTablesList());
+
         customerViewModel.setSelected(null);
         customerViewModel.deselect();
     }
+
     public void reset(){
         customerViewModel.clear();
         customerTableView.getSelectionModel().clearSelection();
@@ -60,14 +66,17 @@ public class StaffCustomerViewController implements ViewController {
     private void back() throws SQLException, RemoteException {
         viewHandler.openView("connectionButtons");
     }
-@FXML
-private void delete() throws SQLException, RemoteException {
+
+    @FXML
+    private void delete() throws SQLException, RemoteException {
         customerViewModel.remove();
-}
-@FXML
-private void update() throws SQLException, RemoteException {
+    }
+
+    @FXML
+    private void update() throws SQLException, RemoteException {
         customerViewModel.updateCustomerList();
-}
+    }
+
     public Region getRoot() {
         return root;
     }
