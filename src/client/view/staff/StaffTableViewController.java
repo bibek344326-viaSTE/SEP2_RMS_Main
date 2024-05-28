@@ -71,9 +71,8 @@ public class StaffTableViewController implements ViewController {
     }
 
     @FXML
-    private void deleteTableButton() throws RemoteException, SQLException {
+    private void deleteTableButton() {
         tableViewModel.remove();
-
     }
 
     @FXML
@@ -82,17 +81,29 @@ public class StaffTableViewController implements ViewController {
     }
 
     @FXML
-    private void addEditButton() throws SQLException, RemoteException {
-        tableViewModel.addEdit();
-        viewHandler.openView("addEditTable");
+    private void addEditButton() {
+        try {
+            tableViewModel.addEdit();
+            viewHandler.openView("addEditTable");
+        } catch (SQLException | RemoteException e) {
+            tableViewModel.getErrorProperty().set("Error opening edit view: " + e.getMessage());
+        }
     }
 
     @FXML
-    private void back() throws SQLException, RemoteException {
-        viewHandler.openView("connectionButtons");
+    private void back() {
+        try {
+            viewHandler.openView("connectionButtons");
+        } catch (SQLException | RemoteException e) {
+            tableViewModel.getErrorProperty().set("Error going back: " + e.getMessage());
+        }
     }
-    public Region getRoot()
-    {
+    @FXML
+    private void update(){
+        tableViewModel.updateTableList();
+    }
+
+    public Region getRoot() {
         return root;
     }
 }

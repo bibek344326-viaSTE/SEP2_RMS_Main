@@ -14,14 +14,13 @@ import java.beans.PropertyChangeListener;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 
-public class StaffTableViewModel implements PropertyChangeListener {
+public class StaffTableViewModel  {
 
     private ObservableList<SimpleTableViewModel> tableList;
     private TableModel tableModel;
     private ObjectProperty<SimpleTableViewModel> selectedTableProperty;
     private StringProperty errorLabel;
     private ViewState viewState;
-
 
     public StaffTableViewModel(ModelFactory modelFactory, ViewState viewState) throws RemoteException {
         this.tableModel = modelFactory.getTableModel();
@@ -46,8 +45,12 @@ public class StaffTableViewModel implements PropertyChangeListener {
 
     public void updateTableList() {
         tableList.clear();
-        for (Table table : tableModel.getTables()) {
-            tableList.add(new SimpleTableViewModel(table));
+        try {
+            for (Table table : tableModel.getTables()) {
+                tableList.add(new SimpleTableViewModel(table));
+            }
+        } catch (Exception e) {
+            errorLabel.set("Failed to update table list: " + e.getMessage());
         }
     }
 
@@ -83,44 +86,14 @@ public class StaffTableViewModel implements PropertyChangeListener {
         updateTableList();
     }
 
-    public void remove() throws RemoteException, SQLException {
-        tableModel.deleteTable(selectedTableProperty.get().getTableNameProperty().get());
-        updateTableList();
-    }
-    public void changeStatus(){
-
-    }
-
-    private void removeSimpleTable(String tableName) {
-        tableList.removeIf(simpleTableViewModel -> simpleTableViewModel.getTableNameProperty().get().equals(tableName));
-    }
-
-    private void addSimpleTable(Table table) {
-        for (int i = 0; i < tableList.size(); i++) {
-            Table t = tableModel.getTables().get(i);
-            if (table.getTableCapacity() < t.getTableCapacity()) {
-                tableList.add(i, new SimpleTableViewModel(table));
-                return;
-            }
+    public void remove() {
+        try {
+            tableModel.deleteTable(selectedTableProperty.get().getTableNameProperty().get());
+            updateTableList();
+            errorLabel.set(null); // Clear error message on success
+        } catch (RemoteException | SQLException e) {
+            errorLabel.set("Failed to remove table: " + e.getMessage());
         }
-        tableList.add(new SimpleTableViewModel(table));
     }
 
-    @Override
-    public void propertyChange(PropertyChangeEvent event) {
-        Platform.runLater(() -> {
-            switch (event.getPropertyName()) {
-                case "AddTable":
-                    addSimpleTable((Table) event.getNewValue());
-                    break;
-                case "RemoveTable":
-                    removeSimpleTable((String) event.getOldValue());
-                    break;
-                case "UpdateTable":
-                    removeSimpleTable((String) event.getOldValue());
-                    addSimpleTable((Table) event.getNewValue());
-                    break;
-            }
-        });
     }
-}
