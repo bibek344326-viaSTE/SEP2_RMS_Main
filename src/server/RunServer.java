@@ -10,6 +10,8 @@ import server.model.createUser.CreateUserHandler;
 import server.model.createUser.CreateUserHandlerManager;
 import server.model.customer.CustomerListHandler;
 import server.model.customer.CustomerListHandlerManager;
+import server.model.kitchenOrders.KitchenOrderListHandlerManager;
+import server.model.kitchenOrders.KitchenOrdersListHandler;
 import server.model.login.LoginHandler;
 import server.model.login.LoginHandlerManager;
 import server.model.menuItem.MenuItemHandler;
@@ -23,6 +25,7 @@ import server.model.tables.TablesHandlerManager;
 import server.networking.ServerManager;
 import server.networking.chat.ChatServerManager;
 import server.networking.customer.CustomerListServerManager;
+import server.networking.kitchenOrders.KitchenOrdersServerManager;
 import server.networking.login.CreateUserServerManager;
 import server.networking.login.LoginServerManager;
 import server.networking.menuItems.MenuItemServerManager;
@@ -61,14 +64,18 @@ public class RunServer {
         OrderHandler orderHandler = new OrderHandlerManager();
         OrderServer orderServer = new OrdersServerManager(orderHandler);
 
+        KitchenOrdersListHandler kitchenOrdersListHandler = new KitchenOrderListHandlerManager();
+        KitchenOrdersServer kitchenOrdersServer = new KitchenOrdersServerManager(kitchenOrdersListHandler);
 
-        Server server = new ServerManager(loginServer, createAccountServer, tablesServerManager, customerListServer, chatServer, menuServer, orderServer, reservationServer);
+
+        Server server = new ServerManager(loginServer, createAccountServer, tablesServerManager, customerListServer, chatServer, menuServer, orderServer, reservationServer, kitchenOrdersServer);
         server.startServer();
 
 
         ReservationDAO reservationDAO = new ReservationDAOManager();
-        for(int i=0; i<reservationDAO.getAllReservations().size(); i++){
-            System.out.println(reservationDAO.getAllReservations().get(i)+"\n");;
+        for (int i = 0; i < reservationDAO.getAllReservations().size(); i++) {
+            System.out.println(reservationDAO.getAllReservations().get(i) + "\n");
+            ;
         }
 
 //        OrderDAO orderDAO = new OrderDAOManager();

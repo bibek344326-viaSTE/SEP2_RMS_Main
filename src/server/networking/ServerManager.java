@@ -21,10 +21,14 @@ public class ServerManager implements Server {
     private OrderServer orderServer;
     private MenuServer menuServer;
     private ReservationServer reservationServer;
+    private KitchenOrdersServer kitchenOrdersServer;
 
     public ServerManager(LoginServer loginServer, CreateAccountServer createAccountServer,
-                         TableServer tableServer, CustomerListServer customerListServer, ChatServer chatServer, MenuServer menuServer, OrderServer orderServer, ReservationServer reservationServer)
+                         TableServer tableServer, CustomerListServer customerListServer,
+                         ChatServer chatServer, MenuServer menuServer, OrderServer orderServer,
+                         ReservationServer reservationServer, KitchenOrdersServer kitchenOrdersServer )
             throws RemoteException {
+        this.kitchenOrdersServer = kitchenOrdersServer;
         this.loginServer = loginServer;
         this.createAccountServer = createAccountServer;
         this.tableServer = tableServer;
@@ -78,6 +82,11 @@ public class ServerManager implements Server {
     @Override
     public ReservationServer getReservationServer() throws RemoteException {
         return reservationServer;
+    }
+
+    @Override
+    public KitchenOrdersServer getKitchenOrdersServer() throws RemoteException {
+        return kitchenOrdersServer;
     }
 
     @Override
