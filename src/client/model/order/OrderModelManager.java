@@ -28,8 +28,8 @@ public class OrderModelManager implements OrderModel {
     }
 
     @Override
-    public void removeOrder(Order order) throws RemoteException {
-        orderClient.cancelOrder(order);
+    public void removeOrder(int orderId) throws RemoteException {
+        orderClient.cancelOrder(orderId);
     }
 
     @Override

@@ -1,8 +1,9 @@
 package shared.utils.order;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class OrdersList {
+public class OrdersList implements Serializable {
     private ArrayList<Order> orders;
 
     public OrdersList() {

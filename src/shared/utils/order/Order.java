@@ -4,11 +4,12 @@ import shared.utils.menuItem.MenuItem;
 import shared.utils.table.Table;
 import shared.utils.user.Customer;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Order {
+public class Order implements Serializable {
     private int orderID;
     private Table table;
     private Customer customer;
@@ -21,8 +22,14 @@ public class Order {
         this.table = table;
         this.customer = customer;
         orderItemsList = new ArrayList<MenuItem>();
-        orderStatus = OrderStatus.ORDERED.toString();
         this.orderDateTime = Timestamp.valueOf(LocalDateTime.now());
+    }
+
+    public Order(int orderID, Table table, Customer customer, Timestamp orderDateTime) {
+        this.orderID = orderID;
+        this.table = table;
+        this.customer = customer;
+        this.orderDateTime = orderDateTime;
     }
 
     public Timestamp getOrderDateTime() {
@@ -46,10 +53,13 @@ public class Order {
     }
 
     public Customer getCustomer() {
-        return customer;
+        return this.customer;
     }
 
     public void setCustomer(Customer customer) {
+        if (customer == null) {
+            throw new IllegalArgumentException("Customer cannot be null");
+        }
         this.customer = customer;
     }
 

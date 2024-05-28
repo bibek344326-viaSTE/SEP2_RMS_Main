@@ -1,6 +1,8 @@
 package shared.utils;
 
 
-public enum Observer {
+import java.io.Serializable;
+
+public enum Observer implements Serializable {
     AVAILABLETABLES,MESSAGE_RECEIVED;
 }

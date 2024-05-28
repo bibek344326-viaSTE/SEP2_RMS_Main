@@ -1,5 +1,7 @@
 package shared.utils.menuItem;
 
-public enum MenuItemCategory {
+import java.io.Serializable;
+
+public enum MenuItemCategory implements Serializable {
     FOOD, DRINKS;
 }

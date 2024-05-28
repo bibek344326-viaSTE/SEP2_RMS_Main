@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public interface OrderModel extends Subject, Remote {
     void createOrder(Order order) throws RemoteException;
-    void removeOrder(Order order) throws RemoteException;
+    void removeOrder(int orderId) throws RemoteException;
     void updateOrder(Order order) throws RemoteException;
     Order getOrder(int id) throws RemoteException;
     ArrayList<Order> getOrders() throws RemoteException;

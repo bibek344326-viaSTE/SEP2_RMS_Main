@@ -5,13 +5,14 @@ import server.database.order.OrderDAOManager;
 import shared.utils.Request;
 import shared.utils.menuItem.MenuItem;
 import shared.utils.order.Order;
+import shared.utils.order.OrderStatus;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
-public class OrderHandlerManager implements OrderHandler {
+public class OrderHandlerManager implements OrderHandler, Serializable {
     private OrderDAO orderDAO;
     private final PropertyChangeSupport support;
 
@@ -20,65 +21,55 @@ public class OrderHandlerManager implements OrderHandler {
         support = new PropertyChangeSupport(this);
     }
 
+
     @Override
-    public Request addOrder(Order order) {
-        orderDAO.addMenuToOrder(order.getOrderID(), order.getOrderItemsList(order.getOrderID()));
-        support.firePropertyChange("orderAdded", null, order);
+    public Request createOrder(Order order) {
+        orderDAO.createOrder(order);
         return null;
     }
 
     @Override
-    public void removeOrder(Order order) {
-        //
+    public Order getOrder(int orderId) {
+        return orderDAO.getOrder(orderId);
     }
 
     @Override
-    public void updateOrder(Order order) {
-       //
+    public void addMenuToOrder(int orderId, int menuItemId) {
+        orderDAO.addMenuToOrder(orderId, menuItemId);
     }
 
     @Override
-    public Order getOrder(int id) {
-        for (Order order : orderDAO.getOrders()) {
-            if (order.getOrderID() == id) {
-                return order;
-            }
-        }
-        return null;
+    public void removeMenuFromOrder(int orderId, int menuItemId) {
+        orderDAO.removeMenuFromOrder(orderId, menuItemId);
     }
 
     @Override
-    public ArrayList<Order> getOrders() {
-        return orderDAO.getOrders();
+    public ArrayList<Order> getAllOrders() {
+        return orderDAO.getAllOrders();
     }
 
     @Override
-    public void addMenuItemToOrder(int orderId, MenuItem menuItem) {
-        Order order = getOrder(orderId);
-        if (order != null) {
-            order.addOrderItemsList(menuItem);
-            support.firePropertyChange("menuItemAddedToOrder", null, order);
-        }
+    public void deleteOrder(int orderId) {
+        orderDAO.deleteOrder(orderId);
     }
 
     @Override
-    public void removeMenuItemFromOrder(int orderId, MenuItem menuItem) {
-        Order order = getOrder(orderId);
-        if (order != null) {
-            order.removeOrderItemsList(menuItem);
-            support.firePropertyChange("menuItemRemovedFromOrder", null, order);
-        }
+    public ArrayList<MenuItem> getOrderItems(int orderId) {
+        return orderDAO.getOrderItems(orderId);
+    }
+
+    @Override
+    public void updateOrderStatus(int orderId, OrderStatus orderStatus) {
+        orderDAO.updateOrderStatus(orderId, orderStatus);
     }
 
     @Override
     public void addListener(String eventName, PropertyChangeListener listener) {
         support.addPropertyChangeListener(eventName, listener);
-
     }
 
     @Override
     public void removeListener(String eventName, PropertyChangeListener listener) {
         support.removePropertyChangeListener(eventName, listener);
-
     }
 }
