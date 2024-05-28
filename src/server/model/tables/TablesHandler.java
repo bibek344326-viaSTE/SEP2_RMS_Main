@@ -21,4 +21,7 @@ public interface TablesHandler extends Subject {
 
     Request addTable(Table table) throws SQLException;
 
+    List<Table> getAvailableTables() throws SQLException;
+    List<Table> getOccupiedTables() throws SQLException;
+
 }

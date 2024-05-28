@@ -151,7 +151,7 @@ public class ReservationDAOManager implements ReservationDAO {
             while (resultSet.next()) {
                 Reservation reservation = new Reservation(
                         resultSet.getInt("reservation_id"),
-                        resultSet.getString("table_number"),
+                        resultSet.getString("table_name"),
                         resultSet.getString("customer_id"),
                         resultSet.getTimestamp("reservation_time").toLocalDateTime()
                 );

@@ -76,6 +76,16 @@ public class TablesHandlerManager implements TablesHandler {
     }
 
     @Override
+    public List<Table> getAvailableTables() throws SQLException {
+        return tablesDAO.getAvailableTables();
+    }
+
+    @Override
+    public List<Table> getOccupiedTables() throws SQLException {
+        return tablesDAO.getAllOccupiedTables();
+    }
+
+    @Override
     public void addListener(String eventName, PropertyChangeListener listener) {
         support.addPropertyChangeListener(eventName, listener);
     }

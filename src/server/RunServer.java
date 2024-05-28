@@ -1,10 +1,9 @@
 package server;
 
-import server.database.menuItem.MenuItemDAO;
-import server.database.menuItem.MenuItemDAOManager;
 import server.database.order.OrderDAO;
 import server.database.order.OrderDAOManager;
 import server.database.reservation.ReservationDAO;
+import server.database.reservation.ReservationDAOManager;
 import server.model.chat.ChatHandler;
 import server.model.chat.ChatHandlerManager;
 import server.model.createUser.CreateUserHandler;
@@ -32,12 +31,8 @@ import server.networking.reservation.ReservationListServerManager;
 import server.networking.tables.TablesServerManager;
 import shared.networking.serverInterfaces.*;
 
-import shared.utils.table.Table;
-
-import java.rmi.AlreadyBoundException;
-import java.rmi.RemoteException;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import shared.utils.kitchenOrder.KitchenOrder;
+import shared.utils.order.Order;
 
 public class RunServer {
     public static void main(String[] args) throws Exception {
@@ -71,19 +66,31 @@ public class RunServer {
         server.startServer();
 
 
-//        ReservationDAO reservationDAO = new ReservationDAOManager();
-//        for(int i=0; i<reservationDAO.().size(); i++){
-//            System.out.println(reservationDAO.getReservations().get(i).getCustomer().getUsername()+"\n");;
-//        }
-
-        OrderDAO orderDAO = new OrderDAOManager();
-        for (int i = 0; i < orderDAO.getAllOrders().size(); i++) {
-            System.out.println(orderDAO.getAllOrders().get(i).getCustomer().getUsername() + "\n");
+        ReservationDAO reservationDAO = new ReservationDAOManager();
+        for(int i=0; i<reservationDAO.getAllReservations().size(); i++){
+            System.out.println(reservationDAO.getAllReservations().get(i)+"\n");;
         }
-//        MenuItemDAO menuItemDAO = new MenuItemDAOManager();
-//        for(int i=0; i<menuItemDAO.getMenuItems().size(); i++){
-//            System.out.println(menuItemDAO.getMenuItems().get(i).getMenuItemID() + " "+ menuItemDAO.getMenuItems().get(i)+"\n");;
+
+//        OrderDAO orderDAO = new OrderDAOManager();
+//        for (int i = 0; i < orderDAO.getAllOrders().size(); i++) {
+//            Order order = orderDAO.getOrder(10);
+//            if (order != null) {
+//                System.out.println(order.getOrderMenuItemsList());
+//            } else {
+//                System.out.println("Order with ID 6 not found");
+//            }
 //        }
+//
+//        KitchenOrder kitchenOrder = new KitchenOrder("Table 1", "Customer 1", 1, 1, "Menu Item 1", "Preparing");
+//        System.out.println(kitchenOrder.getTableName() + " " + kitchenOrder.getCustomerName() + " " + kitchenOrder.getOrderId() + " " + kitchenOrder.getReservationID() + " " + kitchenOrder.getMenuItemName() + " " + kitchenOrder.getPreparationStatus());
+//
+//
+//
+//
+////        MenuItemDAO menuItemDAO = new MenuItemDAOManager();
+////        for(int i=0; i<menuItemDAO.getMenuItems().size(); i++){
+////            System.out.println(menuItemDAO.getMenuItems().get(i).getMenuItemID() + " "+ menuItemDAO.getMenuItems().get(i)+"\n");;
+////        }
 
     }
 }

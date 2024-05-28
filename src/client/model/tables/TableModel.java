@@ -21,4 +21,7 @@ public interface TableModel extends Subject {
     Request removeReservation(int id);
     void deleteTable(String tableName) throws RemoteException, SQLException;
 
+    List<Table> getAvailableTables() throws RemoteException, SQLException;
+    List<Table> getOccupiedTables() throws RemoteException, SQLException;
+
 }

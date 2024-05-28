@@ -57,7 +57,7 @@ public class CustomerDAOManager implements CustomerDAO {
     @Override
     public Customer getCustomer(String username) {
         try (Connection connection = DatabaseConnection.getInstance().getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM \"User\" WHERE \"username\"=?;");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE username = ?;");
             statement.setString(1, username);
 
             ResultSet resultSet = statement.executeQuery();

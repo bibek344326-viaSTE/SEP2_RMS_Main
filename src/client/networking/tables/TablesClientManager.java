@@ -87,6 +87,24 @@ public class TablesClientManager implements TablesClient, TablesCallBack {
     }
 
     @Override
+    public List<Table> getAvailableTables() throws RemoteException, SQLException {
+        try {
+            return server.getTableServer().getAvailableTables();
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public List<Table> getOccupiedTables() throws RemoteException, SQLException {
+       try {
+              return server.getTableServer().getOccupiedTables();
+         } catch (RemoteException e) {
+              throw new RuntimeException(e);
+       }
+    }
+
+    @Override
     public void addListener(String eventName, PropertyChangeListener listener) {
         support.addPropertyChangeListener(eventName, listener);
 

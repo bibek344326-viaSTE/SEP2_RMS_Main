@@ -7,6 +7,7 @@ import server.database.menuItem.MenuItemDAO;
 import server.database.menuItem.MenuItemDAOManager;
 import server.database.table.TableDAO;
 import server.database.table.TableDAOManager;
+import shared.utils.kitchenOrder.KitchenOrder;
 import shared.utils.menuItem.MenuItem;
 import shared.utils.order.Order;
 import shared.utils.order.OrderStatus;
@@ -17,6 +18,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class OrderDAOManager implements OrderDAO {
+    private ArrayList<KitchenOrder> orders;
 
     public OrderDAOManager() {
         try {
@@ -58,8 +60,6 @@ public class OrderDAOManager implements OrderDAO {
                 CustomerDAO customerDAO = new CustomerDAOManager();
                 Customer customer = customerDAO.getCustomer(customerID);
                 Order order = new Order(orderID, table, customer, orderDateTime);
-                order.setCustomer(customer); // Set the Customer object
-                return order;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -105,17 +105,19 @@ public class OrderDAOManager implements OrderDAO {
             while (resultSet.next()) {
                 int orderID = resultSet.getInt("orderid");
                 String tableID = resultSet.getString("tableid");
-                String customerID = resultSet.getString("customerID");
-                Customer customer = getCustomer(customerID); // Get the Customer object
-                System.out.println("Customer ID: " + customerID); // Add this line
-                System.out.println("Customer: " + customer); // Add this line
-
+                String customerID = resultSet.getString("customerid");
                 Timestamp orderDateTime = resultSet.getTimestamp("ordertimestamp");
                 TableDAO tableDAO = new TableDAOManager();
                 Table table = tableDAO.getTable(tableID);
+                CustomerDAO customerDAO = new CustomerDAOManager();
+                Customer customer = customerDAO.getCustomer(customerID);
+                if (customer == null) {
+                    throw new RuntimeException("Customer with ID " + customerID + " not found");
+                }
                 Order order = new Order(orderID, table, customer, orderDateTime);
                 order.setCustomer(customer); // Set the Customer object
                 orderArrayList.add(order);
+                return orderArrayList;
             }
             return orderArrayList;
         } catch (SQLException e) {

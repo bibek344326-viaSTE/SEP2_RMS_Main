@@ -65,7 +65,7 @@ public class Order implements Serializable {
 
     public void setCustomer(Customer customer) {
         if (customer == null) {
-            throw new IllegalArgumentException("Customer cannot be null");
+            this.customer = new Customer(customer.getUsername(), customer.getPassword());
         }
         this.customer = customer;
     }

@@ -49,6 +49,16 @@ public class TablesProxy implements TablesHandler {
     }
 
     @Override
+    public List<Table> getAvailableTables() throws SQLException {
+        return tablesHandler.getAvailableTables();
+    }
+
+    @Override
+    public List<Table> getOccupiedTables() throws SQLException {
+        return tablesHandler.getOccupiedTables();
+    }
+
+    @Override
     public void addListener(String eventName, PropertyChangeListener listener) {
         tablesHandler.addListener(eventName, listener);
     }

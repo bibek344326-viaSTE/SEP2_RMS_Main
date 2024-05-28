@@ -58,7 +58,7 @@ public class TableModelManager implements TableModel {
         }
 
         try {
-            Reservation reservation1 = new Reservation(tempUserName,localDateTime,temp);
+            Reservation reservation1 = new Reservation(tempUserName, localDateTime, temp);
             return tablesClient.reserveTable(reservation1);
         } catch (Exception e) {
             return new Request(e.getMessage(), null);
@@ -88,6 +88,16 @@ public class TableModelManager implements TableModel {
     @Override
     public void deleteTable(String tableName) throws RemoteException, SQLException {
         tablesClient.deleteTable(tableName);
+    }
+
+    @Override
+    public List<Table> getAvailableTables() throws RemoteException, SQLException {
+        return tablesClient.getAvailableTables();
+    }
+
+    @Override
+    public List<Table> getOccupiedTables() throws RemoteException, SQLException {
+        return tablesClient.getOccupiedTables();
     }
 
     @Override

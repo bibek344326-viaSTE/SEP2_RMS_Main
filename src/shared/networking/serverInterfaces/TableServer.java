@@ -8,6 +8,7 @@ import shared.utils.table.Table;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -25,5 +26,8 @@ public interface TableServer extends Remote {
     Request reserveTable(Reservation reservation) throws RemoteException, SQLException;
 
     Request removeReservation(int id) throws RemoteException;
+
+    ArrayList<Table> getAvailableTables() throws RemoteException, SQLException;
+    ArrayList<Table> getOccupiedTables() throws RemoteException, SQLException;
 
 }

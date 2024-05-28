@@ -60,6 +60,16 @@ public class TablesServerManager implements TableServer {
         return tablesHandler.removeReservation(id);
     }
 
+    @Override
+    public ArrayList<Table> getAvailableTables() throws RemoteException, SQLException {
+        return (ArrayList<Table>) tablesHandler.getAvailableTables();
+    }
+
+    @Override
+    public ArrayList<Table> getOccupiedTables() throws RemoteException, SQLException {
+        return (ArrayList<Table>) tablesHandler.getOccupiedTables();
+    }
+
     private void fireAvailableTables(PropertyChangeEvent event) {
         try {
             //  System.out.println("\n\n\n "+event.getNewValue());
