@@ -5,11 +5,11 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="631.0" prefWidth="890.0" style="-fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.staff.StaffMenuItemsViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="631.0" prefWidth="890.0" style="-fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.staff.StaffMenuItemsViewController">
     <children>
-        <Button fx:id="addNewMenuItemButton" layoutX="159.0" layoutY="559.0" mnemonicParsing="false" onAction="#addEditButton" prefHeight="47.0" prefWidth="120.0" text="Add New Item" />
-        <Button fx:id="editMenuItemDetailsButton" layoutX="343.0" layoutY="559.0" mnemonicParsing="false" onAction="#addEditButton" prefHeight="47.0" prefWidth="120.0" text="Edit Item Details" />
-        <Button fx:id="deleteMenuItemButton" layoutX="534.0" layoutY="559.0" mnemonicParsing="false" onAction="#deleteMenuItemButton" prefHeight="47.0" prefWidth="120.0" text="Delete Item" />
+        <Button fx:id="addNewMenuItemButton" layoutX="54.0" layoutY="552.0" mnemonicParsing="false" onAction="#addEditButton" prefHeight="47.0" prefWidth="120.0" text="Add New Item" />
+        <Button fx:id="editMenuItemDetailsButton" layoutX="291.0" layoutY="552.0" mnemonicParsing="false" onAction="#addEditButton" prefHeight="47.0" prefWidth="120.0" text="Edit Item Details" />
+        <Button fx:id="deleteMenuItemButton" layoutX="524.0" layoutY="552.0" mnemonicParsing="false" onAction="#deleteMenuItemButton" prefHeight="47.0" prefWidth="120.0" text="Delete Item" />
         <TableView fx:id="menuTableView" layoutX="-3.0" layoutY="16.0" prefHeight="518.0" prefWidth="890.0">
             <columns>
             <TableColumn fx:id="IdColumn" prefWidth="118.4000244140625" text="Id" />
@@ -17,6 +17,6 @@
                 <TableColumn fx:id="typeColumn" prefWidth="472.800048828125" text="Type(Food/Drinks)" />
             </columns>
         </TableView>
-        <Button layoutX="835.0" layoutY="594.0" mnemonicParsing="false" onAction="#back" text="Back" />
+        <Button layoutX="742.0" layoutY="552.0" mnemonicParsing="false" onAction="#back" prefHeight="47.0" prefWidth="103.0" text="Back" />
     </children>
 </AnchorPane>
