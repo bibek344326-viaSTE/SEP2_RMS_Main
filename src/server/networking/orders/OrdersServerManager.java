@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 public class OrdersServerManager implements OrderServer {
 
-    private ArrayList<Order> orders;
     private OrderHandler orderHandler;
 
     public OrdersServerManager(OrderHandler orderHandler) throws RemoteException {
