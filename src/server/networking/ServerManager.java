@@ -1,5 +1,8 @@
 package server.networking;
 
+import server.model.order.OrderHandler;
+import server.model.order.OrderHandlerManager;
+import server.networking.orders.OrdersServerManager;
 import shared.networking.serverInterfaces.*;
 
 import java.rmi.AlreadyBoundException;
@@ -65,6 +68,10 @@ public class ServerManager implements Server {
 
     @Override
     public OrderServer getOrderServer() throws RemoteException {
+        if (orderServer == null) {
+            OrderHandler orderHandler = new OrderHandlerManager();
+            orderServer = new OrdersServerManager(orderHandler);
+        }
         return orderServer;
     }
 
