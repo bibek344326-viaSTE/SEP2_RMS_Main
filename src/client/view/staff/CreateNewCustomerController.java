@@ -39,13 +39,13 @@ public void reset() throws SQLException, RemoteException {
     private void confirmButtonClicked() throws SQLException, RemoteException {
         boolean ok = createNewCustomerViewModel.createCustomer();
         if (ok) {
-            viewHandler.openView("createNewCustomer");
+            viewHandler.openView("customerViewStaff");
         }
     }
 
     @FXML
     private void backButtonClicked() throws SQLException, RemoteException {
-        viewHandler.openView("createNewCustomer");
+        viewHandler.openView("customerViewStaff");
     }
 
     public Region getRoot() {

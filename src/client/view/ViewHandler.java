@@ -110,7 +110,7 @@ public class ViewHandler {
                 root = loadEditMenuItemsView("staff/EditMenuItems.fxml");
                 break;
             case "staffTable":
-                root = loadStaffTableView("staff/StaffTablesView.fxml");
+                root = loadStaffTableView("staff/StaffTableView.fxml");
                 break;
             default:
                 System.out.println("Invalid view id: " + id);
@@ -130,8 +130,8 @@ public class ViewHandler {
         }
         primaryStage.setTitle(title);
         primaryStage.setScene(currentScene);
-        primaryStage.setWidth(root.getPrefWidth() > 800 ? root.getPrefWidth() : 800); // Ensure minimum width of 800
-        primaryStage.setHeight(root.getPrefHeight() > 600 ? root.getPrefHeight() : 600); // Ensure minimum height of 600
+        primaryStage.setWidth(root.getPrefWidth()); // Ensure minimum width of 800
+        primaryStage.setHeight(root.getPrefHeight()+30); // Ensure minimum height of 600
         primaryStage.show();
     }
 

@@ -44,7 +44,7 @@ public class StaffMenuItemsViewController implements ViewController {
         typeColumn.setCellValueFactory(cellData -> cellData.getValue().getTypeProperty());
         IdColumn.setCellValueFactory(cellData -> cellData.getValue().getItemIdProperty());
 
-        //errorLabel.textProperty().bind(menuViewModel.getErrorProperty());
+        errorLabel.textProperty().bind(menuViewModel.getErrorProperty());
 
         menuTableView.setItems(menuViewModel.getMenuItemList());
 
@@ -77,6 +77,10 @@ public class StaffMenuItemsViewController implements ViewController {
     private void addEditButton(ActionEvent event) throws SQLException, RemoteException {
         menuViewModel.addEdit();
         viewHandler.openView("addNewMenuItems");
+    }
+    @FXML
+    private void update() throws SQLException, RemoteException {
+        menuViewModel.updateMenuItemList();
     }
 
     @FXML

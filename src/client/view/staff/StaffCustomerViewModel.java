@@ -26,6 +26,7 @@ public class StaffCustomerViewModel {
 
         updateCustomerList();
     }
+
     public void clear(){
         errorLabel.set(null);
     }
@@ -74,7 +75,12 @@ public class StaffCustomerViewModel {
     }
 
     public void remove() throws SQLException, RemoteException {
-        customerModel.removeCustomer(selectedCustomerProperty.get().getCustomernameProperty().get());
-        updateCustomerList();
+        if (selectedCustomerProperty.get() != null) {
+            customerModel.removeCustomer(selectedCustomerProperty.get().getCustomernameProperty().get());
+            updateCustomerList();
+            errorLabel.set(null); // Clear error message on success
+        } else {
+            errorLabel.set("You have to select a row"); // Set error message if no customer is selected
+        }
     }
 }

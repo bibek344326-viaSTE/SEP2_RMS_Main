@@ -26,7 +26,6 @@ public class UpdateTableViewController implements ViewController {
     @FXML private Button confirmButton;
     @FXML private Button backButton;
     @FXML private Button createButton;
-
     private ViewHandler viewHandler;
     private UpdateTableViewModel viewModel;
     private Region root;

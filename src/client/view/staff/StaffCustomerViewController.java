@@ -4,10 +4,7 @@ import client.core.ViewModelFactory;
 import client.view.ViewController;
 import client.view.ViewHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.Region;
 
 import java.rmi.RemoteException;
@@ -24,6 +21,8 @@ public class StaffCustomerViewController implements ViewController {
     private Button addButton;
     @FXML
     private Button backButton;
+    @FXML
+    private Label errorLabel;
 
     private ViewHandler viewHandler;
     private StaffCustomerViewModel customerViewModel;
@@ -38,6 +37,7 @@ public class StaffCustomerViewController implements ViewController {
         // Bind table columns to properties in SimpleCustomerViewModel
         customerNameColumn.setCellValueFactory(cellData -> cellData.getValue().getCustomernameProperty());
         passwordColumn.setCellValueFactory(cellData -> cellData.getValue().getPasswordProperty());
+        errorLabel.textProperty().bind(customerViewModel.getErrorProperty());
 
         // Populate table with data from ViewModel
         customerTableView.setItems(customerViewModel.getCustomerList());
@@ -63,6 +63,10 @@ public class StaffCustomerViewController implements ViewController {
 @FXML
 private void delete() throws SQLException, RemoteException {
         customerViewModel.remove();
+}
+@FXML
+private void update() throws SQLException, RemoteException {
+        customerViewModel.updateCustomerList();
 }
     public Region getRoot() {
         return root;

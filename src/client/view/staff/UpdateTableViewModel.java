@@ -8,6 +8,7 @@ import javafx.beans.property.*;
 import shared.utils.table.Table;
 
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 
 public class UpdateTableViewModel {
     private TableModel tableModel;
@@ -83,7 +84,7 @@ public class UpdateTableViewModel {
             tableModel.createTable(table);
             return true;
         } catch (Exception e) {
-            errorProperty.set(e.getMessage());
+            errorProperty.set("Table is already created.");
             return false;
         }
     }

@@ -8,7 +8,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import shared.utils.menuItem.MenuItem;
 
-import java.beans.PropertyChangeListener;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 
@@ -29,6 +28,7 @@ public class StaffMenuItemsViewModel {
 
         updateMenuItemList();
     }
+
     public void clear(){
         errorLabel.set(null);
     }
@@ -43,9 +43,9 @@ public class StaffMenuItemsViewModel {
 
     public void updateMenuItemList() throws RemoteException, SQLException {
         menuItemList.clear();
-    for (int i = 0; i < menuItemModel.getMenuItems().size(); i++){
-        menuItemList.add(new SimpleMenuViewModel(menuItemModel.getMenuItems().get(i)));
-    }
+        for (MenuItem menuItem : menuItemModel.getMenuItems()) {
+            menuItemList.add(new SimpleMenuViewModel(menuItem));
+        }
     }
 
     public void setSelected(SimpleMenuViewModel menuItem) {
@@ -55,9 +55,9 @@ public class StaffMenuItemsViewModel {
             viewState.setId(0);
         } else {
             this.selectedMenuItemProperty.set(menuItem);
-            viewState.setMenuItemName(selectedMenuItemProperty.get().getItemNameProperty().get());
-            viewState.setMenuItemType(selectedMenuItemProperty.get().getTypeProperty().get());
-            viewState.setId(selectedMenuItemProperty.get().getItemIdProperty().get());
+            viewState.setMenuItemName(menuItem.getItemNameProperty().get());
+            viewState.setMenuItemType(menuItem.getTypeProperty().get());
+            viewState.setId(menuItem.getItemIdProperty().get());
         }
     }
 
@@ -72,7 +72,9 @@ public class StaffMenuItemsViewModel {
             viewState.setMenuItemName(selectedMenuItem.getItemNameProperty().get());
             viewState.setMenuItemType(selectedMenuItem.getTypeProperty().get());
             viewState.setId(selectedMenuItem.getItemIdProperty().get());
+            errorLabel.set(null); // Clear error message if a menu item is selected
         } else {
+            errorLabel.set("You have to select a menu item."); // Set error message if no menu item is selected
             viewState.setMenuItemName(null);
             viewState.setMenuItemType(null);
             viewState.setId(0);
@@ -81,21 +83,12 @@ public class StaffMenuItemsViewModel {
     }
 
     public void remove() throws RemoteException, SQLException {
-        menuItemModel.removeMenuItem(selectedMenuItemProperty.get().getItemIdProperty().get());
-        updateMenuItemList();
-
-    }
-
-    public void updateMenuItem(MenuItem menuItem, String newName, String newType) throws RemoteException, SQLException {
-        menuItemModel.updateMenuItem(menuItem, newName, newType);
-        updateMenuItemList();
-    }
-
-    public void addListener(String eventName, PropertyChangeListener listener) {
-        menuItemModel.addListener(eventName, listener);
-    }
-
-    public void removeListener(String eventName, PropertyChangeListener listener) {
-        menuItemModel.removeListener(eventName, listener);
+        if (selectedMenuItemProperty.get() != null) {
+            menuItemModel.removeMenuItem(selectedMenuItemProperty.get().getItemIdProperty().get());
+            updateMenuItemList();
+            errorLabel.set(null); // Clear error message on success
+        } else {
+            errorLabel.set("You have to select a menu item to remove."); // Error if no menu item is selected
+        }
     }
 }

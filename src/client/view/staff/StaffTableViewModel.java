@@ -9,12 +9,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import shared.utils.table.Table;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 
-public class StaffTableViewModel  {
+public class StaffTableViewModel {
 
     private ObservableList<SimpleTableViewModel> tableList;
     private TableModel tableModel;
@@ -78,7 +76,9 @@ public class StaffTableViewModel  {
             viewState.setTablename(selectedTable.getTableNameProperty().get());
             viewState.setCapacity(selectedTable.getCapacityProperty().get());
             viewState.setStatus(selectedTable.getStatusProperty().get());
+            errorLabel.set(null); // Clear error message if a table is selected
         } else {
+            errorLabel.set("You have to select a table."); // Set error message if no table is selected
             viewState.setTablename(null);
             viewState.setCapacity(0);
             viewState.setStatus(false);
@@ -88,12 +88,15 @@ public class StaffTableViewModel  {
 
     public void remove() {
         try {
-            tableModel.deleteTable(selectedTableProperty.get().getTableNameProperty().get());
-            updateTableList();
-            errorLabel.set(null); // Clear error message on success
+            if (selectedTableProperty.get() != null) {
+                tableModel.deleteTable(selectedTableProperty.get().getTableNameProperty().get());
+                updateTableList();
+                errorLabel.set(null); // Clear error message on success
+            } else {
+                errorLabel.set("You have to select a table to remove."); // Error if no table is selected
+            }
         } catch (RemoteException | SQLException e) {
             errorLabel.set("Failed to remove table: " + e.getMessage());
         }
     }
-
-    }
+}
