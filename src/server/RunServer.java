@@ -81,8 +81,8 @@ public class RunServer {
 //            }
 //        }
 //
-//        KitchenOrder kitchenOrder = new KitchenOrder("Table 1", "Customer 1", 1, 1, "Menu Item 1", "Preparing");
-//        System.out.println(kitchenOrder.getTableName() + " " + kitchenOrder.getCustomerName() + " " + kitchenOrder.getOrderId() + " " + kitchenOrder.getReservationID() + " " + kitchenOrder.getMenuItemName() + " " + kitchenOrder.getPreparationStatus());
+        KitchenOrder kitchenOrder = new KitchenOrder("Table 1", "Customer 1", 1, 1, "Menu Item 1", "Preparing");
+        System.out.println(kitchenOrder.getTableName() + " " + kitchenOrder.getCustomerName() + " " + kitchenOrder.getOrderId() + " " + kitchenOrder.getReservationID() + " " + kitchenOrder.getMenuItemName() + " " + kitchenOrder.getPreparationStatus());
 //
 //
 //

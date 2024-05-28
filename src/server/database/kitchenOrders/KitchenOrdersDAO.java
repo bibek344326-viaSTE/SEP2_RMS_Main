@@ -6,4 +6,6 @@ import java.util.ArrayList;
 
 public interface KitchenOrdersDAO {
     ArrayList<KitchenOrder> getKitchenOrders();
+
+    void updateKitchenOrder(int menuitemid, int orderid, String preparationStatus);
 }

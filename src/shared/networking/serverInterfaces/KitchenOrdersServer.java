@@ -2,16 +2,14 @@ package shared.networking.serverInterfaces;
 
 import shared.utils.kitchenOrder.KitchenOrder;
 
+import java.rmi.Remote;
 import java.util.ArrayList;
 
-public interface KitchenOrdersServer {
-    void addKitchenOrder(String tableName, String customerName, int orderId, int reservationID, String menuItemName, String preparationStatus);
+public interface KitchenOrdersServer extends Remote {
 
-    void updateKitchenOrder(int orderId, String preparationStatus);
-
-    void removeKitchenOrder(int orderId);
+    void updateKitchenOrder(int orderId, int menuitemid, String preparationStatus);
 
     ArrayList<KitchenOrder> getKitchenOrders();
 
-    void addKitchenOrder(KitchenOrder kitchenOrder);
+
 }
