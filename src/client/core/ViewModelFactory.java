@@ -2,7 +2,14 @@ package client.core;
 
 import client.view.customer.*;
 import client.view.kitchenstaff.KitchenStaffViewModel;
-import client.view.staff.*;
+import client.view.staff.Customer.CreateNewCustomerViewModel;
+import client.view.staff.Customer.StaffCustomerViewModel;
+import client.view.staff.MenuItems.AddNewMenuItemsViewModel;
+import client.view.staff.MenuItems.EditMenuItemsViewModel;
+import client.view.staff.MenuItems.StaffMenuItemsViewModel;
+import client.view.staff.Order.StaffOrderViewModel;
+import client.view.staff.Table.StaffTableViewModel;
+import client.view.staff.Table.UpdateTableViewModel;
 
 import java.rmi.RemoteException;
 import java.sql.SQLException;
@@ -15,7 +22,6 @@ public class ViewModelFactory {
     private StaffMenuItemsViewModel menuViewModel;
     private StaffCustomerViewModel customerViewModel;
     private AddNewMenuItemsViewModel addNewMenuItemsViewModel;
-    private AddNewTableViewModel addNewTableViewModel;
     private CreateNewCustomerViewModel createNewCustomerViewModel;
     private EditMenuItemsViewModel editMenuItemsViewModel;
     private StaffOrderViewModel staffOrderViewModel;
@@ -66,12 +72,6 @@ public class ViewModelFactory {
         return addNewMenuItemsViewModel;
     }
 
-    public AddNewTableViewModel getAddNewTableViewModel() throws RemoteException {
-        if (addNewTableViewModel == null) {
-            addNewTableViewModel = new AddNewTableViewModel(modelFactory, viewState);
-        }
-        return addNewTableViewModel;
-    }
 
     public CreateNewCustomerViewModel getCreateNewCustomerViewModel() throws RemoteException {
         if (createNewCustomerViewModel == null) {

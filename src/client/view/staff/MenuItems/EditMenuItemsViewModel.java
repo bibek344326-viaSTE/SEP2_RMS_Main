@@ -1,4 +1,4 @@
-package client.view.staff;
+package client.view.staff.MenuItems;
 
 import client.core.ModelFactory;
 import client.core.ViewState;

@@ -1,9 +1,8 @@
-package client.view.staff;
+package client.view.staff.Table;
 
 import client.core.ModelFactory;
 import client.core.ViewState;
 import client.model.tables.TableModel;
-import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

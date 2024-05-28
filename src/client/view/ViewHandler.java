@@ -8,6 +8,14 @@ import client.view.kitchenstaff.KitchenStaffLoginController;
 import client.view.kitchenstaff.KitchenStaffViewController;
 import client.view.login.LoginViewController;
 import client.view.staff.*;
+import client.view.staff.Customer.CreateNewCustomerController;
+import client.view.staff.Customer.StaffCustomerViewController;
+import client.view.staff.MenuItems.AddNewMenuItemsController;
+import client.view.staff.MenuItems.EditMenuItemsController;
+import client.view.staff.MenuItems.StaffMenuItemsViewController;
+import client.view.staff.Order.StaffOrderViewController;
+import client.view.staff.Table.StaffTableViewController;
+import client.view.staff.Table.UpdateTableViewController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Region;
@@ -34,7 +42,6 @@ public class ViewHandler {
     private StaffMenuItemsViewController staffMenuViewController;
     private UpdateTableViewController updateTableViewController;
     private AddNewMenuItemsController addNewMenuItemsController;
-    private AddNewTableController addNewTableController;
     private CreateNewCustomerController createNewCustomerController;
     private EditMenuItemsController editMenuItemsController;
     private StaffTableViewController staffTableViewController;
@@ -71,16 +78,16 @@ public class ViewHandler {
                 root = loadConnectionButtonsView("staff/ConnectionButtonsForStaff.fxml");
                 break;
             case "customerViewStaff":
-                root = loadCustomerViewStaff("staff/StaffCustomerView.fxml");
+                root = loadCustomerViewStaff("staff/Customer/StaffCustomerView.fxml");
                 break;
             case "orderView":
-                root = loadOrderView("staff/StaffOrderView.fxml");
+                root = loadOrderView("staff/Order/StaffOrderView.fxml");
                 break;
             case "menuView":
-                root = loadMenuView("staff/StaffMenuItems.fxml");
+                root = loadMenuView("staff/MenuItems/StaffMenuItems.fxml");
                 break;
             case "addEditTable":
-                root = loadAddEditTableView("staff/UpdateTableDetails.fxml");
+                root = loadAddEditTableView("staff/Table/UpdateTableDetails.fxml");
                 break;
             case "customerViewMenuItems":
                 root = loadCustomerViewMenuItems("customer/CustomerViewMenuItems.fxml");
@@ -89,19 +96,16 @@ public class ViewHandler {
                 root = loadCustomerViewOrderStatus("customer/CustomerViewOrderStatus.fxml");
                 break;
             case "addNewMenuItems":
-                root = loadAddNewMenuItemsView("staff/AddNewMenuItems.fxml");
-                break;
-            case "addNewTable":
-                root = loadAddNewTableView("staff/AddNewTable.fxml");
+                root = loadAddNewMenuItemsView("staff/MenuItems/AddNewMenuItems.fxml");
                 break;
             case "createNewCustomer":
-                root = loadCreateNewCustomerView("staff/CreateNewCustomer.fxml");
+                root = loadCreateNewCustomerView("staff/Customer/CreateNewCustomer.fxml");
                 break;
             case "editMenuItems":
-                root = loadEditMenuItemsView("staff/EditMenuItems.fxml");
+                root = loadEditMenuItemsView("staff/MenuItems/EditMenuItems.fxml");
                 break;
             case "staffTable":
-                root = loadStaffTableView("staff/StaffTableView.fxml");
+                root = loadStaffTableView("staff/Table/StaffTableView.fxml");
                 break;
             default:
                 System.out.println("Invalid view id: " + id);
@@ -325,20 +329,6 @@ public class ViewHandler {
         return addNewMenuItemsController.getRoot();
     }
 
-    private Region loadAddNewTableView(String fxmlFile) {
-        if (addNewTableController == null) {
-            try {
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource(fxmlFile));
-                Region root = loader.load();
-                addNewTableController = loader.getController();
-                addNewTableController.init(viewModelFactory, this,root);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return addNewTableController.getRoot();
-    }
 
     private Region loadCreateNewCustomerView(String fxmlFile) throws SQLException, RemoteException {
         if (createNewCustomerController == null) {

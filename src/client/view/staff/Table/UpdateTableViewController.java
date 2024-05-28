@@ -1,4 +1,4 @@
-package client.view.staff;
+package client.view.staff.Table;
 
 import client.core.ViewModelFactory;
 import client.view.ViewController;
@@ -10,7 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import client.core.IntStringConverter;
 import javafx.scene.layout.Region;
 

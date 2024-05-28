@@ -12,7 +12,7 @@ import client.networking.customer.CustomerInfoClientManager;
 import client.networking.menuItem.MenuItemClient;
 import client.networking.menuItem.MenuItemClientManager;
 import client.networking.tables.TablesClientManager;
-import client.view.staff.StaffTableViewModel;
+import client.view.staff.Table.StaffTableViewModel;
 import shared.utils.user.Customer;
 
 import java.rmi.RemoteException;

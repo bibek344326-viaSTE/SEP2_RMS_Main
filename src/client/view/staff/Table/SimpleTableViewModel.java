@@ -1,4 +1,4 @@
-package client.view.staff;
+package client.view.staff.Table;
 
 import javafx.beans.property.*;
 import shared.utils.table.Table;
