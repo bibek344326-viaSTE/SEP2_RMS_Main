@@ -1,14 +1,12 @@
-package client.view.staff;
+package client.view.staff.Table;
 
 import client.core.ModelFactory;
-import client.core.ViewModelFactory;
 import client.core.ViewState;
 import client.model.tables.TableModel;
 import javafx.beans.property.*;
 import shared.utils.table.Table;
 
 import java.rmi.RemoteException;
-import java.sql.SQLException;
 
 public class UpdateTableViewModel {
     private TableModel tableModel;

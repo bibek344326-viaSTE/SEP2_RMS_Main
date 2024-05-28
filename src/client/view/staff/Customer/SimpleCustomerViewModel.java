@@ -1,4 +1,4 @@
-package client.view.staff;
+package client.view.staff.Customer;
 
 import javafx.beans.property.*;
 import shared.utils.user.Customer;

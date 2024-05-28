@@ -1,4 +1,4 @@
-package client.view.staff;
+package client.view.staff.Customer;
 
 import client.core.ViewModelFactory;
 import client.view.ViewController;

@@ -30,7 +30,7 @@ public class CustomerLoginController implements ViewController {
         this.root = root;
     }
     public void logInAsCustomer() throws SQLException, RemoteException {
-        viewHandler.openView("customerTableNumber");
+        viewHandler.openView("customerViewOrderStatus");
     }
 
     public void back() throws SQLException, RemoteException {
