@@ -22,7 +22,7 @@ public class SimpleKitchenViewModel {
         this.ordertime = new SimpleStringProperty(order.getOrderDateTime().toString());
         this.status = new SimpleStringProperty(order.getOrderStaus());
 
-        List<MenuItem> menuItemList = (List<MenuItem>) order.getOrderItemsList(order.getOrderID());
+        List<MenuItem> menuItemList = order.getOrderMenuItemsList();
         if (menuItemList != null && !menuItemList.isEmpty()) {
             StringBuilder menuItems = new StringBuilder();
             for (MenuItem menuItem : menuItemList) {

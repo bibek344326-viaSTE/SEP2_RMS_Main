@@ -313,7 +313,7 @@ public class ReservationDAOManager implements ReservationDAO {
     }
 
     @Override
-    public Request getReservation(int id) {
+    public Reservation getReservation(int id) {
         try {
             connection = DatabaseConnection.getInstance().getConnection();
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM reservation WHERE reservation_id = ?");
@@ -327,9 +327,9 @@ public class ReservationDAOManager implements ReservationDAO {
                         resultSet.getString("customer_id"),
                         resultSet.getTimestamp("reservation_time").toLocalDateTime()
                 );
-                return new Request("Reservation found", reservation);
+                return reservation;
             } else {
-                return new Request("Reservation not found", null);
+                return null;
             }
 
         } catch (SQLException e) {

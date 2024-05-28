@@ -10,18 +10,24 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Order implements Serializable {
+    private static final long serialVersionUID = 8832161865413793103L;
+
     private int orderID;
     private Table table;
     private Customer customer;
-    private ArrayList<MenuItem> orderItemsList;
+    private ArrayList<MenuItem> orderMenuItemsList;
     private String orderStatus;
     private Timestamp orderDateTime;
+
+    public ArrayList<MenuItem> getOrderMenuItemsList() {
+        return orderMenuItemsList;
+    }
 
     public Order(int orderID, Table table, Customer customer) {
         this.orderID = orderID;
         this.table = table;
         this.customer = customer;
-        orderItemsList = new ArrayList<MenuItem>();
+        this.orderMenuItemsList = new ArrayList<>();
         this.orderDateTime = Timestamp.valueOf(LocalDateTime.now());
     }
 
@@ -30,6 +36,7 @@ public class Order implements Serializable {
         this.table = table;
         this.customer = customer;
         this.orderDateTime = orderDateTime;
+        this.orderMenuItemsList = new ArrayList<>();
     }
 
     public Timestamp getOrderDateTime() {
@@ -63,25 +70,18 @@ public class Order implements Serializable {
         this.customer = customer;
     }
 
-    public MenuItem getOrderItemsList(int menuItemId) {
-        return orderItemsList.get(menuItemId);
-    }
-
     public void addOrderItemsList(MenuItem menuItem) {
-        this.orderItemsList.add(menuItem);
+        this.orderMenuItemsList.add(menuItem);
     }
 
     public void removeOrderItemsList(MenuItem menuItem) {
-        this.orderItemsList.remove(menuItem);
+        this.orderMenuItemsList.remove(menuItem);
     }
 
     public String getOrderStaus() {
         return orderStatus;
     }
 
-    public void setOrderStaus(OrderStatus orderStaus) {
-        this.orderStatus = orderStaus.toString();
-    }
 
     @Override
     public String toString() {
@@ -89,17 +89,17 @@ public class Order implements Serializable {
                 "orderID=" + orderID +
                 ", table=" + table +
                 ", customer=" + customer +
-                ", orderItemsList=" + orderItemsList +
+                ", orderItemsList=" + orderMenuItemsList +
                 '}'
                 + "orderTime = " + orderDateTime + ", orderStatus = " + orderStatus + '}';
     }
 
     public ArrayList<MenuItem> getMenuItems() {
-        return orderItemsList;
+        return orderMenuItemsList;
     }
 
     public void setMenuItems(ArrayList<MenuItem> menuItems) {
-        this.orderItemsList = menuItems;
+        this.orderMenuItemsList = menuItems;
     }
 
     public void setOrderDateTime(Timestamp orderTimestamp) {

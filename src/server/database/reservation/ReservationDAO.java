@@ -20,7 +20,7 @@ public interface ReservationDAO {
 
     ArrayList<Reservation> getReservationsByUsername(String username);
 
-    Request getReservation(int id);
+    Reservation getReservation(int reservationid);
 
-    void removeReservation(int id);
+    void removeReservation(int reservationid);
 }
