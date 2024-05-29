@@ -1,4 +1,4 @@
-package client.model.KitchenOrders;
+package client.model.kitchenOrders;
 
 import client.networking.kitchenOrders.KitchenOrdersClient;
 import client.networking.kitchenOrders.KitchenOrdersClientManager;
@@ -34,14 +34,4 @@ public class KitchenOrdersModelManager implements KitchenOrdersModel {
         removeListener(eventName, listener);
     }
 
-    public static void main(String[] args) {
-        KitchenOrdersClient client = new KitchenOrdersClientManager();
-        KitchenOrdersModelManager model = new KitchenOrdersModelManager(client);
-        for (int i = 0; i < model.getKitchenOrders().size(); i++) {
-            System.out.println(model.getKitchenOrders().get(i).getOrderId() +
-                    "\n" + model.getKitchenOrders().get(i).getReservationID() +
-                    "\n" + model.getKitchenOrders().get(i).getPreparationStatus() + "\n");
-        }
-
-    }
 }

@@ -62,7 +62,9 @@ public class KitchenOrdersDAOManager implements KitchenOrdersDAO {
         for (int i = 0; i < kitchenOrdersDAOManager.getKitchenOrders().size(); i++) {
             System.out.println(kitchenOrdersDAOManager.getKitchenOrders().get(i).getOrderId() +
                     "\n" + kitchenOrdersDAOManager.getKitchenOrders().get(i).getReservationID() +
-                    "\n" + kitchenOrdersDAOManager.getKitchenOrders().get(i).getPreparationStatus() + "\n");
+                    "\n" + kitchenOrdersDAOManager.getKitchenOrders().get(i).getPreparationStatus() +
+                    "\n" + kitchenOrdersDAOManager.getKitchenOrders().get(i).getMenuItemName() +
+                    "\n" + kitchenOrdersDAOManager.getKitchenOrders().get(i).getCustomerName() +"\n") ;
         }
     }
 }

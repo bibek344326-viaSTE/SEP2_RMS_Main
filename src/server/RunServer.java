@@ -67,7 +67,6 @@ public class RunServer {
         KitchenOrdersListHandler kitchenOrdersListHandler = new KitchenOrderListHandlerManager();
         KitchenOrdersServer kitchenOrdersServer = new KitchenOrdersServerManager(kitchenOrdersListHandler);
 
-
         Server server = new ServerManager(loginServer, createAccountServer, tablesServerManager, customerListServer, chatServer, menuServer, orderServer, reservationServer, kitchenOrdersServer);
         server.startServer();
 

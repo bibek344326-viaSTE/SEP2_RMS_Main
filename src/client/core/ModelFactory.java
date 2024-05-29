@@ -1,7 +1,7 @@
 package client.core;
 
-import client.model.KitchenOrders.KitchenOrdersModel;
-import client.model.KitchenOrders.KitchenOrdersModelManager;
+import client.model.kitchenOrders.KitchenOrdersModel;
+import client.model.kitchenOrders.KitchenOrdersModelManager;
 import client.model.Reservation.ReservationModel;
 import client.model.Reservation.ReservationModelManager;
 import client.model.chat.ChatModel;
@@ -18,8 +18,6 @@ import client.model.order.OrderModel;
 import client.model.order.OrderModelManager;
 import client.model.tables.TableModel;
 import client.model.tables.TableModelManager;
-import client.networking.kitchenOrders.KitchenOrdersClient;
-import client.networking.tables.TablesClient;
 
 import java.rmi.RemoteException;
 import java.sql.SQLException;

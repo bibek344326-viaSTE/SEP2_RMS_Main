@@ -23,6 +23,9 @@ public class KitchenOrdersServerManager implements KitchenOrdersServer {
 
     @Override
     public ArrayList<KitchenOrder> getKitchenOrders() {
+        for(int i = 0; i < kitchenOrdersListHandler.getKitchenOrders().size(); i++){
+            System.out.println(kitchenOrdersListHandler.getKitchenOrders().get(i).getOrderId());
+        }
         return kitchenOrdersListHandler.getKitchenOrders();
     }
 
