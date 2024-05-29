@@ -45,7 +45,7 @@ public class CustomerDAOManager implements CustomerDAO {
     @Override
     public void removeCustomer(String customerid) {
         try (Connection connection = DatabaseConnection.getInstance().getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM \"User\" WHERE \"username\"=?;");
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM users WHERE username=?;");
             statement.setString(1, customerid);
 
             statement.executeUpdate();

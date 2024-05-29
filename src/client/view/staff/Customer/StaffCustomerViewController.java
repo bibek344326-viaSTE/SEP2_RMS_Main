@@ -29,8 +29,7 @@ public class StaffCustomerViewController implements ViewController {
     private ViewHandler viewHandler;
     private StaffCustomerViewModel customerViewModel;
     private Region root;
-
-    @Override
+    
     public void init(ViewModelFactory viewModelFactory, ViewHandler viewHandler, Region root) throws SQLException, RemoteException {
         this.viewHandler = viewHandler;
         this.customerViewModel = viewModelFactory.getCustomerViewModel();
