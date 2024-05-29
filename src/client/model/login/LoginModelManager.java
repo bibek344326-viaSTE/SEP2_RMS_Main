@@ -10,11 +10,10 @@ public class LoginModelManager implements LoginModel {
     private String userName;
     private String userType;
     private String password;
-    private ChatClient chatClient;
 
-    public LoginModelManager(LoginClient loginClient, ChatClient chatClient) {
+
+    public LoginModelManager(LoginClient loginClient) {
         this.loginClient = loginClient;
-        this.chatClient = chatClient;
     }
 
     @Override
@@ -25,7 +24,6 @@ public class LoginModelManager implements LoginModel {
     @Override
     public void setUsername(String userName) {
         this.userName = userName;
-        chatClient.setUsername(userName);
     }
 
     @Override
@@ -36,7 +34,6 @@ public class LoginModelManager implements LoginModel {
     @Override
     public void setUserType(String userType) {
         this.userType = userType;
-        chatClient.setUserType(userType);
         System.out.println("UserType set as :" + this.userType);
     }
 

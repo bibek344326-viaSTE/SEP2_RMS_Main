@@ -18,7 +18,7 @@ public class LoginDAOManager implements LoginDAO {
     @Override
     public Request login(String username, String password) {
         try (Connection connection = DatabaseConnection.getInstance().getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM \"user\" WHERE \"username\"=? and \"password\"=?;");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE username =? and password =?;");
             statement.setString(1, username);
             statement.setString(2, password);
             ResultSet resultSet = statement.executeQuery();
@@ -36,11 +36,11 @@ public class LoginDAOManager implements LoginDAO {
     }
 
     private Request getUserType(String username, String accessType) {
-        if (accessType.equals(Usertype.STAFFMEMBERS.toString())) {
+        if (accessType.toUpperCase().equals(Usertype.STAFFMEMBERS.toString())) {
             return new Request(Usertype.STAFFMEMBERS.toString(), new StaffMember(username));
-        } else if (accessType.equals(Usertype.CUSTOMER.toString())) {
+        } else if (accessType.toUpperCase().equals(Usertype.CUSTOMER.toString())) {
             return new Request(Usertype.CUSTOMER.toString(), new Customer(username));
-        } else if (accessType.equals(Usertype.KITCHENCHEF.toString())) {
+        } else if (accessType.toUpperCase().equals(Usertype.KITCHENCHEF.toString())) {
             return new Request(Usertype.KITCHENCHEF.toString(), new KitchenChef(username));
         } else
             return new Request("Something went wrong in database", null);
