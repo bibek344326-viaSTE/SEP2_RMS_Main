@@ -45,7 +45,7 @@ public class StaffCustomerViewController implements ViewController {
         customerTableView.setItems(customerViewModel.getCustomerList());
 
         // Bind ComboBox to availableTablesList
-       // assignTableComboBox.setItems(customerViewModel.getAvailableTablesList());
+        assignTableComboBox.setItems(customerViewModel.getAvailableTableNames());
 
         customerViewModel.setSelected(null);
         customerViewModel.deselect();
@@ -75,6 +75,7 @@ public class StaffCustomerViewController implements ViewController {
     @FXML
     private void update() throws SQLException, RemoteException {
         customerViewModel.updateCustomerList();
+        assignTableComboBox.setItems(customerViewModel.getAvailableTableNames());
     }
 
     public Region getRoot() {
