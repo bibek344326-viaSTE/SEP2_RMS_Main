@@ -6,6 +6,8 @@ import client.networking.createUser.CreateUserClient;
 import client.networking.createUser.CreateUserClientManager;
 import client.networking.customer.CustomerInfoClient;
 import client.networking.customer.CustomerInfoClientManager;
+import client.networking.kitchenOrders.KitchenOrdersClient;
+import client.networking.kitchenOrders.KitchenOrdersClientManager;
 import client.networking.login.LoginClient;
 import client.networking.login.LoginClientManager;
 import client.networking.menuItem.MenuItemClient;
@@ -29,6 +31,8 @@ public class ClientFactory {
     private ReservationClient reservationClient;
     private MenuItemClient menuItemClient;
     private OrderClient orderClient;
+
+    private KitchenOrdersClient kitchenOrdersClient;
 
     public LoginClient getLoginClient() throws RemoteException {
         if (loginClient == null) {
@@ -72,7 +76,7 @@ public class ClientFactory {
         return reservationClient;
     }
 
-    public OrderClient getOrderClient() throws RemoteException{
+    public OrderClient getOrderClient() throws RemoteException {
         if (orderClient == null) {
             orderClient = new OrderClientManager();
         }
@@ -84,6 +88,13 @@ public class ClientFactory {
             menuItemClient = new MenuItemClientManager();
         }
         return menuItemClient;
+    }
+
+    public KitchenOrdersClient getKitchenOrdersClient() throws RemoteException {
+        if (kitchenOrdersClient == null) {
+            kitchenOrdersClient = new KitchenOrdersClientManager();
+        }
+        return kitchenOrdersClient;
     }
 }
 
