@@ -2,19 +2,20 @@ package client.view.kitchenstaff;
 
 import client.core.ModelFactory;
 import client.core.ViewState;
-import client.model.order.OrderModel;
+import client.model.KitchenOrders.KitchenOrdersModel;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import shared.utils.order.Order;
+import shared.utils.kitchenOrder.KitchenOrder;
+
 
 import java.rmi.RemoteException;
 
 public class KitchenStaffViewModel {
-    private OrderModel orderModel;
+    private KitchenOrdersModel kitchenOrdersModel;
     private ViewState viewState;
     private ObservableList<SimpleKitchenViewModel> kitchenList;
     private ObjectProperty<SimpleKitchenViewModel> selectedKitchenProperty;
@@ -23,7 +24,7 @@ public class KitchenStaffViewModel {
 
     public KitchenStaffViewModel(ModelFactory modelFactory, ViewState viewState) throws RemoteException {
         this.viewState = viewState;
-        this.orderModel = modelFactory.getOrderModel();
+        this.kitchenOrdersModel = modelFactory.getKitchenOrdersModel();
         this.kitchenList = FXCollections.observableArrayList();
         this.selectedKitchenProperty = new SimpleObjectProperty<>();
         this.errorLabel = new SimpleStringProperty();
@@ -37,8 +38,8 @@ public class KitchenStaffViewModel {
     }
     public void updateKitchenList() throws RemoteException {
         kitchenList.clear();
-        for (Order order : orderModel.getOrders()) {
-            kitchenList.add(new SimpleKitchenViewModel(order));
+        for (KitchenOrder kitchenOrder : kitchenOrdersModel.getKitchenOrders()) {
+            kitchenList.add(new SimpleKitchenViewModel(kitchenOrder));
         }
     }
 }

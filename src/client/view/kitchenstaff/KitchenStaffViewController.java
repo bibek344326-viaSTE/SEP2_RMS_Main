@@ -14,7 +14,7 @@ import shared.utils.order.Order;
 import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 
-public class KitchenStaffViewController {
+public class KitchenStaffViewController implements ViewController {
     @FXML
     private TableView<SimpleKitchenViewModel> tableView;
     @FXML
@@ -46,7 +46,7 @@ public class KitchenStaffViewController {
         orderIDColumn.setCellValueFactory(cellData -> cellData.getValue().orderIDProperty());
         tablenameColumn.setCellValueFactory(cellData -> cellData.getValue().tablenameProperty());
         customerNameColumn.setCellValueFactory(cellData -> cellData.getValue().customerNameProperty());
-        ordertimeColumn.setCellValueFactory(cellData -> cellData.getValue().ordertimeProperty());
+        //ordertimeColumn.setCellValueFactory(cellData -> cellData.getValue().ordertimeProperty());
         menuitemnameColumn.setCellValueFactory(cellData -> cellData.getValue().menuitemnameProperty());
         statusColumn.setCellValueFactory(cellData -> cellData.getValue().statusProperty());
 

@@ -16,15 +16,15 @@
                 <TableColumn fx:id="passwordColumn" minWidth="0.0" prefWidth="475.0" text="Passcode" />
             </columns>
         </TableView>
-        <Button fx:id="addButton" layoutX="257.0" layoutY="553.0" mnemonicParsing="false" onAction="#addEditButton" prefHeight="46.0" prefWidth="97.0" text="Add Customer" />
         <ComboBox fx:id="assignTableComboBox" layoutX="14.0" layoutY="553.0" prefHeight="46.0" prefWidth="229.0" promptText="Assign Table To selected Customer" />
         <Button fx:id="backButton" layoutX="750.0" layoutY="553.0" mnemonicParsing="false" onAction="#back" prefHeight="46.0" prefWidth="110.0" text="Back" />
-        <Button layoutX="374.0" layoutY="553.0" mnemonicParsing="false" onAction="#delete" prefHeight="46.0" prefWidth="62.0" text="Delete" />
         <Button layoutX="454.0" layoutY="553.0" mnemonicParsing="false" onAction="#update" prefHeight="46.0" prefWidth="74.0" text="Update" />
         <Label fx:id="errorLabel" layoutX="546.0" layoutY="560.0" prefHeight="46.0" prefWidth="200.0" textFill="RED">
             <font>
                 <Font size="14.0" />
             </font>
         </Label>
+        <Button fx:id="addButton" layoutX="257.0" layoutY="553.0" mnemonicParsing="false" onAction="#addEditButton" prefHeight="46.0" prefWidth="97.0" text="Add Customer" />
+        <Button layoutX="374.0" layoutY="553.0" mnemonicParsing="false" onAction="#delete" prefHeight="46.0" prefWidth="62.0" text="Delete" />
     </children>
 </AnchorPane>
