@@ -17,14 +17,13 @@
         <TableView fx:id="tableView" layoutX="4.0" layoutY="44.0" prefHeight="578.0" prefWidth="870.0">
             <columns>
                 <TableColumn fx:id="orderIDColumn" prefWidth="75.0" text="Order ID" />
-                <TableColumn fx:id="tablenameColumn" prefWidth="151.199951171875" text="Table name" />
-                <TableColumn fx:id="customerNameColumn" prefWidth="145.59996032714844" text="Customer name" />
-                <TableColumn fx:id="ordertimeColumn" prefWidth="200.79998779296875" text="Order time" />
-                <TableColumn fx:id="menuitemnameColumn" prefWidth="202.39996337890625" text="Menu item" />
-            <TableColumn fx:id="statusColumn" prefWidth="93.5999755859375" text="Status" />
+                <TableColumn fx:id="tablenameColumn" prefWidth="180.7999725341797" text="Table name" />
+                <TableColumn fx:id="customerNameColumn" prefWidth="199.20001220703125" text="Customer name" />
+                <TableColumn fx:id="menuitemnameColumn" prefWidth="228.0" text="Menu item" />
+            <TableColumn fx:id="statusColumn" prefWidth="192.800048828125" text="Status" />
             </columns>
         </TableView>
-        <Button layoutX="40.0" layoutY="637.0" mnemonicParsing="false" onAction="#markAsPreparatory" prefHeight="42.0" prefWidth="128.0" text="Mark as preparation" />
+        <Button layoutX="40.0" layoutY="637.0" mnemonicParsing="false" onAction="#markAsPreparatory" prefHeight="42.0" prefWidth="128.0" text="Mark as preparing" />
         <Button layoutX="669.0" layoutY="637.0" mnemonicParsing="false" onAction="#markAsPrepared" prefHeight="42.0" prefWidth="128.0" text="Mark as prepared" />
     </children>
 </AnchorPane>
