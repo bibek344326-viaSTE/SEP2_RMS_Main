@@ -64,7 +64,6 @@ public class ViewModelFactory {
     }
 
 
-
     public AddNewMenuItemsViewModel getAddNewMenuItemsViewModel() throws RemoteException {
         if (addNewMenuItemsViewModel == null) {
             addNewMenuItemsViewModel = new AddNewMenuItemsViewModel(modelFactory, viewState);
@@ -122,6 +121,21 @@ public class ViewModelFactory {
         }
         return kitchenStaffViewModel;
     }
+
+//    public static void main(String[] args) {
+//        ViewModelFactory viewModelFactory = new ViewModelFactory(new ModelFactory(new ClientFactory()));
+//        try {
+//            viewModelFactory.getKitchenStaffViewModel();
+//            if (!viewModelFactory.getKitchenStaffViewModel().getKitchenList().isEmpty()) {
+//                System.out.println(viewModelFactory.getKitchenStaffViewModel().getKitchenList().get(0).customerNameProperty().get());
+//            } else {
+//                System.out.println("Kitchen list is empty");
+//            }
+//        } catch (RemoteException e) {
+//            e.printStackTrace();
+//        }
+//        System.out.println("KitchenStaffViewModel created");
+//    }
 }
 
 

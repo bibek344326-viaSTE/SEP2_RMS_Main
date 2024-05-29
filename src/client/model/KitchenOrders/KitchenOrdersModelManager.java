@@ -1,6 +1,7 @@
 package client.model.KitchenOrders;
 
 import client.networking.kitchenOrders.KitchenOrdersClient;
+import client.networking.kitchenOrders.KitchenOrdersClientManager;
 import shared.utils.kitchenOrder.KitchenOrder;
 
 import java.beans.PropertyChangeListener;
@@ -31,5 +32,16 @@ public class KitchenOrdersModelManager implements KitchenOrdersModel {
     @Override
     public void removeListener(String eventName, PropertyChangeListener listener) {
         removeListener(eventName, listener);
+    }
+
+    public static void main(String[] args) {
+        KitchenOrdersClient client = new KitchenOrdersClientManager();
+        KitchenOrdersModelManager model = new KitchenOrdersModelManager(client);
+        for (int i = 0; i < model.getKitchenOrders().size(); i++) {
+            System.out.println(model.getKitchenOrders().get(i).getOrderId() +
+                    "\n" + model.getKitchenOrders().get(i).getReservationID() +
+                    "\n" + model.getKitchenOrders().get(i).getPreparationStatus() + "\n");
+        }
+
     }
 }
