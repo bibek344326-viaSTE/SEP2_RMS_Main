@@ -22,7 +22,7 @@ public class KitchenOrderListHandlerManager implements KitchenOrdersListHandler{
     }
 
     @Override
-    public void updateKitchenOrder(int orderId, int menuitemid, String preparationStatus) {
+    public void updateKitchenOrder(int orderId, String menuitemid, String preparationStatus) {
         kitchenOrderDAO.updateKitchenOrder(orderId, menuitemid, preparationStatus);
     }
 }

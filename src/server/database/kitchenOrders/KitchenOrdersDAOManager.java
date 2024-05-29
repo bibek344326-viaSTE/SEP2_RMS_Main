@@ -44,13 +44,13 @@ public class KitchenOrdersDAOManager implements KitchenOrdersDAO {
     }
 
     @Override
-    public void updateKitchenOrder(int menuitemid, int orderid, String preparationStatus) {
+    public void updateKitchenOrder(int orderid, String menuitemname, String preparationStatus) {
         try (Connection connection = DatabaseConnection.getInstance().getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement
-                    ("UPDATE orderitems SET orderstatus = ? WHERE orderid = ? and menuitemid = ?;");
+                    ("UPDATE orderitems SET orderstatus = ? WHERE orderid = ? AND menuitemname = (SELECT menuitem_id FROM menuitem WHERE menuItemName = ?);");
             preparedStatement.setString(1, preparationStatus);
             preparedStatement.setInt(2, orderid);
-            preparedStatement.setInt(3, menuitemid);
+            preparedStatement.setString(3, menuitemname);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -64,7 +64,7 @@ public class KitchenOrdersDAOManager implements KitchenOrdersDAO {
                     "\n" + kitchenOrdersDAOManager.getKitchenOrders().get(i).getReservationID() +
                     "\n" + kitchenOrdersDAOManager.getKitchenOrders().get(i).getPreparationStatus() +
                     "\n" + kitchenOrdersDAOManager.getKitchenOrders().get(i).getMenuItemName() +
-                    "\n" + kitchenOrdersDAOManager.getKitchenOrders().get(i).getCustomerName() +"\n") ;
+                    "\n" + kitchenOrdersDAOManager.getKitchenOrders().get(i).getCustomerName() + "\n");
         }
     }
 }

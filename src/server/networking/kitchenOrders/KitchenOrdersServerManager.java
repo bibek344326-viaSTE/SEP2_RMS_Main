@@ -17,8 +17,8 @@ public class KitchenOrdersServerManager implements KitchenOrdersServer {
     }
 
     @Override
-    public void updateKitchenOrder(int orderId, int menuitemid, String preparationStatus) {
-        kitchenOrdersListHandler.updateKitchenOrder(orderId, menuitemid, preparationStatus);
+    public void updateKitchenOrder(int orderId, String menuitemname, String preparationStatus) {
+        kitchenOrdersListHandler.updateKitchenOrder(orderId, menuitemname, preparationStatus);
     }
 
     @Override

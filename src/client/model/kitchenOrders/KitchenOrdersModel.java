@@ -7,5 +7,5 @@ import java.util.ArrayList;
 
 public interface KitchenOrdersModel extends Subject {
     ArrayList<KitchenOrder> getKitchenOrders();
-    void updateKitchenOrder(int orderId, int menuitemid, String preparationStatus);
+    void updateKitchenOrder(int orderId, String menuitemid, String preparationStatus);
 }
