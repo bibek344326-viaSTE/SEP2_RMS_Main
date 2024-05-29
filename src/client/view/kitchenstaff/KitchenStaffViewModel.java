@@ -2,7 +2,7 @@ package client.view.kitchenstaff;
 
 import client.core.ModelFactory;
 import client.core.ViewState;
-import client.model.KitchenOrders.KitchenOrdersModel;
+import client.model.kitchenOrders.KitchenOrdersModel;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;

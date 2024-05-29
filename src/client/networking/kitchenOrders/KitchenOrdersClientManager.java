@@ -27,6 +27,7 @@ public class KitchenOrdersClientManager implements KitchenOrdersClient {
         }
     }
 
+
     @Override
     public void updateKitchenOrder(int orderId, int menuitemid, String preparationStatus) {
         try {
@@ -35,4 +36,5 @@ public class KitchenOrdersClientManager implements KitchenOrdersClient {
             e.printStackTrace();
         }
     }
+
 }

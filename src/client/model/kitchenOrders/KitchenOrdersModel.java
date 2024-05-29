@@ -1,4 +1,4 @@
-package client.model.KitchenOrders;
+package client.model.kitchenOrders;
 
 import shared.utils.Subject;
 import shared.utils.kitchenOrder.KitchenOrder;
