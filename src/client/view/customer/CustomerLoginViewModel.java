@@ -59,7 +59,8 @@ public class CustomerLoginViewModel {
                 loginModel.setUsername(((User) temp.getObject()).getUsername());
                 loginModel.setUserType(temp.getType());
             }
-            errorLogin.set(temp.getType());
+            //errorLogin.set(temp.getType());
+            System.out.println(temp.getType().toString());
             return temp.getType();
         }
     }

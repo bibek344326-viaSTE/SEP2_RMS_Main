@@ -14,6 +14,7 @@ public class LoginModelManager implements LoginModel {
 
     public LoginModelManager(LoginClient loginClient) {
         this.loginClient = loginClient;
+        this.userType = loginClient.login(userName, password).getType();
     }
 
     @Override

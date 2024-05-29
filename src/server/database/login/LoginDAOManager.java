@@ -23,7 +23,7 @@ public class LoginDAOManager implements LoginDAO {
             statement.setString(2, password);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                String accessType = resultSet.getString("access_type");
+                String accessType = resultSet.getString("accesstype");
                 connection.close();
                 return getUserType(username, accessType);
             } else {
@@ -38,7 +38,7 @@ public class LoginDAOManager implements LoginDAO {
     private Request getUserType(String username, String accessType) {
         if (accessType.toUpperCase().equals(Usertype.STAFFMEMBERS.toString())) {
             return new Request(Usertype.STAFFMEMBERS.toString(), new StaffMember(username));
-        } else if (accessType.toUpperCase().equals(Usertype.CUSTOMER.toString())) {
+        } else if (accessType.toUpperCase().equals(Usertype.CUSTOMER.name())) {
             return new Request(Usertype.CUSTOMER.toString(), new Customer(username));
         } else if (accessType.toUpperCase().equals(Usertype.KITCHENCHEF.toString())) {
             return new Request(Usertype.KITCHENCHEF.toString(), new KitchenChef(username));
