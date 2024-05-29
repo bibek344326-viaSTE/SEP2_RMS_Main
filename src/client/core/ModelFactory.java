@@ -26,7 +26,6 @@ public class ModelFactory {
     private ClientFactory client;
     private LoginModel loginModel;
     private TableModel tableManagementModel;
-    private ChatModel chatModel;
     private CreateUserModel createUserModel;
     private CustomerModel customerModel;
     private MenuItemModel menuItemModel;
@@ -41,7 +40,7 @@ public class ModelFactory {
     public LoginModel getLoginModel() {
         if (loginModel == null) {
             try {
-                loginModel = new LoginModelManager(client.getLoginClient(), client.getChatClient());
+                loginModel = new LoginModelManager(client.getLoginClient());
             } catch (RemoteException e) {
                 throw new RuntimeException(e);
             }
@@ -49,16 +48,6 @@ public class ModelFactory {
         return loginModel;
     }
 
-    public ChatModel getChatModel() {
-        if (chatModel == null) {
-            try {
-                chatModel = new ChatModelManager(client.getChatClient());
-            } catch (RemoteException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        return chatModel;
-    }
 
     public TableModel getTableModel() throws RemoteException {
         if (tableManagementModel == null) {

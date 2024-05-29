@@ -25,7 +25,6 @@ import java.sql.SQLException;
 public class ClientFactory {
     private LoginClient loginClient;
     private TablesClient tableClient;
-    private ChatClient chatClient;
     private CreateUserClient createUserClient;
     private CustomerInfoClient customerInfoClient;
     private ReservationClient reservationClient;
@@ -39,13 +38,6 @@ public class ClientFactory {
             loginClient = new LoginClientManager();
         }
         return loginClient;
-    }
-
-    public ChatClient getChatClient() throws RemoteException {
-        if (chatClient == null) {
-            chatClient = new ChatClientManager();
-        }
-        return chatClient;
     }
 
     public TablesClient getTableClient() throws RemoteException {
