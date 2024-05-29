@@ -36,9 +36,19 @@ public class KitchenStaffViewModel {
         errorLabel.set(null);
     }
 
-    public void preparing(){
-        kitchenOrdersModel.updateKitchenOrder(selectedKitchenProperty.get().orderIDProperty(),selectedKitchenProperty.get().menuitemnameProperty(),selectedKitchenProperty.get().statusProperty().set("PREPARING");
+    public void preparing() {
+        kitchenOrdersModel.updateKitchenOrder(
+                selectedKitchenProperty.get().orderIDProperty().get(),
+                selectedKitchenProperty.get().menuitemnameProperty().get(),
+                "PREPARING");
+    }
+    public void prepared() {
+        kitchenOrdersModel.updateKitchenOrder(
+                selectedKitchenProperty.get().orderIDProperty().get(),
+                selectedKitchenProperty.get().menuitemnameProperty().get(),
+                "PREPARED");
     }
 
-    }
+
+}
 

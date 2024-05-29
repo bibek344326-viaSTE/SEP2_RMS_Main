@@ -59,11 +59,11 @@ public class KitchenStaffViewController implements ViewController {
 
     @FXML
     private void markAsPreparatory() {
-        // Add logic to mark order as preparatory
+        kitchenStaffViewModel.preparing();
     }
 
     @FXML
     private void markAsPrepared() {
-        // Add logic to mark order as prepared
+        kitchenStaffViewModel.prepared();
     }
 }
