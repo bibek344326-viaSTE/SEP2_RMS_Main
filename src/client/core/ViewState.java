@@ -35,6 +35,16 @@ public class ViewState {
     private String password;
     private int Id;
 
+    public String getStatus2() {
+        return status2;
+    }
+
+    public void setStatus2(String status2) {
+        this.status2 = status2;
+    }
+
+    private String status2;
+
     public String getMenuItemName() {
         return menuItemName;
     }
@@ -73,5 +83,6 @@ public class ViewState {
         this.customerName = null;
         this.password = null;
         this.Id = 0;
+        this.status2 = null;
     }
 }
