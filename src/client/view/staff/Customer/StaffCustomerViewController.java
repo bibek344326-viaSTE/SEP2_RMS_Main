@@ -45,7 +45,7 @@ public class StaffCustomerViewController implements ViewController {
         customerTableView.setItems(customerViewModel.getCustomerList());
 
         // Bind ComboBox to availableTablesList
-        assignTableComboBox.setItems(customerViewModel.getAvailableTablesList());
+       // assignTableComboBox.setItems(customerViewModel.getAvailableTablesList());
 
         customerViewModel.setSelected(null);
         customerViewModel.deselect();

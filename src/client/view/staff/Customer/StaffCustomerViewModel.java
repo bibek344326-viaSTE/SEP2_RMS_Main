@@ -20,20 +20,15 @@ public class StaffCustomerViewModel {
     private final ObjectProperty<SimpleCustomerViewModel> selectedCustomerProperty;
     private final StringProperty errorLabel;
     private final ViewState viewState;
-    private final TableModel tableModel;
-    private final ObservableList<String> availableTablesList;
 
     public StaffCustomerViewModel(ModelFactory modelFactory, ViewState viewState) throws RemoteException, SQLException {
         this.customerModel = modelFactory.getCustomerModel();
         this.customerList = FXCollections.observableArrayList();
         this.selectedCustomerProperty = new SimpleObjectProperty<>();
         this.errorLabel = new SimpleStringProperty();
-        this.tableModel = modelFactory.getTableModel();
         this.viewState = viewState;
-        this.availableTablesList = FXCollections.observableArrayList();
 
         updateCustomerList();
-        loadAvailableTables();
     }
 
     public void clear() {
@@ -93,15 +88,4 @@ public class StaffCustomerViewModel {
         }
     }
 
-    public void loadAvailableTables() throws SQLException, RemoteException {
-        availableTablesList.clear();
-        List<Table> tables = tableModel.getAvailableTables();
-        availableTablesList.addAll(tables.stream()
-                .map(Table::toString) // or any other method to get a string representation
-                .collect(Collectors.toList()));
-    }
-
-    public ObservableList<String> getAvailableTablesList() {
-        return availableTablesList;
-    }
 }
