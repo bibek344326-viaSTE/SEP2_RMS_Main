@@ -20,8 +20,8 @@ public class KitchenOrdersModelManager implements KitchenOrdersModel {
     }
 
     @Override
-    public void updateKitchenOrder(int orderId, int menuitemid, String preparationStatus) {
-        client.updateKitchenOrder(orderId, menuitemid, preparationStatus);
+    public void updateKitchenOrder(int orderId, String menuitemname, String preparationStatus) {
+        client.updateKitchenOrder(orderId, menuitemname, preparationStatus);
     }
 
     @Override

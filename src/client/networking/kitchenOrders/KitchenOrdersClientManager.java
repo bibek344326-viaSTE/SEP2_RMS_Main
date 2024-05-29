@@ -29,7 +29,7 @@ public class KitchenOrdersClientManager implements KitchenOrdersClient {
 
 
     @Override
-    public void updateKitchenOrder(int orderId, int menuitemid, String preparationStatus) {
+    public void updateKitchenOrder(int orderId, String menuitemid, String preparationStatus) {
         try {
             server.getKitchenOrdersServer().updateKitchenOrder(orderId, menuitemid, preparationStatus);
         } catch (Exception e) {

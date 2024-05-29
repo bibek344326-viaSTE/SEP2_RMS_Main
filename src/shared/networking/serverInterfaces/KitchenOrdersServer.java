@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public interface KitchenOrdersServer extends Remote {
 
-    void updateKitchenOrder(int orderId, int menuitemid, String preparationStatus) throws RemoteException;
+    void updateKitchenOrder(int orderId, String menuitemname, String preparationStatus) throws RemoteException;
 
     ArrayList<KitchenOrder> getKitchenOrders() throws RemoteException;
 
