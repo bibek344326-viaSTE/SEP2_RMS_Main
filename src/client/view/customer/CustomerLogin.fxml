@@ -13,13 +13,13 @@
                 <Font size="18.0" />
             </font>
         </Label>
-        <TextField layoutX="196.0" layoutY="140.0" prefHeight="35.0" prefWidth="176.0" />
-        <Button layoutX="211.0" layoutY="283.0" mnemonicParsing="false" onAction="#logInAsCustomer" prefHeight="44.0" prefWidth="118.0" text="Log In">
+        <TextField fx:id="usernameField" layoutX="196.0" layoutY="140.0" prefHeight="35.0" prefWidth="176.0" />
+        <Button layoutX="211.0" layoutY="283.0" mnemonicParsing="false" onAction="#signIn" prefHeight="44.0" prefWidth="118.0" text="Log In">
             <font>
                 <Font size="14.0" />
             </font>
         </Button>
-        <TextField layoutX="196.0" layoutY="193.0" prefHeight="35.0" prefWidth="176.0" />
+        <TextField fx:id="passwordField" layoutX="196.0" layoutY="193.0" prefHeight="35.0" prefWidth="176.0" />
         <Label layoutX="51.0" layoutY="134.0" prefHeight="35.0" prefWidth="98.0" text="Username:">
             <font>
                 <Font size="18.0" />
@@ -35,10 +35,15 @@
                 <Font name="System Bold" size="18.0" />
             </font>
         </Label>
-      <Button layoutX="215.0" layoutY="356.0" mnemonicParsing="false" onAction="#back" prefHeight="44.0" prefWidth="110.0" text="Back">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
+        <Label fx:id="errorLabel" layoutX="196.0" layoutY="250.0" prefHeight="27.0" prefWidth="176.0" textFill="red">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Button layoutX="215.0" layoutY="356.0" mnemonicParsing="false" onAction="#back" prefHeight="44.0" prefWidth="110.0" text="Back">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Button>
     </children>
 </AnchorPane>

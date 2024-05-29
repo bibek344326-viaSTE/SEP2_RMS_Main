@@ -1,9 +1,7 @@
 package client.view.customer;
 
 import client.core.ModelFactory;
-import client.core.ViewModelFactory;
 import client.core.ViewState;
-import client.model.customer.CustomerModel;
 import client.model.login.LoginModel;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -19,12 +17,10 @@ public class CustomerLoginViewModel {
 
     private ViewState viewState;
 
-
     public CustomerLoginViewModel(ModelFactory modelFactory, ViewState viewState) {
         this.loginModel = modelFactory.getLoginModel();
         initializeAllProperties();
         signInScene.setValue(true);
-
     }
 
     private void initializeAllProperties() {
@@ -51,7 +47,6 @@ public class CustomerLoginViewModel {
     }
 
     public String login() {
-        //  System.out.println(usernameLogin.get());
         if (usernameLogin.get() == null || usernameLogin.get().isEmpty()) {
             errorLogin.set("Username cannot be empty !!");
             return "";

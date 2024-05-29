@@ -1,14 +1,13 @@
 package client.view.customer;
 
 import client.core.ViewModelFactory;
-import client.networking.login.LoginClientManager;
 import client.view.ViewController;
 import client.view.ViewHandler;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
-import server.model.login.LoginHandler;
-import shared.networking.serverInterfaces.CreateAccountServer;
 import shared.utils.user.Usertype;
 
 import java.rmi.RemoteException;
@@ -18,48 +17,51 @@ public class CustomerLoginController implements ViewController {
     private ViewModelFactory viewModelFactory;
     private ViewHandler viewHandler;
     private CustomerLoginViewModel customerLoginViewModel;
-
     private Region root;
 
-   /* public void clearTableForCustomer() {
-        Customer selectedCustomer = customerComboBox.getSelectionModel().getSelectedItem();
-        if (selectedCustomer != null) {
-            customerViewModel.clearTableForCustomer(selectedCustomer);
-        } else {
-            System.out.println("Please select a customer.");
-        }
-    }*/
-
+    @FXML
+    private TextField usernameField;
+    @FXML
+    private TextField passwordField;
+    @FXML
+    private Label errorLabel;
+    @FXML
+    private Button logInButton;
+    @FXML
+    private Button backButton;
 
     @Override
     public void init(ViewModelFactory viewModelFactory, ViewHandler viewHandler, Region root) throws RemoteException {
         this.viewModelFactory = viewModelFactory;
         this.viewHandler = viewHandler;
         this.root = root;
-        customerLoginViewModel = viewModelFactory.getCustomerLoginViewModel();
-
-
+        this.customerLoginViewModel = viewModelFactory.getCustomerLoginViewModel();
+        bindFields();
     }
 
-    public void logInAsCustomer() throws SQLException, RemoteException {
-        viewHandler.openView("customerViewOrderStatus");
-    }
-
-    public void back() throws SQLException, RemoteException {
-        viewHandler.openView("login");
-    }
-
-    public Region getRoot() {
-        return root;
+    private void bindFields() {
+        usernameField.textProperty().bindBidirectional(customerLoginViewModel.getUsernameLogin());
+        passwordField.textProperty().bindBidirectional(customerLoginViewModel.getPasswordLogin());
+        errorLabel.textProperty().bind(customerLoginViewModel.getErrorLogin());
     }
 
     @FXML
-    private void signIn(ActionEvent event) throws SQLException, RemoteException {
+    private void signIn() throws SQLException, RemoteException {
         String temp = customerLoginViewModel.login();
         if (temp.equals(Usertype.CUSTOMER.toString())) {
             viewHandler.openView("customerViewOrderStatus");
         } else {
             System.out.println("Wrong username or password");
         }
+    }
+
+    @FXML
+    private void back() throws SQLException, RemoteException {
+        viewHandler.openView("login");
+    }
+
+
+    public Region getRoot() {
+        return root;
     }
 }
