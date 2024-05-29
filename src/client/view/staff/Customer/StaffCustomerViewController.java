@@ -44,11 +44,16 @@ public class StaffCustomerViewController implements ViewController {
         // Populate table with data from ViewModel
         customerTableView.setItems(customerViewModel.getCustomerList());
 
-        // Bind ComboBox to availableTablesList
-        assignTableComboBox.setItems(customerViewModel.getAvailableTableNames());
 
         customerViewModel.setSelected(null);
         customerViewModel.deselect();
+
+        customerTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue != null) {
+                customerViewModel.setSelected(newValue);
+            }
+
+        });
     }
 
     public void reset(){
@@ -75,7 +80,6 @@ public class StaffCustomerViewController implements ViewController {
     @FXML
     private void update() throws SQLException, RemoteException {
         customerViewModel.updateCustomerList();
-        assignTableComboBox.setItems(customerViewModel.getAvailableTableNames());
     }
 
     public Region getRoot() {

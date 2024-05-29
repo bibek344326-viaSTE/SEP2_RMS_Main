@@ -1,6 +1,7 @@
 package client.view.staff.Customer;
 
 import client.core.ViewModelFactory;
+import client.view.ViewController;
 import client.view.ViewHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,7 +12,7 @@ import javafx.scene.layout.Region;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 
-public class CreateNewCustomerController {
+public class CreateNewCustomerController implements ViewController {
     @FXML private Label headerLabel;
     @FXML private TextField usernameField;
     @FXML private TextField passwordField;

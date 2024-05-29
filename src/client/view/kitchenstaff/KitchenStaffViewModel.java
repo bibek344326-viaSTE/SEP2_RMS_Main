@@ -28,7 +28,6 @@ public class KitchenStaffViewModel {
         this.kitchenList = FXCollections.observableArrayList();
         this.selectedKitchenProperty = new SimpleObjectProperty<>();
         this.errorLabel = new SimpleStringProperty();
-        updateKitchenList();
     }
 
     public ObservableList<SimpleKitchenViewModel> getKitchenList () {return kitchenList;}
@@ -36,10 +35,6 @@ public class KitchenStaffViewModel {
     public void clear(){
         errorLabel.set(null);
     }
-    public void updateKitchenList() throws RemoteException {
-        kitchenList.clear();
-        for (KitchenOrder kitchenOrder : kitchenOrdersModel.getKitchenOrders()) {
-            kitchenList.add(new SimpleKitchenViewModel(kitchenOrder));
-        }
+
     }
-}
+

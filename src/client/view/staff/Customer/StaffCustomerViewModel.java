@@ -89,12 +89,6 @@ public class StaffCustomerViewModel {
             errorLabel.set("You have to select a row"); // Set error message if no customer is selected
         }
     }
-    public ObservableList<String> getAvailableTableNames() throws RemoteException, SQLException {
-        List<Table> availableTables = tableModel.getAvailableTables();
-        List<String> tableNames = availableTables.stream()
-                .map(Table::getTableName)
-                .collect(Collectors.toList());
-        return FXCollections.observableArrayList(tableNames);
-    }
+
 
 }
