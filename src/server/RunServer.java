@@ -1,5 +1,6 @@
 package server;
 
+import server.database.kitchenOrders.KitchenOrdersDAOManager;
 import server.database.order.OrderDAO;
 import server.database.order.OrderDAOManager;
 import server.database.reservation.ReservationDAO;
@@ -70,12 +71,6 @@ public class RunServer {
         Server server = new ServerManager(loginServer, createAccountServer, tablesServerManager, customerListServer, chatServer, menuServer, orderServer, reservationServer, kitchenOrdersServer);
         server.startServer();
 
-
-        ReservationDAO reservationDAO = new ReservationDAOManager();
-        for (int i = 0; i < reservationDAO.getAllReservations().size(); i++) {
-            System.out.println(reservationDAO.getAllReservations().get(i) + "\n");
-            ;
-        }
 
 //        OrderDAO orderDAO = new OrderDAOManager();
 //        for (int i = 0; i < orderDAO.getAllOrders().size(); i++) {

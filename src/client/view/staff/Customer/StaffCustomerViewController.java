@@ -3,12 +3,17 @@ package client.view.staff.Customer;
 import client.core.ViewModelFactory;
 import client.view.ViewController;
 import client.view.ViewHandler;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.Region;
+import javafx.util.StringConverter;
+import shared.utils.table.Table;
 
 import java.rmi.RemoteException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class StaffCustomerViewController implements ViewController {
     @FXML
@@ -22,14 +27,36 @@ public class StaffCustomerViewController implements ViewController {
     @FXML
     private Button backButton;
     @FXML
-    private ComboBox<String> assignTableComboBox;
+    private ComboBox<Table> assignTableComboBox;
     @FXML
     private Label errorLabel;
 
     private ViewHandler viewHandler;
     private StaffCustomerViewModel customerViewModel;
     private Region root;
-    
+
+    public void initialize() {
+        ArrayList<Table> tables = getTables(); // get your ArrayList of Table objects
+        ObservableList<Table> observableList = FXCollections.observableArrayList(tables);
+
+        assignTableComboBox.setItems(observableList);
+        assignTableComboBox.setConverter(new StringConverter<Table>() {
+            @Override
+            public String toString(Table table) {
+                return table.getTableName(); // replace with your method to get the table name
+            }
+
+            @Override
+            public Table fromString(String string) {
+                return null; // no need to convert from string
+            }
+        });
+    }
+
+    private ArrayList<Table> getTables() {
+        // your method to get the ArrayList of Table objects
+        return new ArrayList<>();
+    }
     public void init(ViewModelFactory viewModelFactory, ViewHandler viewHandler, Region root) throws SQLException, RemoteException {
         this.viewHandler = viewHandler;
         this.customerViewModel = viewModelFactory.getCustomerViewModel();
@@ -46,6 +73,7 @@ public class StaffCustomerViewController implements ViewController {
 
         customerViewModel.setSelected(null);
         customerViewModel.deselect();
+        initialize();
 
         customerTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue != null) {
